@@ -6,8 +6,8 @@
 # https://blowfish.page/docs/configuration/#theme-parameters
 
 colorScheme = "slate"
-defaultAppearance = "light" # valid options: light or dark
-autoSwitchAppearance = true
+defaultAppearance = "dark" # valid options: light or dark
+autoSwitchAppearance = false
 
 enableSearch = true
 enableCodeCopy = false
@@ -31,17 +31,18 @@ disableTextInHeader = false
 [footer]
   showMenu = true
   showCopyright = true
+  showThemeAttribution = false
   showAppearanceSwitcher = true
   showScrollToTop = true
 
 [homepage]
   layout = "hero" # valid options: page, profile, hero, card, background, custom
   homepageImage = "leuven.jpeg" # used in: hero, and card
-  showRecent = false
-  showRecentItems = 5
+  showRecent = true
+  showRecentItems = 10
   showMoreLink = false
   showMoreLinkDest = "/posts"
-  cardView = false
+  cardView = true
   cardViewScreenWidth = false
   layoutBackgroundBlur = false # only used when layout equals background
 
