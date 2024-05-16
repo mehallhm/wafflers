@@ -1,10 +1,7 @@
-# Team Blog Template Repo
+# Wafflers Blog Post
 
-This is a team blog template repository for the Summer 2024 Dialogue in Brussels. 
+The blog for the Wafflers team while away on a DoC summer 2024 in Belgium 🧇
 
-We will use HUGO, a static site generator, because it works nicely with GitHub Pages, allowing for free hosting.  
+Please be careful when pushing to main.
 
 [Hugo](https://gohugo.io/)
-
-
-
