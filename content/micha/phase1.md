@@ -2,11 +2,10 @@
 title: "Phase I Reflection"
 date: 2024-05-16
 draft: false
-description: "Our Idea"
-slug: "mphase1"
-tags: ["authors", "config", "docs"]
+slug: "phase1"
+tags: ["reflection"]
 authors:
-  - "michael_mehall"
+  - "michael"
 ---
 
 # Empty for now
