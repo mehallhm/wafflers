@@ -2,7 +2,7 @@
 title: "Phase I Reflection"
 date: 2024-05-16
 draft: false
-slug: "phase1"
+slug: "1"
 tags: ["reflection"]
 authors:
   - "michael"
