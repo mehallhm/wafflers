@@ -30,17 +30,24 @@
   pageRef = "micha"
   weight = 20
 
-  [[main]]
-  name = "Aahil Nishad"
-  parent = "Team Members"
-  pageRef = "aahiln"
-  weight = 20
+[[main]]
+name = "Aahil Nishad"
+parent = "Team Members"
+pageRef = "aahiln"
+weight = 20
 
 [[main]]
   name = "Justin Wang"
   parent = "Team Members"
   pageRef = "justin"
   weight = 20
+  
+  [[main]]
+  name = "Anjola Babalola"
+  parent = "Team Members"
+  pageRef = "anjola"
+  weight = 20
+
 
 #[[main]]
 #  name = "example sub-menu 1"
