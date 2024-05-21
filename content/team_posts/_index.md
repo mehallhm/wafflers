@@ -21,13 +21,15 @@ yada yada yada
 
 ### Persona #1:
 
-Description:
+Description: NGO Description: EcoUnity Europe is an NGO that primarily focuses on promoting sustainable development within Europe. Their mission involves trying to gain more active participation from communities in their educational programs, working with businesses to implement sustainable practices, and developing strategies to help communities adapt to the changing climate as well as trying to mitigate any further climate change. 
 
-User Story #1:
 
-User Story #2:
+User Story #1:As a non profit organization, it is hard to gain funding in order to have adequate resources to educate the public about potential efforts to mitigate climate change. In order to help EcoUnity Europe’s initiatives, it is essential to try to attract ideal donors who are more willing to support EcoUnity Europe. It would be useful to be able to connect with users based on statistics to gain the interest of people that are already interested in climate change, reducing efforts in gaining more people within the organization. 
 
-User Story #3:
+
+User Story #2:As an NGO dedicated to helping communities that are the most vulnerable to climate change within the EU, it is essential to make sure that the EcoUnity Europe’s efforts are going to those that need it the most. Having a feature that allows EcoUnity to view community statistics that are vulnerable to climate change NGOs can shift their objectives towards those communities. 
+
+User Story #3:  As an NGO in order to increase the effectiveness of educational content by potentially personalizing the content towards certain users. In order to produce more heavily personalized educational content EcoUnity Europe would need a feature to view users survey results in order to decide what content would be the most effective in drawing customers to their objectives. 
 
 ### Persona #2:
 
