@@ -21,33 +21,33 @@ yada yada yada
 
 ### Persona #1:
 
-    Description:
+Description:
 
-    User Story #1:
+User Story #1:
 
-    User Story #2:
+User Story #2:
 
-    User Story #3:
+User Story #3:
 
 ### Persona #2:
 
-    Description:
+Description:
 
-    User Story #1:
+User Story #1:
 
-    User Story #2:
+User Story #2:
 
-    User Story #3:
+User Story #3:
 
-### Persona # 3:
+### Persona # 3: John Davis
 
-    Description:
+Description: John Davis is the secretary of emissions and energy of Belgium. He works closely with fellow members of Belgium’s government as well as EU representatives to optimize energy usage and reduce harmful emissions. He also helps to write policies and regulations based on energy/emissions.
 
-    User Story #1:
+User Story #1: As the secretary of energy and emissions, I want to be able to select or see all policies related to emissions and analyze their effect on the EU or Belgium as a whole so that I can see what legislative actions are effective. It would be helpful to see a full breakdown of the types of emissions and quantities or even the types of energy production (wind, solar, coal, etc.).
 
-    User Story #2:
+User Story #2: As the secretary of energy and emissions, I want to have an intuitive compare tool to see the emissions and energy breakdowns of Belgium compared to other member states. I would also like to have a predictive model for comparison to see if our emissions are on the right track compared to another country. This would give insight as to whether policy is even necessary or no action is needed.
 
-    User Story #3:
+User Story #3: As the secretary of energy and emissions, I would like to be able to have a predictive tool in the application to calculate the effect of potential policy. For example, I could input that we need our CO2 emissions to be down 20% and the calculator could output what every citizen of Belgium would need to decrease their admissions by to achieve this goal. It would be extra helpful if it also outputted ways to reduce emissions by this amount for each user. This would serve to guide future emission and energy regulations.
 
 ## Data Sources:
 
