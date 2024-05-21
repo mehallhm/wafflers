@@ -19,7 +19,7 @@ yada yada yada
 
 ## User Personas
 
-### Persona #1:
+### Persona #1: EcoUnity Europe  
 
 Description: NGO Description: EcoUnity Europe is an NGO that primarily focuses on promoting sustainable development within Europe. Their mission involves trying to gain more active participation from communities in their educational programs, working with businesses to implement sustainable practices, and developing strategies to help communities adapt to the changing climate as well as trying to mitigate any further climate change. 
 
@@ -70,3 +70,6 @@ User Story #3: As the secretary of energy and emissions, I would like to be able
   - The answer to this question will define which countries are more dependent on import of energy versus a reliance on a domestic production, especially as climate change may impact a countries ability to produce energy.
 - Is there a relationship between increasing climate change and sources of energy (a shift from combustible to renewable, or vice versa)?
   - This question will indicate two things: whether or not climate change has an impact on the sources of energy, or if policy enacted to fight climate change is having a tangible effect on a country's energy usage.
+- Which countries in the EU produce the most harmful emissions or are predicted to in the near future?
+ - This question is interesting and can be used by the EU to determine which countries need to reduce their emissions the most. The prediction can indicate whether preventative measures should be taken to ensure emissions don't rise drastically.
+
