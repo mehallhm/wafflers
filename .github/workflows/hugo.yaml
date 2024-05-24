@@ -4,7 +4,7 @@ name: Deploy Hugo Developer Blog to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branch:
+    branches:
       - main
     paths:
       - blog/**
@@ -28,7 +28,6 @@ concurrency:
 defaults:
   run:
     shell: bash
-    working-directory: ./blog
 
 jobs:
   # Build job
@@ -48,6 +47,8 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      - name: Move to Blog
+        run: cd ./blog
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
