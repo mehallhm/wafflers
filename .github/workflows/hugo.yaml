@@ -4,6 +4,8 @@ name: Deploy Hugo Developer Blog to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
+    branch:
+      - main
     paths:
       - blog/**
 
@@ -26,14 +28,12 @@ concurrency:
 defaults:
   run:
     shell: bash
+    working-directory: blog
 
 jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: blog
     env:
       HUGO_VERSION: 0.124.0
     steps:
