@@ -4,7 +4,7 @@ name: Deploy Hugo Developer Blog to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branch:
+    branches:
       - main
     paths:
       - blog/**
@@ -28,7 +28,6 @@ concurrency:
 defaults:
   run:
     shell: bash
-    working-directory: ./blog
 
 jobs:
   # Build job
@@ -53,6 +52,7 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+        working-directory: ./blog
       - name: Build with Hugo
         env:
           # For maximum backward compatibility with Hugo modules
@@ -63,10 +63,11 @@ jobs:
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
+        working-directory: ./blog
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: ./blog/public
 
   # Deployment job
   deploy:
