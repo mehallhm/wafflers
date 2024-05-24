@@ -1,3 +1,0 @@
-# Michael Mehall
-
-Eating Waffles
