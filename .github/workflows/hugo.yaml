@@ -47,13 +47,12 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
-      - name: Move to Blog
-        run: cd ./blog
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+        working-directory: ./blog
       - name: Build with Hugo
         env:
           # For maximum backward compatibility with Hugo modules
@@ -64,10 +63,11 @@ jobs:
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
+        working-directory: ./blog
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: ./blog/public
 
   # Deployment job
   deploy:
