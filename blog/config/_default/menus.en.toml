@@ -31,10 +31,10 @@
   weight = 20
 
 [[main]]
-name = "Aahil Nishad"
-parent = "Team Members"
-pageRef = "aahiln"
-weight = 20
+  name = "Aahil Nishad"
+  parent = "Team Members"
+  pageRef = "aahiln"
+  weight = 20
 
 [[main]]
   name = "Justin Wang"
@@ -42,11 +42,23 @@ weight = 20
   pageRef = "justin"
   weight = 20
   
-  [[main]]
+[[main]]
   name = "Anjola Babalola"
   parent = "Team Members"
   pageRef = "anjola"
   weight = 20
+
+[[main]]
+  identifier = "github"
+  pre = "github"
+  url = "https://github.com/mehallhm/wafflers-blog"
+  weight = 30
+
+[[main]]
+  identifier = "blowfish"
+  pre = "link"
+  url = "https://blowfish.page/"
+  weight = 35
 
 
 #[[main]]
@@ -88,10 +100,10 @@ weight = 20
 # the copyright notice. Configure as per the main menu above.
 
 
-# [[footer]]
-#   name = "Tags"
-#   pageRef = "tags"
-#   weight = 10
+[[footer]]
+  name = "Tags"
+  pageRef = "tags"
+  weight = 10
 
 # [[footer]]
 #   name = "Categories"
