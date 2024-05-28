@@ -1,6 +1,10 @@
 public.bak/
-
-public/
 .DS_Store
+
+# Python
+__pycache__/
+
+# Hugo
+public/
 
 api/.env
