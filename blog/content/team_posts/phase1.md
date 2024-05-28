@@ -4,7 +4,7 @@ date: 2024-05-21
 draft: false
 description: "Our Idea"
 tags: ["authors", "config", "docs"]
-slug: "index"
+slug: "phase_one"
 authors:
   - "aahil"
   - "anjola"
@@ -23,7 +23,7 @@ The app would also feature a macro statistics section, which would allow current
 
 Related to the macro statistics, a policy viewer will be implemented in order to allow the user to see the regulations and laws of particular EU member states (or the EU as a whole) and their impact on climate change initiatives. This would allow the user to not only become more informed and potentially spur political action, but also would allow public workers to judge the efficiency of policy or see if the proposed policy would have an effect. Due to the few, slower, and more static nature of policy, these policy initiatives would most likely be hand-added rather than programmatically collected.
 
-One potential feature would be to have NGOs / nonprofits be able to register with the app (or automatically register based on public records). At the end of the user report, these NGOs could be suggested to the user in order to connect the user with organizations that help mitigate problems the user might have. From an NGO standpoint, they would have a dashboard where they could see how many people they match to as well as anonymous aggregated statistics from the people they match with in order to better understand their target audience.
+Another feature would be to have non-governmental organizations (NGOs) be able to register with the app (or automatically register based on public records). At the end of the user report, these NGOs could be suggested to the user in order to connect the user with organizations that help mitigate problems the user might have. From an NGO standpoint, they would have a dashboard where they could see how many people they match to as well as anonymous aggregated statistics from the people they match with in order to better understand their target audience.
 
 ## User Personas
 
@@ -31,11 +31,11 @@ One potential feature would be to have NGOs / nonprofits be able to register wit
 
 Description: EcoUnity Europe is an NGO that primarily focuses on promoting sustainable development within Europe. Their mission involves trying to gain more active participation from communities in their educational programs, working with businesses to implement sustainable practices, and developing strategies to help communities adapt to the changing climate as well as trying to mitigate any further climate change.
 
-User Story #1: As a non profit organization, it is hard to gain funding in order to have adequate resources to educate the public about potential efforts to mitigate climate change. In order to help EcoUnity Europe’s initiatives, it is essential to try to attract ideal donors who are more willing to support EcoUnity Europe. It would be useful to be able to connect with users based on statistics to gain the interest of people that are already interested in climate change, reducing efforts in gaining more people within the organization.
+User Story #1: As an NGO, I want to be able to select certain tags to be associated with so that I can match with citizens who are affected by the problems indicated by those same tags. This feature will directly promote our cause to our intended audience and streamline the process of attracting interested users, which could result in increased financial contributions.
 
-User Story #2: As an NGO dedicated to helping communities that are the most vulnerable to climate change within the EU, it is essential to make sure that the EcoUnity Europe’s efforts are going to those that need it the most. Having a feature that allows EcoUnity to view community statistics that are vulnerable to climate change NGOs can shift their objectives towards those communities.
+User Story #2: As an NGO, we want to be matched with interested businesses so that we can increase our visibility and funding from corporations. As it stands, it can be difficult to receive funding from major users, and it would be useful to be able to match with businesses that are trying to be more conscious of climate change.
 
-User Story #3: As an NGO in order to increase the effectiveness of educational content by potentially personalizing the content towards certain users. In order to produce more heavily personalized educational content EcoUnity Europe would need a feature to view users survey results in order to decide what content would be the most effective in drawing customers to their objectives.
+User Story #3: As an NGO, we want to be able to match with users associated with the same tags so that we can spread educational content to citizens that already proven to be interested in learning about climate change initiatives to make our mission more effective. To produce more personalized educational content, EcoUnity Europe would need a feature to view users survey results in order to decide what content would be the most effective in drawing customers to their objectives.
 
 ### Persona #2: Natalie Allard
 
@@ -47,7 +47,7 @@ User Story #2: As a member of the general public, I want to be able to use this 
 
 User Story #3: As a member of the general public, I want to use this information to make an informed decision regarding climate change policy for the upcoming federal and supranational level elections. I want to find more information about the current regulations in place and make decisions on the efficacy of such policies, using the application to give me information specific to me.
 
-### Persona #3: John Davis
+### Persona #3: ~~John Davis~~
 
 Description: John Davis is the secretary of emissions and energy of Belgium. He works closely with fellow members of Belgium’s government as well as EU representatives to optimize energy usage and reduce harmful emissions. He also helps to write policies and regulations based on energy/emissions.
 
