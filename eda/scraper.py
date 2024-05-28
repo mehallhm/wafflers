@@ -1,5 +1,5 @@
 """
-TODO
+Gets and parses data from Eurostat through their `statistics` API
 """
 
 import requests
@@ -48,6 +48,28 @@ def parse_df_from_eurostat(values: dict[str: str], tables: list[str], rows: list
 	return df
 
 
+def get_eurostat_dataframe(dataset:str, tables:any) -> tuple[pd.DataFrame, list[str]]:
+	"""
+	Gets the eurostat dataframe from a given dataset id and tables function.
+
+	:param dataset: The dataset id to scrape and parse
+	:param tables: A function that takes in the raw response and returns
+		a list of tables that the dataset contains
+	:returns: A tuple with the dataframe and an array of the tables
+	"""
+	url = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data" 
+	params = "format=JSON&lang=EN"
+	res = requests.get(f"{url}/{dataset}?{params}")
+	raw = res.json()
+
+	values = raw["value"]
+	rows = list(raw["dimension"]["geo"]["category"]["label"].items())
+	cols = list(raw["dimension"]["time"]["category"]["label"].items())
+	tables = tables(raw)
+
+	return parse_df_from_eurostat(values, tables, rows, cols, label="country", col_label="time"), tables
+
+
 def scrape_sdg_07_40() -> tuple[pd.DataFrame, list[str]]:
 	"""
 	Scrapes the `sdg_07_40` dataset from eurostat.
@@ -62,29 +84,46 @@ def scrape_sdg_07_40() -> tuple[pd.DataFrame, list[str]]:
 	
 	:returns: A tuple with the dataframe and a list of tables
 	"""
-	url = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data" 
-	params = "format=JSON&lang=EN"
 	dataset = "sdg_07_40"
-	res = requests.get(f"{url}/{dataset}?{params}")
-	raw = res.json()
+	tables = lambda raw: [i[0] for i in raw["dimension"]["nrg_bal"]["category"]["label"].items()]
 
-	values = raw["value"]
-	rows = list(raw["dimension"]["geo"]["category"]["label"].items())
-	cols = list(raw["dimension"]["time"]["category"]["label"].items())
-	tables = [i[0] for i in raw["dimension"]["nrg_bal"]["category"]["label"].items()]
-
-	return parse_df_from_eurostat(values, tables, rows, cols, label="country", col_label="time"), tables
+	return get_eurostat_dataframe(dataset, tables)
 
 
-# def parse_from_eurostat_raw(raw:dict, tables: list[str]) -> pd.DataFrame:
-# 	"""
-# 	Parses a dataframe from the raw eurostat output
+def scrape_sdg_13_10() -> tuple[pd.DataFrame, list[str]]:
+	"""
+	Scrapes the `sdg_13_10` dataset from eurostat.
 
-# 	:param raw: The raw API output as a parsed dict
-# 	:param tables: A list of the table names
-# 	:returns: A dataframe from `parse_df_from_eurostat`
-# 	"""
-# 	rows = list(raw["dimension"]["geo"]["category"]["label"].items())
-# 	cols = list(raw["dimension"]["time"]["category"]["label"].items())
+	Title: Net greenhouse gas emissions
+	Description: The indicator measures total national emissions (from both ESD
+	  and ETS sectors) including international aviation of the so called
+	    ‘Kyoto basket’ of greenhouse gases, including carbon dioxide (CO2), 
+		methane (CH4), nitrous oxide (N2O), and the so-called F-gases 
+		(hydrofluorocarbons, perfluorocarbons, nitrogen triflouride (NF3) and
+		sulphur hexafluoride (SF6)) from all sectors of the GHG emission
+		inventories (including international aviation and indirect CO2).
+		The indicator is presented in two forms: as net emissions including
+		land use, land use change and forestry (LULUCF) as well as excluding
+		LULUCF. Using each gas’ individual global warming potential (GWP),
+		they are being integrated into a single indicator expressed in units
+		of CO2 equivalents. The GHG emission inventories are submitted annually
+		by the EU Member States to the United Nations Framework Convention on
+		Climate Change (UNFCCC).
+	
+	:returns: A tuple with the dataframe and a list of tables
+	"""
+	dataset = "sdg_13_10"
+	def tables(raw:str) -> list[str]:
+		"""
+		Generates tables list from raw response
+	
+		:param raw: The raw response from eurostat
+		:returns: A list of the available tables
+		"""
+		t = []
+		for j in raw["dimension"]["src_crf"]["category"]["label"].items():
+			for k in raw["dimension"]["unit"]["category"]["label"].items():
+				t.append(j[0] + "_" + k[0])
+		return t
 
-# 	return parse_df_from_eurostat(raw["value"], tables, rows, cols, label="country", col_label="time")
+	return get_eurostat_dataframe(dataset, tables)
