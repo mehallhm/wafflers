@@ -1,0 +1,20 @@
+name: Fly Deploy Db
+on:
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - db/**
+
+jobs:
+  deploy:
+    name: Deploy Api
+    runs-on: ubuntu-latest
+    concurrency: deploy-group # optional: ensure only one action runs at a time
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        working-directory: ./db
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

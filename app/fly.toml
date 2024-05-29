@@ -3,8 +3,8 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'streamlit-doc'
-primary_region = 'bos'
+app = 'green-griddle-streamlit'
+primary_region = 'ams'
 
 [build]
 
