@@ -1,6 +1,8 @@
 services:
   app:
-    build: ./app
+    build:
+      context: ./app
+      target: dev
     container_name: front-end
     volumes:
       ["./app/src:/appcode"]
@@ -9,7 +11,9 @@ services:
       - 8501:8501
 
   api:
-    build: ./api
+    build:
+      context: ./api
+      target: dev
     container_name: web-api
     hostname: web-api
     volumes: ["./api:/apicode"]

@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for streamlit-app on 2024-02-08T04:59:06-05:00
+# fly.toml app configuration file generated for green-griddle-streamlit on 2024-05-29T10:28:04+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -17,6 +17,6 @@ primary_region = 'ams'
   processes = ['app']
 
 [[vm]]
+  memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
-  memory_mb = 512
