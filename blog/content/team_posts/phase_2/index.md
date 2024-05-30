@@ -43,7 +43,7 @@ User Story #3: As an enterprise, I want to understand my contribution to my coun
 
   - This question combines user/enterprise data with a repository of organizations that combat different sources of climate change, such as an organization combating electric inefficiencies being matched with a person that has a high electricity usage. This question could also encourage partnerships between such organizations and companies currently afflicted with carbon emission-related issues.
 
-## Data Anaylsis & Machine Learning
+## Data Analysis & Machine Learning
 
 In Phase II a prototype Machine Learning model for the carbon survey was created. This model would be quite similar for both businesses and individual users, differing in training data (businesses would have more industry-focused data rather than the residential data used for individuals).
 
