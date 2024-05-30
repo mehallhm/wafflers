@@ -6,26 +6,26 @@ USE CarbonConnect;
 DROP TABLE IF EXISTS Country;
 CREATE TABLE IF NOT EXISTS Country (
    id INT PRIMARY KEY,
-   emissions varchar(255),
-   name varchar(50)
+   emissions VARCHAR(255),
+   name VARCHAR(50)
 );
 
 
 DROP TABLE IF EXISTS NGO;
 CREATE TABLE IF NOT EXISTS NGO (
    id INT PRIMARY KEY,
-   logo varchar(255) UNIQUE NOT NULL,
-   website varchar(255) UNIQUE NOT NULL,
-   name varchar(50),
-   mission_tags varchar(50),
-   contact varchar(50)
+   logo VARCHAR(255) UNIQUE NOT NULL,
+   website VARCHAR(255) UNIQUE NOT NULL,
+   name VARCHAR(50),
+   mission_tags VARCHAR(50),
+   contact VARCHAR(50)
 );
 
 
 DROP TABLE IF EXISTS User;
 CREATE TABLE IF NOT EXISTS User (
    id INT PRIMARY KEY,
-   tags varchar(255),
+   tags VARCHAR(255),
    emission_result INT,
    country_id INT,
    FOREIGN KEY (country_id) REFERENCES Country(id)
@@ -37,11 +37,11 @@ CREATE TABLE IF NOT EXISTS User (
 DROP TABLE IF EXISTS Enterprises;
 CREATE TABLE IF NOT EXISTS Enterprises (
    id INT PRIMARY KEY,
-   name varchar(50),
-   type varchar(255),
-   emission_result varchar(255),
-   emission_tags varchar(255),
-   misc_emissions varchar(255),
+   name VARCHAR(50),
+   type VARCHAR(255),
+   emission_result VARCHAR(255),
+   emission_tags VARCHAR(255),
+   misc_emissions VARCHAR(255),
    country_id INT,
    FOREIGN KEY (country_id) REFERENCES Country(id)
        ON UPDATE CASCADE
@@ -56,8 +56,8 @@ CREATE TABLE IF NOT EXISTS operatingEmission (
    FOREIGN KEY (enterprise_id) REFERENCES Enterprises(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT,
-   heat_and_gas varchar(50),
-   ElectricityUsage varchar(50)
+   heat_and_gas VARCHAR(50),
+   ElectricityUsage VARCHAR(50)
 );
 
 
@@ -65,10 +65,10 @@ DROP TABLE IF EXISTS SupplyChain;
 CREATE TABLE IF NOT EXISTS SupplyChain (
    id INT PRIMARY KEY,
    enterprise_id INT,
-   vehicle_type varchar(50),
+   vehicle_type VARCHAR(50),
    distance INT,
-   fuel_type varchar(50),
-   emission_tags varchar(50),
+   fuel_type VARCHAR(50),
+   emission_tags VARCHAR(50),
    FOREIGN KEY (enterprise_id) REFERENCES Enterprises(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS PublicTransport (
    distance INT,
    trainCount INT,
    busCount INT,
-   emission_tags varchar(50),
+   emission_tags VARCHAR(50),
    FOREIGN KEY (user_id) REFERENCES User(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT
@@ -95,10 +95,10 @@ CREATE TABLE IF NOT EXISTS Flight (
    user_id INT,
    enterprise_id INT,
    Date_taken DATETIME,
-   origin varchar(250),
-   destination varchar(250),
-   emission_tags varchar(50),
-   aircraft_type varchar(250),
+   origin VARCHAR(250),
+   destination VARCHAR(250),
+   emission_tags VARCHAR(50),
+   aircraft_type VARCHAR(250),
    FOREIGN KEY (user_id) REFERENCES User(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT,
@@ -125,38 +125,10 @@ DROP TABLE IF EXISTS ResData;
 CREATE TABLE IF NOT EXISTS ResData (
    id INT PRIMARY KEY,
    user_id INT,
-   elec_usage varchar(250),
-   emission_tags varchar(250),
-   heat_gas varchar(50),
+   elec_usage VARCHAR(250),
+   emission_tags VARCHAR(250),
+   heat_gas VARCHAR(50),
    FOREIGN KEY (user_id) REFERENCES User(id)
-       ON UPDATE CASCADE
-       ON DELETE RESTRICT
-);
-
-
-DROP TABLE IF EXISTS Ent_NGO;
-CREATE TABLE IF NOT EXISTS Ent_NGO (
-   Enterprise_ID INT,
-   NGO_ID INT,
-   PRIMARY KEY(Enterprise_ID, NGO_ID),
-   FOREIGN KEY (Enterprise_ID) REFERENCES Enterprises(id)
-       ON UPDATE CASCADE
-       ON DELETE RESTRICT,
-   FOREIGN KEY (NGO_ID) REFERENCES NGO(id)
-       ON UPDATE CASCADE
-       ON DELETE RESTRICT
-);
-
-
-DROP TABLE IF EXISTS User_NGO;
-CREATE TABLE IF NOT EXISTS User_NGO (
-   User_ID INT,
-   NGO_ID INT,
-   PRIMARY KEY(User_ID, NGO_ID),
-   FOREIGN KEY (User_ID) REFERENCES User(id)
-       ON UPDATE CASCADE
-       ON DELETE RESTRICT,
-   FOREIGN KEY (NGO_ID) REFERENCES NGO(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT
 );
@@ -168,17 +140,6 @@ CREATE TABLE IF NOT EXISTS CarTags (
    Emission_Tag INT,
    PRIMARY KEY(Car_ID, Emission_Tag),
    FOREIGN KEY (Car_ID) REFERENCES Cars(id)
-       ON UPDATE CASCADE
-       ON DELETE RESTRICT
-);
-
-
-DROP TABLE IF EXISTS ResTags;
-CREATE TABLE IF NOT EXISTS ResTags (
-   Res_ID INT,
-   Emission_Tag INT,
-   PRIMARY KEY(Res_ID, Emission_Tag),
-   FOREIGN KEY (Res_ID) REFERENCES ResData(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT
 );
@@ -227,27 +188,58 @@ CREATE TABLE IF NOT EXISTS CostTags (
        ON DELETE RESTRICT
 );
 
-
-DROP TABLE IF EXISTS MissionTags;
-CREATE TABLE IF NOT EXISTS MissionTags (
-   NGO_ID INT,
-   Emission_Tag INT,
-   PRIMARY KEY(NGO_ID, Emission_Tag),
-   FOREIGN KEY (NGO_ID) REFERENCES NGO(id)
-       ON UPDATE CASCADE
-       ON DELETE RESTRICT
-);
-
-
 DROP TABLE IF EXISTS EntTags;
 CREATE TABLE IF NOT EXISTS EntTags (
-   Enterprises_ID INT,
-   Emission_Tag INT,
-   PRIMARY KEY(Enterprises_ID, Emission_Tag),
-   FOREIGN KEY (Enterprises_ID) REFERENCES Enterprises(id)
+   enterprise_id INT,
+   tag_id INT,
+   PRIMARY KEY(enterprise_id, tag_id),
+   FOREIGN KEY (enterprise_id) REFERENCES Enterprises(id)
+       ON UPDATE CASCADE
+       ON DELETE RESTRICT,
+   FOREIGN KEY (tag_id) REFERENCES EmissionTags(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT
 );
+
+
+
+DROP TABLE IF EXISTS UserTags;
+CREATE TABLE IF NOT EXISTS UserTags (
+   user_id INT,
+   tag_id INT,
+   PRIMARY KEY(user_id, tag_id),
+   FOREIGN KEY (user_id) REFERENCES User(id)
+       ON UPDATE CASCADE
+       ON DELETE RESTRICT,
+   FOREIGN KEY (tag_id) REFERENCES EmissionTags(id)
+       ON UPDATE CASCADE
+       ON DELETE RESTRICT
+);
+
+
+
+DROP TABLE IF EXISTS NGOTags;
+CREATE TABLE IF NOT EXISTS NGOTags (
+   ngo_id INT,
+   tag_id INT,
+   PRIMARY KEY(ngo_id, tag_id),
+   FOREIGN KEY (ngo_id) REFERENCES NGO(id)
+       ON UPDATE CASCADE
+       ON DELETE RESTRICT,
+   FOREIGN KEY (tag_id) REFERENCES EmissionTags(id)
+       ON UPDATE CASCADE
+       ON DELETE RESTRICT
+);
+
+
+
+
+DROP TABLE IF EXISTS EmissionTags;
+CREATE TABLE IF NOT EXISTS EmissionTags (
+    id INT PRIMARY KEY,
+    description VARCHAR(250)
+);
+
 
 
 
