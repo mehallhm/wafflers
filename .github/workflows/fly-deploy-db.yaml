@@ -1,10 +1,10 @@
 name: Fly Deploy Db
 on:
-  # push:
-  #   branches:
-  #     - main
-  #   paths:
-  #     - db/**
+  push:
+    branches:
+      - main
+    paths:
+      - db/**
 
 jobs:
   deploy:
