@@ -239,3 +239,30 @@ CREATE TABLE IF NOT EXISTS EmissionTags (
     id INT PRIMARY KEY,
     description VARCHAR(250)
 );
+
+DROP TABLE IF EXISTS NGOEnterprise;
+CREATE TABLE IF NOT EXISTS NGOEnterprise (
+   ngo_id INT,
+   enterprise_id INT,
+   PRIMARY KEY(ngo_id, enterprise_id,
+   FOREIGN KEY (ngo_id) REFERENCES NGO(id)
+       ON UPDATE CASCADE
+       ON DELETE RESTRICT,
+   FOREIGN KEY (enterprise_id) REFERENCES enterprise(id)
+       ON UPDATE CASCADE
+       ON DELETE RESTRICT
+);
+DROP TABLE IF EXISTS NGOUser;
+CREATE TABLE IF NOT EXISTS NGOUser (
+   ngo_id INT,
+   user_id INT,
+   PRIMARY KEY(ngo_id, user_id),
+   FOREIGN KEY (ngo_id) REFERENCES NGO(id)
+       ON UPDATE CASCADE
+       ON DELETE RESTRICT,
+   FOREIGN KEY (user_id) REFERENCES user(id)
+       ON UPDATE CASCADE
+       ON DELETE RESTRICT
+);
+
+
