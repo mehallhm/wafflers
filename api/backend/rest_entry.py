@@ -4,8 +4,7 @@ logging.basicConfig(level=logging.DEBUG)
 from flask import Flask
 
 from backend.db_connection import db
-from backend.customers.customer_routes import customers
-from backend.products.products_routes import products
+from backend.test.test_routes import test
 import os
 from dotenv import load_dotenv
 
@@ -60,8 +59,7 @@ def create_app():
     app.logger.info('current_app(): registering blueprints with app object.')
     # Register the routes from each Blueprint with the app object
     # and give a url prefix to each
-    app.register_blueprint(customers,   url_prefix='/c')
-    app.register_blueprint(products,    url_prefix='/p')
+    app.register_blueprint(test, url_prefix='/t')
 
     # Don't forget to return the app object
     return app

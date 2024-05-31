@@ -239,7 +239,3 @@ CREATE TABLE IF NOT EXISTS EmissionTags (
     id INT PRIMARY KEY,
     description VARCHAR(250)
 );
-
-
-
-
