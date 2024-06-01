@@ -25,6 +25,9 @@ def UserSurveyNav():
 def EnterpriseHomeNav():
     st.sidebar.page_link("pages/10_enterprisehome.py", label="Enterprise Home")
 
+def EnterpriseMatchNav():
+    st.sidebar.page_link("pages/12_enterpriseMatch.py", label="Enterprise Match")
+
 # NGO role
 
 def NGOHomeNav():
@@ -58,6 +61,7 @@ def SideBarLinks(show_home=False):
 
         if st.session_state['role'] == 'enterprise':
             EnterpriseHomeNav()
+            EnterpriseMatchNav()
         
         if st.session_state['role'] == 'NGO':
             NGOHomeNav()

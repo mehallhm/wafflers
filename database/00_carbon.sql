@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS NGO (
    logo VARCHAR(255) UNIQUE NOT NULL,
    website VARCHAR(255) UNIQUE NOT NULL,
    name VARCHAR(50),
-   mission_tags VARCHAR(50),
    contact VARCHAR(50)
 );
 
@@ -25,7 +24,6 @@ CREATE TABLE IF NOT EXISTS NGO (
 DROP TABLE IF EXISTS User;
 CREATE TABLE IF NOT EXISTS User (
    id INT PRIMARY KEY,
-   tags VARCHAR(255),
    emission_result INT,
    country_id INT,
    FOREIGN KEY (country_id) REFERENCES Country(id)
@@ -40,7 +38,6 @@ CREATE TABLE IF NOT EXISTS Enterprises (
    name VARCHAR(50),
    type VARCHAR(255),
    emission_result VARCHAR(255),
-   emission_tags VARCHAR(255),
    misc_emissions VARCHAR(255),
    country_id INT,
    FOREIGN KEY (country_id) REFERENCES Country(id)
@@ -188,6 +185,12 @@ CREATE TABLE IF NOT EXISTS CostTags (
        ON DELETE RESTRICT
 );
 
+DROP TABLE IF EXISTS EmissionTags;
+CREATE TABLE IF NOT EXISTS EmissionTags (
+    id INT PRIMARY KEY,
+    description VARCHAR(250)
+);
+
 DROP TABLE IF EXISTS EntTags;
 CREATE TABLE IF NOT EXISTS EntTags (
    enterprise_id INT,
@@ -200,8 +203,6 @@ CREATE TABLE IF NOT EXISTS EntTags (
        ON UPDATE CASCADE
        ON DELETE RESTRICT
 );
-
-
 
 DROP TABLE IF EXISTS UserTags;
 CREATE TABLE IF NOT EXISTS UserTags (
@@ -231,24 +232,15 @@ CREATE TABLE IF NOT EXISTS NGOTags (
        ON DELETE RESTRICT
 );
 
-
-
-
-DROP TABLE IF EXISTS EmissionTags;
-CREATE TABLE IF NOT EXISTS EmissionTags (
-    id INT PRIMARY KEY,
-    description VARCHAR(250)
-);
-
 DROP TABLE IF EXISTS NGOEnterprise;
 CREATE TABLE IF NOT EXISTS NGOEnterprise (
    ngo_id INT,
    enterprise_id INT,
-   PRIMARY KEY(ngo_id, enterprise_id,
+   PRIMARY KEY(ngo_id, enterprise_id),
    FOREIGN KEY (ngo_id) REFERENCES NGO(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT,
-   FOREIGN KEY (enterprise_id) REFERENCES enterprise(id)
+   FOREIGN KEY (enterprise_id) REFERENCES Enterprises(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT
 );
@@ -260,7 +252,7 @@ CREATE TABLE IF NOT EXISTS NGOUser (
    FOREIGN KEY (ngo_id) REFERENCES NGO(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT,
-   FOREIGN KEY (user_id) REFERENCES user(id)
+   FOREIGN KEY (user_id) REFERENCES User(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT
 );
