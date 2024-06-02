@@ -13,8 +13,7 @@ CREATE TABLE IF NOT EXISTS Country (
 
 DROP TABLE IF EXISTS NGO;
 CREATE TABLE IF NOT EXISTS NGO (
-   id INT PRIMARY KEY,
-   logo VARCHAR(255) UNIQUE NOT NULL,
+   id INT PRIMARY KEY AUTO_INCREMENT,
    website VARCHAR(255) UNIQUE NOT NULL,
    name VARCHAR(50),
    contact VARCHAR(50)
@@ -37,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Enterprises (
    id INT PRIMARY KEY,
    name VARCHAR(50),
    type VARCHAR(255),
-   emission_result VARCHAR(255),
+   emission_result INT,
    misc_emissions VARCHAR(255),
    country_id INT,
    FOREIGN KEY (country_id) REFERENCES Country(id)

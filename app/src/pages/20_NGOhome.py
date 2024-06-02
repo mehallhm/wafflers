@@ -11,9 +11,9 @@ with col1:
     st.write("NGO")
     st.image('https://cdn-icons-png.freepik.com/256/3101/3101045.png?ga=GA1.1.1507691374.1717099387', width = 50)
 
-st.write("# To get started take the survey below")
+st.write("# To get started we need some information from you")
 st.write('')
 st.write('')
 
-if st.button('Take NGO general emissions survey'):
-    st.switch_page('pages/21_NGOSurvey.py')
+if st.button('NGO information questions'):
+    st.switch_page('pages/21_NGOInfo.py')
