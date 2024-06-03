@@ -23,20 +23,48 @@ Website_link = st.text_input("Website link:")
 
 Contact_email = st.text_input("Head contact email:")
 
+
+data = {} 
+try:
+  data = requests.get('http://api:4000/n/ngotags').json()
+except:
+  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
+st.dataframe(data)
+
+data = {} 
+try:
+  data = requests.get('http://api:4000/n/tags').json()
+except:
+  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
+st.dataframe(data)
+
+# Multiselect tags option
+options = ["Transport", "Flights", "Energy", "Heat"]
+
+selected_tags = st.multiselect("Select your associated tags", options)
+
+st.write("Selected tags:", selected_tags)
+
+
 if st.button("Submit"):
     if NGO_name and Website_link and Contact_email:
         
-        api_url = "http://127.0.0.1:8501/n/NGOadd"
+        api_url = "http://api:4000/n/NGOadd"
         data = {
             "name": NGO_name,
             "website": Website_link,
-            "email": Contact_email
+            "email": Contact_email,
+            "tags": selected_tags 
         }
-        
+                
         try:
             response = requests.post(api_url, json=data)
             
-            if response.status_code == 201:
+            if response.status_code == 201 or response.status_code == 200:
                 st.success("Data successfully inserted!")
             else:
                 try:
@@ -50,14 +78,6 @@ if st.button("Submit"):
     else:
         st.error("Please fill in all the fields before submitting.")
 
-
-
-# Multiselect tags option
-options = ["Transport", "Flights", "Energy", "Heat"]
-
-selected_tags = st.multiselect("Select your associated tags", options)
-
-st.write("Selected tags:", selected_tags)
 
 if st.button('Proceed to tools'):
     st.switch_page('pages/22_NGOTools.py')
