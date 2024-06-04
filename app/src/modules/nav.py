@@ -26,7 +26,7 @@ def EnterpriseHomeNav():
     st.sidebar.page_link("pages/10_enterprisehome.py", label="Enterprise Home")
 
 def EnterpriseMatchNav():
-    st.sidebar.page_link("pages/12_enterpriseMatch.py", label="Enterprise Match")
+    st.sidebar.page_link("pages/12_enterpriseMatch.py", label="NGO Match")
 
 def EnterpriseSurveyNav():
     st.sidebar.page_link("pages/11_enterpriseSurvey.py", label="Enterprise Survey")
@@ -44,6 +44,9 @@ def NGOInfoNav():
 
 def NGOToolsNav():
     st.sidebar.page_link("pages/22_NGOTools.py", label="NGO Tools")
+
+def NGOMatchNav():
+    st.sidebar.page_link("pages/23_NGOMatch.py", label="Enterprise Match")    
 
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):
@@ -81,6 +84,7 @@ def SideBarLinks(show_home=False):
             NGOHomeNav()
             NGOInfoNav()
             NGOToolsNav()
+            NGOMatchNav()
 
     
     # Always show the About page at the bottom of the list of links

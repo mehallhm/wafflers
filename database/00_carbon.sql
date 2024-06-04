@@ -90,9 +90,8 @@ CREATE TABLE IF NOT EXISTS Flight (
    id INT PRIMARY KEY,
    user_id INT,
    enterprise_id INT,
-   Date_taken DATETIME,
-   origin VARCHAR(250),
-   destination VARCHAR(250),
+   date_taken DATETIME,
+   distance INT,
    emission_tags VARCHAR(50),
    aircraft_type VARCHAR(250),
    FOREIGN KEY (user_id) REFERENCES User(id)
@@ -215,8 +214,6 @@ CREATE TABLE IF NOT EXISTS UserTags (
        ON UPDATE CASCADE
        ON DELETE RESTRICT
 );
-
-
 
 DROP TABLE IF EXISTS NGOTags;
 CREATE TABLE IF NOT EXISTS NGOTags (

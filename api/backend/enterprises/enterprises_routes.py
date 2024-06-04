@@ -22,12 +22,7 @@ def get_tags():
     WHERE EmissionTags.id IN (
         SELECT tag_id 
         FROM EntTags 
-        WHERE EntTags.enterprise_id = (
-            SELECT id 
-            FROM Enterprises 
-            ORDER BY id DESC 
-            LIMIT 1
-        )
+        WHERE EntTags.enterprise_id = 1
     );
 ''')
     
@@ -63,12 +58,7 @@ def get_matches():
     WHERE EmissionTags.id IN (
         SELECT tag_id
         FROM EntTags
-        WHERE EntTags.enterprise_id = (
-            SELECT id
-            FROM Enterprises
-            ORDER BY id DESC
-            LIMIT 1
-        )
+        WHERE EntTags.enterprise_id = 1
     );
 ''')
     
@@ -97,17 +87,20 @@ def get_comparison():
     cursor = db.get_db().cursor()
 
     cursor.execute('''
-    SELECT AVG(Enterprises.emission_result) AS avg_enterprise_emissions, Country.name AS your_country, (SELECT e2.emission_result
-        FROM Enterprises e2
-        ORDER BY e2.id DESC
-        LIMIT 1) AS your_enterprise_emissions
-    FROM Enterprises
-    JOIN Country ON Enterprises.country_id = Country.id
-    WHERE Country.name = (SELECT Country.name FROM Enterprises
-    JOIN Country ON Enterprises.country_id = Country.id
-    ORDER BY Enterprises.id DESC
-    LIMIT 1)
-    GROUP BY Country.name;
+        SELECT AVG(Enterprises.emission_result) AS 'Average Emission (by Country)',
+               Country.name                     AS 'Country',
+               (SELECT e2.emission_result
+                FROM Enterprises e2
+                WHERE e2.id = 1)                AS 'Your Emissions'
+        FROM Enterprises
+                 JOIN Country ON Enterprises.country_id = Country.id
+        WHERE Country.name =
+              (SELECT Country.name
+               FROM Enterprises
+                        JOIN Country ON Enterprises.country_id = Country.id
+               WHERE Enterprises.id = 1
+               LIMIT 1)
+        GROUP BY Country.name;
     ''')
     
     # grab the column headers from the returned data
