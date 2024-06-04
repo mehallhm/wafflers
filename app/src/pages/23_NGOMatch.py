@@ -13,15 +13,12 @@ st.write('')
 st.write("## Your emission tags are: ")
 
 data = {} 
-try:
-  data = requests.get('http://api:4000/n/tags').json()
-except:
-  st.write("**Important**: Could not connect to sample api, so using dummy data.")
-  data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+data = requests.get('http://api:4000/n/tags').json()
+
 
 st.dataframe(data)
 
-st.write("## NGOs with these tags are: ")
+st.write("## Enterprises with these tags are: ")
 
 data = {} 
 try:
