@@ -1,8 +1,12 @@
-USE CarbonConnect;
+INSERT INTO Country (id, emissions, name) VALUES (1, '5.8 million metric tons', 'Austria');
+INSERT INTO Country (id, emissions, name) VALUES (2, '15.2 million metric tons', 'Belgium');
+INSERT INTO Country (id, emissions, name) VALUES (3, '20.7 million metric tons', 'Bulgaria');
+INSERT INTO Country (id, emissions, name) VALUES (4, '7.3 million metric tons', 'Croatia');
+INSERT INTO Country (id, emissions, name) VALUES (5, '12.1 million metric tons', 'Cyprus');
+INSERT INTO Country (id, emissions, name) VALUES (6, '18.5 million metric tons', 'Czechia');
+INSERT INTO Country (id, emissions, name) VALUES (7, '9.8 million metric tons', 'Denmark');
+INSERT INTO Country (id, emissions, name) VALUES (8, '14.3 million metric tons', 'Estonia');
 
-INSERT INTO Country (id, emissions, name) VALUES (1, '5.8 million metric tons', 'CountryA');
-INSERT INTO Country (id, emissions, name) VALUES (2, '15.2 million metric tons', 'CountryB');
-INSERT INTO Country (id, emissions, name) VALUES (3, '20.7 million metric tons', 'CountryC');
 
 INSERT INTO EmissionTags (id, description) VALUES
 (1, 'Transport'),

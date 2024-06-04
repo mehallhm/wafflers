@@ -3,6 +3,7 @@ import json
 from backend.db_connection import db
 
 ngo = Blueprint('ngo', __name__)
+current_id = 1
 
 @ngo.route('/NGOadd', methods=['POST'])
 def add_new_NGO():
@@ -42,9 +43,6 @@ def add_new_NGO():
     return 'Success'
 
 
-
-
-
 @ngo.route('/ngotags', methods=['GET'])
 def get_ngotags():
     # get a cursor object from the database
@@ -71,13 +69,55 @@ def get_ngotags():
     return jsonify(json_data)
 
 @ngo.route('/tags', methods=['GET'])
-def get_ngodata():
+def get_tags():
+    # get a cursor object from the database
+    cursor = db.get_db().cursor()
+    cursor.execute('''
+        SELECT description 
+        FROM EmissionTags 
+        WHERE EmissionTags.id IN (
+            SELECT tag_id 
+            FROM NGOTags 
+            WHERE NGOTags.ngo_id = 1
+        );
+    ''')
+    
+    # grab the column headers from the returned data
+    column_headers = [x[0] for x in cursor.description]
+
+    # create an empty dictionary object to use in 
+    # putting column headers together with data
+    json_data = []
+
+    # fetch all the data from the cursor
+    theData = cursor.fetchall()
+
+    # for each of the rows, zip the data elements together with
+    # the column headers. 
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
+
+
+# get all of the matching Enterprises based on tags
+@ngo.route('/EnterpriseMatch', methods=['GET'])
+def get_matches():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
-    # use cursor to query the database for a list of products
-    cursor.execute('SELECT * FROM EmissionTags')
-
+    cursor.execute('''
+    SELECT Enterprises.name, EmissionTags.description
+    FROM Enterprises
+    JOIN EntTags ON Enterprises.id = EntTags.enterprise_id
+    JOIN EmissionTags ON EntTags.tag_id = EmissionTags.id
+    WHERE EmissionTags.id IN (
+        SELECT tag_id
+        FROM EntTags
+        WHERE EntTags.enterprise_id = 1
+    );
+''')
+    
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
 
