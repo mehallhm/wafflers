@@ -119,3 +119,58 @@ def get_comparison():
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+
+# Get all the supply chain history for this enterprise
+@enterprises.route('/EntSupplyChain', methods=['GET'])
+def get_supplychain():
+    cursor = db.get_db().cursor()
+
+    cursor.execute('SELECT * FROM SupplyChain WHERE SupplyChain.enterprise_id = 1')
+
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    theData = cursor.fetchall()
+
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
+
+# Get all the operating cost history for this enterprise
+@enterprises.route('/EntCosts', methods=['GET'])
+def get_costs():
+    cursor = db.get_db().cursor()
+
+    cursor.execute('SELECT * FROM operatingEmission WHERE operatingEmission.enterprise_id = 1')
+
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    theData = cursor.fetchall()
+
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
+
+# Get all the flights history for this enterprise
+@enterprises.route('/EntFlights', methods=['GET'])
+def get_flights():
+    cursor = db.get_db().cursor()
+
+    cursor.execute('SELECT * FROM Flight WHERE Flight.enterprise_id = 1')
+
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    theData = cursor.fetchall()
+
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)

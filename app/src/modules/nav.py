@@ -20,6 +20,9 @@ def UserHomeNav():
 def UserSurveyNav():
     st.sidebar.page_link("pages/02_userSurvey.py", label="General User Survey")
 
+def UserHistoryNav():
+    st.sidebar.page_link("pages/03_userHistory.py", label="General User Survey History")
+
 # enterprise role
 
 def EnterpriseHomeNav():
@@ -33,6 +36,9 @@ def EnterpriseSurveyNav():
 
 def EnterpriseCompareNav():
     st.sidebar.page_link("pages/13_enterpriseCompare.py", label="Enterprise Compare")
+
+def EnterpriseHistoryNav():
+    st.sidebar.page_link("pages/14_enterpriseHistory.py", label="Enterprise Survey History")
 
 # NGO role
 
@@ -73,12 +79,14 @@ def SideBarLinks(show_home=False):
         if st.session_state['role'] == 'citizen':
             UserHomeNav()
             UserSurveyNav()
+            UserHistoryNav()
 
         if st.session_state['role'] == 'enterprise':
             EnterpriseHomeNav()
             EnterpriseMatchNav()
             EnterpriseSurveyNav()
             EnterpriseCompareNav()
+            EnterpriseHistoryNav()
         
         if st.session_state['role'] == 'NGO':
             NGOHomeNav()
