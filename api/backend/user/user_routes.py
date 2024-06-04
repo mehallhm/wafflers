@@ -41,7 +41,7 @@ def get_residential():
     return jsonify(json_data)
 
 # Get all the flight history for this user
-@user.route('/UserFights', methods=['GET'])
+@user.route('/UserFlights', methods=['GET'])
 def get_flights():
     cursor = db.get_db().cursor()
 

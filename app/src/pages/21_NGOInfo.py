@@ -23,25 +23,6 @@ Website_link = st.text_input("Website link:")
 
 Contact_email = st.text_input("Head contact email:")
 
-
-data = {} 
-try:
-  data = requests.get('http://api:4000/n/ngotags').json()
-except:
-  st.write("**Important**: Could not connect to sample api, so using dummy data.")
-  data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
-
-st.dataframe(data)
-
-data = {} 
-try:
-  data = requests.get('http://api:4000/n/tags').json()
-except:
-  st.write("**Important**: Could not connect to sample api, so using dummy data.")
-  data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
-
-st.dataframe(data)
-
 # Multiselect tags option
 options = ["Transport", "Flights", "Energy", "Heat"]
 
