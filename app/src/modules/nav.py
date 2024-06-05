@@ -49,7 +49,7 @@ def NGOInfoNav():
     st.sidebar.page_link("pages/21_NGOInfo.py", label="NGO Info")
 
 def NGOMatchNav():
-    st.sidebar.page_link("pages/22_NGOMatch.py", label="Enterprise Match")    
+    st.sidebar.page_link("pages/22_NGOMatch.py", label="Enterprise/User Match")    
 
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):

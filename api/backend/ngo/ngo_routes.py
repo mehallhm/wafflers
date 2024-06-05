@@ -125,3 +125,39 @@ def get_matches():
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+
+# get all of the matching users based on tags
+@ngo.route('/UserMatch', methods=['GET'])
+def get_usermatches():
+    # get a cursor object from the database
+    cursor = db.get_db().cursor()
+
+    cursor.execute('''
+    SELECT DISTINCT User.id
+    FROM User
+    JOIN UserTags ON User.id = UserTags.tag_id
+    JOIN EmissionTags ON UserTags.tag_id = EmissionTags.id
+    WHERE EmissionTags.id IN (
+        SELECT tag_id
+        FROM NGOTags
+        WHERE NGOTags.ngo_id = 1
+    );
+''')
+    
+    # grab the column headers from the returned data
+    column_headers = [x[0] for x in cursor.description]
+
+    # create an empty dictionary object to use in 
+    # putting column headers together with data
+    json_data = []
+
+    # fetch all the data from the cursor
+    theData = cursor.fetchall()
+
+    # for each of the rows, zip the data elements together with
+    # the column headers. 
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)

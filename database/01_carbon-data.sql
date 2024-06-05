@@ -50,6 +50,13 @@ INSERT INTO User (id, emission_result, country_id) VALUES
 (2, 200, 2),
 (3, 300, 3);
 
-
 INSERT INTO ResData (id, user_id, elec_usage, emission_tags, heating, water_heating, cooking_gas) VALUES
 (200, 1, 1000.0, 'res', 2000.0, 1.0, 11.0)
+
+INSERT INTO UserTags (user_id, tag_id) VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(2, 4),
+(3, 1),
+(3, 3);
