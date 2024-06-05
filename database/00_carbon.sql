@@ -120,9 +120,11 @@ DROP TABLE IF EXISTS ResData;
 CREATE TABLE IF NOT EXISTS ResData (
    id INT PRIMARY KEY,
    user_id INT,
-   elec_usage VARCHAR(250),
+   elec_usage FLOAT(5),
    emission_tags VARCHAR(250),
-   heat_gas VARCHAR(50),
+   heating FLOAT(5),
+   water_heating FLOAT(5),
+   cooking_gas FLOAT(5),
    FOREIGN KEY (user_id) REFERENCES User(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT
