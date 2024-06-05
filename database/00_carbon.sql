@@ -6,7 +6,7 @@ USE CarbonConnect;
 DROP TABLE IF EXISTS Country;
 CREATE TABLE IF NOT EXISTS Country (
    id INT PRIMARY KEY AUTO_INCREMENT,
-   emissions VARCHAR(255),
+   emissions FLOAT(5),
    name VARCHAR(50)
 );
 
@@ -105,11 +105,11 @@ CREATE TABLE IF NOT EXISTS Flight (
 
 DROP TABLE IF EXISTS Cars;
 CREATE TABLE IF NOT EXISTS Cars (
-   id INT PRIMARY KEY,
+   id INT PRIMARY KEY AUTO_INCREMENT,
    user_id INT,
    fuel_type VARCHAR(50),
    emission_tags VARCHAR(50),
-   distance INT,
+   fuel_used FLOAT(20),
    FOREIGN KEY (user_id) REFERENCES User(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT

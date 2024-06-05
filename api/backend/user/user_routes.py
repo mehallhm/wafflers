@@ -23,6 +23,27 @@ def get_cars():
     return jsonify(json_data)
 
 # Get all the residential history for this user
+@user.route('/UserAddCar', methods=['PUT'])
+def add_car():
+    current_app.logger.info('user_routes.py: PUT /UserAddCar')
+    
+    received_data = request.json
+    current_app.logger.info(received_data)
+
+    fuel_type = received_data['fuel_type']
+    fuel_used = received_data['fuel_used']
+    
+    query = "UPDATE Cars SET emission_tags = 'car', fuel_type = %s, fuel_used = %s WHERE user_id = 1"
+
+    data = (fuel_type, fuel_used)
+    cursor = db.get_db().cursor()
+    cursor.execute(query, data)
+    db.get_db().commit()
+    return "success"
+    
+
+
+# Get all the residential history for this user
 @user.route('/UserResidential', methods=['GET'])
 def get_residential():
     cursor = db.get_db().cursor()
@@ -62,23 +83,23 @@ def add_residential():
     return "success"
     
 
-# Get all the residential history for this user
-@user.route('/UserCountry', methods=['PUT'])
-def add_country():
-    current_app.logger.info('user_routes.py: PUT /UserCountry')
+# # Get all the residential history for this user
+# @user.route('/UserCountry', methods=['PUT'])
+# def add_country():
+#     current_app.logger.info('user_routes.py: PUT /UserCountry')
     
-    recieved_data = request.json
-    current_app.logger.info(recieved_data)
+#     recieved_data = request.json
+#     current_app.logger.info(recieved_data)
 
-    name = recieved_data['name']
-    emissions = recieved_data['website']
+#     name = recieved_data['name']
+#     emissions = recieved_data['website']
 
-    query = 'UPDATE NGO SET website = %s, name = %s, contact = %s WHERE id = 1'
+#     query = 'UPDATE NGO SET website = %s, name = %s, contact = %s WHERE id = 1'
 
-    data = (name, website, email)
-    cursor = db.get_db().cursor()
-    cursor.execute(query, data)
-    db.get_db().commit()
+#     data = (name, website, email)
+#     cursor = db.get_db().cursor()
+#     cursor.execute(query, data)
+#     db.get_db().commit()
 
 
 # Get all the flight history for this user

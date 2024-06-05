@@ -60,3 +60,8 @@ INSERT INTO UserTags (user_id, tag_id) VALUES
 (2, 4),
 (3, 1),
 (3, 3);
+
+INSERT INTO Cars (id, user_id, fuel_type, emission_tags, fuel_used) VALUES
+(1, 1, 'Gasoline/Hybrid', 'car', 100.0),
+(2, 2, 'Diesel', 'car', 200.0),
+(3, 3, 'Electric', 'car', 304.0);
