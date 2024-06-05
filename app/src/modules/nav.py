@@ -23,6 +23,9 @@ def UserSurveyNav():
 def UserHistoryNav():
     st.sidebar.page_link("pages/03_userHistory.py", label="General User Survey History")
 
+def UserMatchNav():
+    st.sidebar.page_link("pages/04_userMatch.py", label="NGO Suggestions")
+
 # enterprise role
 
 def EnterpriseHomeNav():
@@ -34,11 +37,8 @@ def EnterpriseMatchNav():
 def EnterpriseSurveyNav():
     st.sidebar.page_link("pages/11_enterpriseSurvey.py", label="Enterprise Survey")
 
-def EnterpriseCompareNav():
-    st.sidebar.page_link("pages/13_enterpriseCompare.py", label="Enterprise Compare")
-
 def EnterpriseHistoryNav():
-    st.sidebar.page_link("pages/14_enterpriseHistory.py", label="Enterprise Survey History")
+    st.sidebar.page_link("pages/13_enterpriseHistory.py", label="Enterprise Survey History")
 
 # NGO role
 
@@ -48,11 +48,8 @@ def NGOHomeNav():
 def NGOInfoNav():
     st.sidebar.page_link("pages/21_NGOInfo.py", label="NGO Info")
 
-def NGOToolsNav():
-    st.sidebar.page_link("pages/22_NGOTools.py", label="NGO Tools")
-
 def NGOMatchNav():
-    st.sidebar.page_link("pages/23_NGOMatch.py", label="Enterprise Match")    
+    st.sidebar.page_link("pages/22_NGOMatch.py", label="Enterprise Match")    
 
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):
@@ -76,22 +73,21 @@ def SideBarLinks(show_home=False):
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
 
-        if st.session_state['role'] == 'citizen':
+        if st.session_state['role'] == 'General User':
             UserHomeNav()
             UserSurveyNav()
             UserHistoryNav()
+            UserMatchNav()
 
-        if st.session_state['role'] == 'enterprise':
+        if st.session_state['role'] == 'Enterprise':
             EnterpriseHomeNav()
             EnterpriseMatchNav()
             EnterpriseSurveyNav()
-            EnterpriseCompareNav()
             EnterpriseHistoryNav()
         
         if st.session_state['role'] == 'NGO':
             NGOHomeNav()
             NGOInfoNav()
-            NGOToolsNav()
             NGOMatchNav()
 
     

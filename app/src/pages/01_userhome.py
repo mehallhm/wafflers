@@ -8,12 +8,18 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     st.write("Logged in as:")
-    st.write("General user")
+    st.write(f"{st.session_state['role']} {st.session_state['first_name']}")
     st.image('https://cdn-icons-png.freepik.com/256/552/552848.png?ga=GA1.1.1507691374.1717099387', width = 50)
 
-st.write("# To get started take the survey below")
+st.write("# Navigate to your desired tool")
 st.write('')
 st.write('')
 
-if st.button('Take user general emissions survey'):
+if st.button('Retake user general emissions survey'):
     st.switch_page('pages/02_userSurvey.py')
+st.write('')
+if st.button('See my survey history'):
+    st.switch_page('pages/03_userHistory.py')
+st.write('')
+if st.button('See my NGO recommendations'):
+    st.switch_page('pages/04_userMatch.py')
