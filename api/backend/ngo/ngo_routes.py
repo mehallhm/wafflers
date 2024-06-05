@@ -5,8 +5,26 @@ from backend.db_connection import db
 ngo = Blueprint('ngo', __name__)
 current_id = 1
 
-# adds an ngo to the NGO table given filled out data
-@ngo.route('/NGOadd', methods=['POST'])
+# Gets my ngo data
+@ngo.route('/ngomine', methods=['GET'])
+def get_mine():
+    cursor = db.get_db().cursor()
+
+    cursor.execute('SELECT * FROM NGO WHERE id = 1')
+
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    theData = cursor.fetchall()
+
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
+
+# updates an ngo to the NGO table given filled out data
+@ngo.route('/NGOupdate', methods=['PUT'])
 def add_new_NGO():
     current_app.logger.info('ngo_routes.py: POST /NGOadd')
     
@@ -17,29 +35,27 @@ def add_new_NGO():
     website = recieved_data['website']
     email = recieved_data['email']
 
-    query = 'INSERT INTO NGO (website, name, contact) VALUES (%s, %s, %s)'
+    query = 'UPDATE NGO SET website = %s, name = %s, contact = %s WHERE id = 1'
 
     data = (name, website, email)
-    current_app.logger.info(query)
-    current_app.logger.info(data)
     cursor = db.get_db().cursor()
     cursor.execute(query, data)
     db.get_db().commit()
 
-    new_id = cursor.lastrowid
+    # new_id = cursor.lastrowid
     
-    selected_tags = recieved_data.get('tags', []) 
-    if selected_tags:
-        insert_query = 'INSERT INTO NGOTags (ngo_id, tag_id) VALUES (%s, %s)'
-        # for each tag gets the tag_id from the emission tags table, :)
-        # also inserts into NGO tags
-        for tag_name in selected_tags:
-            tag_query = 'SELECT id FROM EmissionTags WHERE description = %s'
-            cursor.execute(tag_query, (tag_name,))
-            tag_row = cursor.fetchone()
-            tag_id = tag_row[0]
-            cursor.execute(insert_query, (new_id, tag_id))
-            db.get_db().commit()
+    # selected_tags = recieved_data.get('tags', []) 
+    # if selected_tags:
+    #     insert_query = 'INSERT INTO NGOTags (ngo_id, tag_id) VALUES (%s, %s)'
+    #     # for each tag gets the tag_id from the emission tags table, :)
+    #     # also inserts into NGO tags
+    #     for tag_name in selected_tags:
+    #         tag_query = 'SELECT id FROM EmissionTags WHERE description = %s'
+    #         cursor.execute(tag_query, (tag_name,))
+    #         tag_row = cursor.fetchone()
+    #         tag_id = tag_row[0]
+    #         cursor.execute(insert_query, (new_id, tag_id))
+    #         db.get_db().commit()
 
     return 'Success'
 
