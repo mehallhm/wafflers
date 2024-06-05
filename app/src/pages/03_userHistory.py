@@ -9,7 +9,7 @@ st.write("# User history")
 
 data = {} 
 try:
-  data = requests.get('http://api:4000/u/userhistory').json()
+  data = requests.get('http://api:4000/u/UserCars').json()
 except:
   st.write("**Important**: Could not connect to sample api, so using dummy data.")
   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
@@ -18,7 +18,7 @@ st.dataframe(data)
 
 data = {} 
 try:
-  data = requests.get('http://api:4000/u/userhistory').json()
+  data = requests.get('http://api:4000/u/UserResidential').json()
 except:
   st.write("**Important**: Could not connect to sample api, so using dummy data.")
   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
@@ -27,7 +27,7 @@ st.dataframe(data)
 
 data = {} 
 try:
-  data = requests.get('http://api:4000/u/userhistory').json()
+  data = requests.get('http://api:4000/u/UserFlights').json()
 except:
   st.write("**Important**: Could not connect to sample api, so using dummy data.")
   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
@@ -36,7 +36,7 @@ st.dataframe(data)
 
 data = {} 
 try:
-  data = requests.get('http://api:4000/u/userhistory').json()
+  data = requests.get('http://api:4000/u/UserTransport').json()
 except:
   st.write("**Important**: Could not connect to sample api, so using dummy data.")
   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
