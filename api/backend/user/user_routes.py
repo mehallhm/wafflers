@@ -40,6 +40,47 @@ def get_residential():
 
     return jsonify(json_data)
 
+# Get all the residential history for this user
+@user.route('/UserAddRes', methods=['PUT'])
+def add_residential():
+    current_app.logger.info('user_routes.py: PUT /UserAddRes')
+    
+    received_data = request.json
+    current_app.logger.info(received_data)
+
+    elec_usage = received_data['elec_usage']
+    heating = received_data['heating']
+    water_heating = received_data['water_heating']
+    cooking_gas = received_data['cooking_gas']
+    
+    query = "UPDATE ResData SET emission_tags = 'residential', elec_usage = %s, heating = %s, water_heating = %s, cooking_gas = %s WHERE user_id = 1"
+
+    data = (elec_usage, heating, water_heating, cooking_gas)
+    cursor = db.get_db().cursor()
+    cursor.execute(query, data)
+    db.get_db().commit()
+    return "success"
+    
+
+# Get all the residential history for this user
+@user.route('/UserCountry', methods=['PUT'])
+def add_country():
+    current_app.logger.info('user_routes.py: PUT /UserCountry')
+    
+    recieved_data = request.json
+    current_app.logger.info(recieved_data)
+
+    name = recieved_data['name']
+    emissions = recieved_data['website']
+
+    query = 'UPDATE NGO SET website = %s, name = %s, contact = %s WHERE id = 1'
+
+    data = (name, website, email)
+    cursor = db.get_db().cursor()
+    cursor.execute(query, data)
+    db.get_db().commit()
+
+
 # Get all the flight history for this user
 @user.route('/UserFlights', methods=['GET'])
 def get_flights():

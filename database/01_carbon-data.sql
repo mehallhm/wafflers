@@ -45,3 +45,11 @@ INSERT INTO NGOTags (ngo_id, tag_id) VALUES
 (3, 2),
 (3, 3);
 
+INSERT INTO User (id, emission_result, country_id) VALUES
+(1, 100, 1),
+(2, 200, 2),
+(3, 300, 3);
+
+
+INSERT INTO ResData (id, user_id, elec_usage, emission_tags, heating, water_heating, cooking_gas) VALUES
+(200, 1, 1000.0, 'res', 2000.0, 1.0, 11.0)

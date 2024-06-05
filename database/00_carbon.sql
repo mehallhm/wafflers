@@ -5,7 +5,7 @@ USE CarbonConnect;
 
 DROP TABLE IF EXISTS Country;
 CREATE TABLE IF NOT EXISTS Country (
-   id INT PRIMARY KEY,
+   id INT PRIMARY KEY AUTO_INCREMENT,
    emissions VARCHAR(255),
    name VARCHAR(50)
 );
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS Cars (
 
 DROP TABLE IF EXISTS ResData;
 CREATE TABLE IF NOT EXISTS ResData (
-   id INT PRIMARY KEY,
+   id INT PRIMARY KEY AUTO_INCREMENT,
    user_id INT,
    elec_usage FLOAT(5),
    emission_tags VARCHAR(250),
