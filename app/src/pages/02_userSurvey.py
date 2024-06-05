@@ -84,8 +84,7 @@ with st.expander("Car Data"):
 
     elif (fuel_type == "Electric"): 
         st.write("Please include charging data in residential data.")
-    
-    
+        
     if st.button("Submit Car Data"):
         if fuel_type and fuel_used:
             api_url = "http://api:4000/u/UserAddCar"
