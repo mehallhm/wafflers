@@ -1,23 +1,34 @@
 DROP DATABASE IF EXISTS CarbonConnect;
 CREATE DATABASE IF NOT EXISTS CarbonConnect;
-USE CarbonConnect;
+Use CarbonConnect;
+
+
+DROP TABLE IF EXISTS Beta_User;
+CREATE TABLE IF NOT EXISTS Beta_User (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_values VARCHAR(100)
+);
+
+DROP TABLE IF EXISTS Beta_Enterprise;
+CREATE TABLE IF NOT EXISTS Beta_Enterprise (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    enterprise_values VARCHAR(100)
+);
 
 
 DROP TABLE IF EXISTS Country;
 CREATE TABLE IF NOT EXISTS Country (
-   id INT PRIMARY KEY,
-   emissions VARCHAR(255),
+   id INT PRIMARY KEY AUTO_INCREMENT,
+   emissions FLOAT(5),
    name VARCHAR(50)
 );
 
 
 DROP TABLE IF EXISTS NGO;
 CREATE TABLE IF NOT EXISTS NGO (
-   id INT PRIMARY KEY,
-   logo VARCHAR(255) UNIQUE NOT NULL,
-   website VARCHAR(255) UNIQUE NOT NULL,
+   id INT PRIMARY KEY AUTO_INCREMENT,
+   website VARCHAR(255) NOT NULL,
    name VARCHAR(50),
-   mission_tags VARCHAR(50),
    contact VARCHAR(50)
 );
 
@@ -25,7 +36,6 @@ CREATE TABLE IF NOT EXISTS NGO (
 DROP TABLE IF EXISTS User;
 CREATE TABLE IF NOT EXISTS User (
    id INT PRIMARY KEY,
-   tags VARCHAR(255),
    emission_result INT,
    country_id INT,
    FOREIGN KEY (country_id) REFERENCES Country(id)
@@ -39,9 +49,8 @@ CREATE TABLE IF NOT EXISTS Enterprises (
    id INT PRIMARY KEY,
    name VARCHAR(50),
    type VARCHAR(255),
-   emission_result VARCHAR(255),
-   emission_tags VARCHAR(255),
-   misc_emissions VARCHAR(255),
+   emission_result INT,
+   misc_emissions INT,
    country_id INT,
    FOREIGN KEY (country_id) REFERENCES Country(id)
        ON UPDATE CASCADE
@@ -94,9 +103,8 @@ CREATE TABLE IF NOT EXISTS Flight (
    id INT PRIMARY KEY,
    user_id INT,
    enterprise_id INT,
-   Date_taken DATETIME,
-   origin VARCHAR(250),
-   destination VARCHAR(250),
+   date_taken DATETIME,
+   distance INT,
    emission_tags VARCHAR(50),
    aircraft_type VARCHAR(250),
    FOREIGN KEY (user_id) REFERENCES User(id)
@@ -110,11 +118,11 @@ CREATE TABLE IF NOT EXISTS Flight (
 
 DROP TABLE IF EXISTS Cars;
 CREATE TABLE IF NOT EXISTS Cars (
-   id INT PRIMARY KEY,
+   id INT PRIMARY KEY AUTO_INCREMENT,
    user_id INT,
    fuel_type VARCHAR(50),
    emission_tags VARCHAR(50),
-   distance INT,
+   fuel_used FLOAT(20),
    FOREIGN KEY (user_id) REFERENCES User(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT
@@ -123,11 +131,13 @@ CREATE TABLE IF NOT EXISTS Cars (
 
 DROP TABLE IF EXISTS ResData;
 CREATE TABLE IF NOT EXISTS ResData (
-   id INT PRIMARY KEY,
+   id INT PRIMARY KEY AUTO_INCREMENT,
    user_id INT,
-   elec_usage VARCHAR(250),
+   elec_usage FLOAT(5),
    emission_tags VARCHAR(250),
-   heat_gas VARCHAR(50),
+   heating FLOAT(5),
+   water_heating FLOAT(5),
+   cooking_gas FLOAT(5),
    FOREIGN KEY (user_id) REFERENCES User(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT
@@ -188,6 +198,12 @@ CREATE TABLE IF NOT EXISTS CostTags (
        ON DELETE RESTRICT
 );
 
+DROP TABLE IF EXISTS EmissionTags;
+CREATE TABLE IF NOT EXISTS EmissionTags (
+    id INT PRIMARY KEY,
+    description VARCHAR(250)
+);
+
 DROP TABLE IF EXISTS EntTags;
 CREATE TABLE IF NOT EXISTS EntTags (
    enterprise_id INT,
@@ -200,8 +216,6 @@ CREATE TABLE IF NOT EXISTS EntTags (
        ON UPDATE CASCADE
        ON DELETE RESTRICT
 );
-
-
 
 DROP TABLE IF EXISTS UserTags;
 CREATE TABLE IF NOT EXISTS UserTags (
@@ -216,8 +230,6 @@ CREATE TABLE IF NOT EXISTS UserTags (
        ON DELETE RESTRICT
 );
 
-
-
 DROP TABLE IF EXISTS NGOTags;
 CREATE TABLE IF NOT EXISTS NGOTags (
    ngo_id INT,
@@ -231,15 +243,29 @@ CREATE TABLE IF NOT EXISTS NGOTags (
        ON DELETE RESTRICT
 );
 
-
-
-
-DROP TABLE IF EXISTS EmissionTags;
-CREATE TABLE IF NOT EXISTS EmissionTags (
-    id INT PRIMARY KEY,
-    description VARCHAR(250)
+DROP TABLE IF EXISTS NGOEnterprise;
+CREATE TABLE IF NOT EXISTS NGOEnterprise (
+   ngo_id INT,
+   enterprise_id INT,
+   PRIMARY KEY(ngo_id, enterprise_id),
+   FOREIGN KEY (ngo_id) REFERENCES NGO(id)
+       ON UPDATE CASCADE
+       ON DELETE RESTRICT,
+   FOREIGN KEY (enterprise_id) REFERENCES Enterprises(id)
+       ON UPDATE CASCADE
+       ON DELETE RESTRICT
 );
-
-
+DROP TABLE IF EXISTS NGOUser;
+CREATE TABLE IF NOT EXISTS NGOUser (
+   ngo_id INT,
+   user_id INT,
+   PRIMARY KEY(ngo_id, user_id),
+   FOREIGN KEY (ngo_id) REFERENCES NGO(id)
+       ON UPDATE CASCADE
+       ON DELETE RESTRICT,
+   FOREIGN KEY (user_id) REFERENCES User(id)
+       ON UPDATE CASCADE
+       ON DELETE RESTRICT
+);
 
 
