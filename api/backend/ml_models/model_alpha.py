@@ -121,12 +121,11 @@ def predict(feats:list[float], beta:list[float]) -> float:
 	:returns: The predicted greenhouse gass emission in CO2 equiventlents
 		measured in ktonnes
 	"""
-	x = np.pad(np.array(feats, dtype=np.float64), ((0, 0), (1, 0)),
-			 mode="constant", constant_values=1)
+	x = np.concatenate([[1], np.array(feats, dtype=np.float64)])
 	beta = np.array(beta, dtype=np.float64)
 	y_hat = np.matmul(x, beta)
 
-	return y_hat[0]
+	return y_hat
 
 
 
