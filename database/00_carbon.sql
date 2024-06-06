@@ -1,6 +1,19 @@
 DROP DATABASE IF EXISTS CarbonConnect;
 CREATE DATABASE IF NOT EXISTS CarbonConnect;
-USE CarbonConnect;
+Use CarbonConnect;
+
+
+DROP TABLE IF EXISTS Beta_User;
+CREATE TABLE IF NOT EXISTS Beta_User (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_values VARCHAR(100)
+);
+
+DROP TABLE IF EXISTS Beta_Enterprise;
+CREATE TABLE IF NOT EXISTS Beta_Enterprise (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    enterprise_values VARCHAR(100)
+);
 
 
 DROP TABLE IF EXISTS Country;

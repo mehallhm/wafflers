@@ -1,8 +1,67 @@
 from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from backend.db_connection import db
+from backend.ml_models.model_alpha import predict, train
 
 user = Blueprint('user', __name__)
+
+@user.route('/UserPrediction/', methods=['GET'])
+def predict_value():
+    cursor = db.get_db().cursor()
+    
+    select_heating_query = '''
+        SELECT heating FROM ResData;
+    '''
+    cursor.execute(select_heating_query)
+    heating = cursor.fetchone()[0]
+    current_app.logger.info("THIS IS HEATING", heating)
+    
+    # select_water_query = '''
+    #     SELECT water_heating FROM ResData WHERE user_id = 1;
+    # '''
+    # cursor.execute(select_water_query)
+    # water_heating = cursor.fetchone()[0]
+    # current_app.logger.info(select_water_query)
+    
+    # select_cooking_query = '''
+    #     SELECT cooking_gas FROM ResData WHERE user_id = 1;
+    # '''
+    # cursor.execute(select_cooking_query)
+    # cooking_gas = cursor.fetchone()[0]
+    # current_app.logger.info(select_cooking_query)
+    
+    select_car_query = '''
+        SELECT fuel_used FROM Cars WHERE user_id = 1;
+    '''
+    cursor.execute(select_car_query)
+    fuel_used = cursor.fetchone()[0]
+    current_app.logger.info(select_car_query)
+    
+    select_beta_query = '''
+        SELECT user_values FROM Beta_User ORDER BY id DESC LIMIT 1;
+        '''
+    
+    cursor.execute(select_beta_query)
+    betaValue = cursor.fetchone()[0].split(', ')
+    current_app.logger.info(select_beta_query)
+    
+    if betaValue is None:
+        current_app.logger.info(f'Beta Value not Found: {betaValue}')
+        return jsonify({"error": "BV not found"}), 404
+    
+    feats = [heating, fuel_used]
+    returnVal = predict(feats, betaValue)
+    return_dict = {'result': returnVal}
+
+    the_response = make_response(jsonify(return_dict))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    
+    betavals = train()
+    current_app.logger.info("betavals: ", betavals)
+    return the_response
+
+
 
 # Get all the cars history for this user
 @user.route('/UserCars', methods=['GET'])

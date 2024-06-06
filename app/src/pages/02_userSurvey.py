@@ -116,3 +116,30 @@ with st.expander("Car Data"):
 #   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
 # st.dataframe(data)
+
+
+if st.button("View Prediction"): 
+    api_url = "http://api:4000/u/UserPrediction/"
+    try: 
+        response = requests.get(api_url)
+        responseJSON = response.json()
+        finalCarbon = responseJSON['result']
+        st.write("Estimated Carbon Footprint (tonnes of CO2): ", finalCarbon)
+        
+        # HEY PROFS: THIS IS THE ML PREDICTION
+        if response.status_code == 201 or response.status_code == 200:
+            st.success("Successfully Predicted!")
+
+            
+        else:
+            try:
+                error_message = response.json().get('error', 'No error message provided')
+            except json.JSONDecodeError:
+                error_message = response.text  # Raw response if not JSON
+            
+            st.error(f"Failed to insert data. Status code: {response.status_code}, Error: {error_message}")
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+        
+        
+        
