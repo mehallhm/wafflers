@@ -98,11 +98,6 @@ except:
   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 st.dataframe(data)
 
-
-if st.button('Proceed to tools'):
-    st.switch_page('pages/22_NGOTools.py')
-
-
 def delete_tags():
     st.write('### Delete NGO Tags')
 

@@ -56,9 +56,6 @@ def predict_value():
     the_response = make_response(jsonify(return_dict))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
-    
-    betavals = train()
-    current_app.logger.info("betavals: ", betavals)
     return the_response
 
 
