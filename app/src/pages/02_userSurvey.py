@@ -37,18 +37,16 @@ with st.expander("Residential Data"):
     household_members = st.number_input("How many people live in your household?", 1, None, 2)
     
     electricity_usage = 0.0000036 * 12 * st.number_input("How much electricity does your household use per month (kWh)?", 0.0, None, 6320.0)
-    st.write("I use approximately ", electricity_usage / household_members , "terajoules per year.")
 
     heating = 0.0000036 * 12 * st.number_input("How much heating does your household use per month (kWh)?", 0.0, None, 3000.0)
-    st.write("I use approximately ", heating / household_members, "terajoules per year.")
 
     water_heating = 0.0000036 * 12 * st.number_input("How much water heating does your household use per month (kWh)?", 0.0, None, 2000.0)
-    st.write("I use approximately ", water_heating / household_members, "terajoules per year.")
 
     cooking_gas = 0.0000036 * 12 * st.number_input("Per month, how much energy is used cooking? (kWh)?", 0.0, None, 2000.0)
-    st.write("I use approximately ", cooking_gas / household_members, "terajoules per year.")
     
-    st.write("Total Residential Usage (TJ): ", (electricity_usage + heating + water_heating + cooking_gas) / household_members)
+    kWh_total = ((electricity_usage + heating + water_heating + cooking_gas) / (household_members * 0.0000036 * 12))
+    st.write("Your Total Residential Usage (kWh): ", kWh_total)
+    st.write("That's equivalent to running a 60w lightbulb for ", round((kWh_total * 1000)/60), " hours!")
     
     if st.button("Submit Residential Data"):
         if household_members and electricity_usage and heating and water_heating and cooking_gas:
@@ -58,8 +56,7 @@ with st.expander("Residential Data"):
                 "heating": heating,
                 "water_heating": water_heating,
                 "cooking_gas": cooking_gas}
-            
-            try: 
+            try:
                 response = requests.put(API_URL, json=data)
                 if response.status_code == 201 or response.status_code == 200:
                         st.success("Data successfully inserted!")
@@ -94,11 +91,16 @@ with st.expander("Car Data"):
     if (fuel_type == "Gasoline/Hybrid"):
         fuel_capacity = st.number_input("How many liters of gasoline does your vehicle hold?", 0.0, None, 50.0)
         fuel_used_monthly = st.slider("How many times a month do you fill up your tank?", 0, 10, 5)
-        fuel_used = st.number_input("Total fuel used per year (liters): ", 0.0, None, fuel_capacity * fuel_used_monthly * 12) * 1.11302E-6
+        fuel_used = fuel_capacity * fuel_used_monthly * 12 * 1.11302E-6
+        st.write("Approx. fuel used per year (liters): ", fuel_used / 1.11302E-6) 
+        st.write("That's equivalent to ", round((fuel_used / 1.11302E-6) / 302, 2), "bathtubs!")
+        
     elif (fuel_type == "Diesel"):
         fuel_capacity = st.number_input("How many liters of diesel does your vehicle hold?", 0.0, None, 50.0)
         fuel_used_monthly = st.slider("How many times a month do you fill up your tank?", 0, 10, 5)
-        fuel_used = st.number_input("Total fuel used per year (liters): ", 0.0, None, fuel_capacity * fuel_used_monthly * 12) * 1.1571E-6
+        fuel_used = fuel_capacity * fuel_used_monthly * 12 * 1.1571E-6
+        st.write("Approx. fuel used per year (liters): ", fuel_used / 1.1571E-6) 
+        st.write("That's equivalent to ", round((fuel_used / 1.1571E-6) / 302, 2) , "bathtubs!")
 
     elif (fuel_type == "Electric"):
         st.write("Please include charging data in residential data.")
@@ -142,12 +144,13 @@ if st.button("View Prediction"):
         response = requests.get(PRED_URL, timeout=10)
         responseJSON = response.json()
         finalCarbon = responseJSON['result']
-        st.write("Estimated Carbon Footprint (ktons of CO2 equivalent): ", finalCarbon)
-        country_response = requests.get("http://api:4000/u/UserCountryCarbon", timeout=10).json()
-        st.write("Total Country Carbon Emissions (ktons of CO2 equivalent): ", country_response[0]['emissions'])
-        st.dataframe(country_response) 
+        st.write("### Estimated Carbon Footprint (kgs of CO2 equivalent): ", round(finalCarbon * 1000000, 4))
+        country_response = requests.get("http://api:4000/u/UserCountryCarbon", timeout=10).json()[0]['emissions']
+        
+        # st.write("Total Country Carbon Emissions (ktons of CO2 equivalent): ", country_response)
+        st.write("#### Your Carbon Footprint is ", round(finalCarbon / country_response, 2), " times the average in ", country)
                
-        # HEY PROFS: THIS IS THE ML PREDICTION
+               
         if response.status_code == 201 or response.status_code == 200:
             st.success("Successfully Predicted!")
         else:
