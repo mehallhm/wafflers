@@ -236,11 +236,9 @@ def get_usermatches():
     cursor = db.get_db().cursor()
 
     cursor.execute('''
-    SELECT DISTINCT User.id
-    FROM User
-    JOIN UserTags ON User.id = UserTags.tag_id
-    JOIN EmissionTags ON UserTags.tag_id = EmissionTags.id
-    WHERE EmissionTags.id IN (
+    SELECT DISTINCT UserTags.user_id
+    FROM UserTags
+    WHERE UserTags.tag_id IN (
         SELECT tag_id
         FROM NGOTags
         WHERE NGOTags.ngo_id = 1

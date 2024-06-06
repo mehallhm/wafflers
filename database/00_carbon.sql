@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS Country (
 DROP TABLE IF EXISTS NGO;
 CREATE TABLE IF NOT EXISTS NGO (
    id INT PRIMARY KEY AUTO_INCREMENT,
-   website VARCHAR(255) UNIQUE NOT NULL,
+   website VARCHAR(255) NOT NULL,
    name VARCHAR(50),
    contact VARCHAR(50)
 );
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS Enterprises (
    name VARCHAR(50),
    type VARCHAR(255),
    emission_result INT,
-   misc_emissions VARCHAR(255),
+   misc_emissions INT,
    country_id INT,
    FOREIGN KEY (country_id) REFERENCES Country(id)
        ON UPDATE CASCADE

@@ -13,7 +13,7 @@ with col1:
     st.write("NGO")
     st.image('https://cdn-icons-png.freepik.com/256/3101/3101045.png?ga=GA1.1.1507691374.1717099387', width = 50)
 
-st.write("# To get started fill in the following information")
+st.write("# Edit your info if so desired")
 
 st.write('')
 
