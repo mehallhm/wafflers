@@ -1,6 +1,7 @@
 import streamlit as st
 from modules.nav import SideBarLinks
 import requests
+import validators
 import json
 
 # Show appropriate sidebar links for the role of the currently logged in user
@@ -13,15 +14,38 @@ with col1:
     st.write("NGO")
     st.image('https://cdn-icons-png.freepik.com/256/3101/3101045.png?ga=GA1.1.1507691374.1717099387', width = 50)
 
-st.write("# Edit your info if so desired")
-
+st.write("# Account Info")
+st.write("## Edit your account info")
 st.write('')
 
 NGO_name = st.text_input("NGO name")
 
+def is_valid_url_with_tld(url, tld_list):
+    if not url.startswith(('http://', 'https://')):
+        url = 'http://' + url
+    
+    if validators.url(url):
+        domain = url.split('/')[2]
+        for tld in tld_list:
+            if domain.endswith(tld):
+                return True
+    return False
+
 Website_link = st.text_input("Website link:")
 
+if Website_link:
+    if is_valid_url_with_tld(Website_link, ['.com', '.gov', '.net', '.org', '.tv', '.cz', '.jp', '.de', '.br', '.edu']):
+        st.success('Valid URL!')
+    else:
+        st.error('Invalid URL or TLD')
+
 Contact_email = st.text_input("Head contact email:")
+
+if Contact_email:
+    if validators.email(Contact_email):
+        st.success('Valid email address!')
+    else:
+        st.error('Invalid email address. Please enter a valid email.')
 
 # Multiselect tags option
 # options = ["Transport", "Flights", "Energy", "Heat"]
@@ -32,7 +56,7 @@ Contact_email = st.text_input("Head contact email:")
 
 
 if st.button("Submit"):
-    if NGO_name and Website_link and Contact_email:
+    if NGO_name and is_valid_url_with_tld(Website_link, ['.com', '.gov', '.net', '.org', '.tv', '.cz', '.jp', '.de', '.br', '.edu']) and validators.email(Contact_email):
         
         api_url = "http://api:4000/n/NGOupdate"
         data = {
@@ -55,7 +79,7 @@ if st.button("Submit"):
         except Exception as e:
             st.error(f"An error occurred: {e}")
     else:
-        st.error("Please fill in all the fields before submitting.")
+        st.error("Please fill in all the fields before submitting and have valid emails/urls")
 
 st.write('## My NGO data')
 
