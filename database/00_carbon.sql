@@ -38,6 +38,9 @@ CREATE TABLE IF NOT EXISTS User (
    id INT PRIMARY KEY,
    emission_result INT,
    country_id INT,
+   email VARCHAR(255),
+   match_consent BOOLEAN,
+   name VARCHAR(255),
    FOREIGN KEY (country_id) REFERENCES Country(id)
        ON UPDATE CASCADE
        ON DELETE RESTRICT

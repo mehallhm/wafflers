@@ -236,13 +236,15 @@ def get_usermatches():
     cursor = db.get_db().cursor()
 
     cursor.execute('''
-    SELECT DISTINCT UserTags.user_id
-    FROM UserTags
-    WHERE UserTags.tag_id IN (
-        SELECT tag_id
-        FROM NGOTags
-        WHERE NGOTags.ngo_id = 1
-    );
+    SELECT DISTINCT User.name, User.email FROM User
+    WHERE User.id IN
+    (SELECT DISTINCT UserTags.user_id
+        FROM UserTags
+        WHERE UserTags.tag_id IN (
+            SELECT tag_id
+            FROM NGOTags
+            WHERE NGOTags.ngo_id = 1
+        )) AND User.match_consent = true;
 ''')
     
     # grab the column headers from the returned data
