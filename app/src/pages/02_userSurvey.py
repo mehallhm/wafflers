@@ -124,7 +124,7 @@ if st.button("View Prediction"):
         response = requests.get(api_url)
         responseJSON = response.json()
         finalCarbon = responseJSON['result']
-        st.write("Estimated Carbon Footprint (tonnes of CO2): ", finalCarbon)
+        st.write("Estimated Carbon Footprint (ktons of CO2 equivalent): ", finalCarbon)
         
         # HEY PROFS: THIS IS THE ML PREDICTION
         if response.status_code == 201 or response.status_code == 200:

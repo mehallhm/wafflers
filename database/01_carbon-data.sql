@@ -421,4 +421,4 @@ INSERT INTO Cars (id, user_id, fuel_type, emission_tags, fuel_used) VALUES
 (2, 2, 'Diesel', 'car', 200.0),
 (3, 3, 'Electric', 'car', 304.0);
 
-INSERT INTO Beta_User (id, user_values) VALUES (1, '0.001, 0.3, 0.2');
+INSERT INTO Beta_User (id, user_values) VALUES (1, '-3.58516566E-17, .163886704, .821830787');
