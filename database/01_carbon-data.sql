@@ -139,7 +139,7 @@ insert into Enterprises (id, name, type, emission_result, misc_emissions, countr
 insert into Enterprises (id, name, type, emission_result, misc_emissions, country_id) values (49, 'Schinner, Sanford and Stark', 'Metal Fabrications', 180, 261, 9);
 insert into Enterprises (id, name, type, emission_result, misc_emissions, country_id) values (50, 'Bins, Heller and Ondricka', 'Packaged Foods', 199, 150, 16);
 
-insert into User (id, emission_result, country_id, email, match_consent, name) values (1, 40, 1, 'dfloweth0@360.cn', true, 'Dorey');
+insert into User (id, emission_result, country_id, email, match_consent, name) values (1, 40, 1, 'NatAllard@360.cn', true, 'Natalie');
 insert into User (id, emission_result, country_id, email, match_consent, name) values (2, 9, 14, 'plevings1@cbslocal.com', true, 'Phineas');
 insert into User (id, emission_result, country_id, email, match_consent, name) values (3, 19, 30, 'blitterick2@tuttocitta.it', false, 'Bruis');
 insert into User (id, emission_result, country_id, email, match_consent, name) values (4, 39, 21, 'emallett3@e-recht24.de', true, 'Elsie');
