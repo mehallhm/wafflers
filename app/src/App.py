@@ -21,7 +21,7 @@ def App():
           st.session_state['role'] = 'General User'
           st.session_state['first_name'] = 'Natalie'
           st.switch_page("pages/01_userhome.py")
-        st.image('https://cdn-icons-png.freepik.com/256/552/552848.png?ga=GA1.1.1507691374.1717099387', width = 100)
+        st.image('assets/profile-user.png', width = 90)
 
 
     with col2:
@@ -30,7 +30,7 @@ def App():
           st.session_state['role'] = 'Enterprise'
           st.session_state['first_name'] = 'EcoForward'
           st.switch_page("pages/10_enterprisehome.py")
-        st.image('https://cdn-icons-png.freepik.com/256/834/834504.png?ga=GA1.1.1507691374.1717099387', width = 100)
+        st.image('assets/suitcase.png', width = 90)
 
     with col3:
         if st.button("EcoUnity Europe"):
@@ -38,7 +38,7 @@ def App():
           st.session_state['role'] = 'NGO'
           st.session_state['first_name'] = 'EcoUnity'
           st.switch_page("pages/20_NGOhome.py")
-        st.image('https://cdn-icons-png.freepik.com/256/3101/3101045.png?ga=GA1.1.1507691374.1717099387', width = 100)
+        st.image('assets/NGOicon.png', width = 100)
 
 
 App()
