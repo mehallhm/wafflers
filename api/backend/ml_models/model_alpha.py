@@ -78,7 +78,7 @@ def train() -> np.array:
     return m
 
 
-def test(x: np._ArrayFloat_co, y: np._ArrayFloat_co) -> float:
+def test(x: np.array, y: np.array) -> float:
     """
     Tests the CO2 emissions regression model
 
