@@ -9,9 +9,6 @@ def HomeNav():
 def AboutPageNav():
     st.sidebar.page_link("pages/30_about.py", label="About")
 
-def testAPINav():
-    st.sidebar.page_link("pages/31_apiPage.py", label="Test API")
-
 # user role
 
 def UserHomeNav():
@@ -68,7 +65,6 @@ def SideBarLinks(show_home=False):
     if show_home:
         # Show the Home page link (the landing page)
         HomeNav()
-        testAPINav()
 
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
