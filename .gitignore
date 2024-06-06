@@ -10,3 +10,5 @@ public/
 api/.env
 
 app/src/.streamlit/config.toml
+
+.idea/
