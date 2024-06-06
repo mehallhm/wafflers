@@ -69,14 +69,9 @@ def train() -> np.array:
 	standard_df = standardize(merged_df)
 	standard_df = standard_df.fillna(0)
 
-	df_dummies = pd.get_dummies(standard_df, dtype=int, columns=["geo"])
-	df_dummies = df_dummies.fillna(0)
-
-	#X = np.pad(df_dummies.iloc[:, 1:].to_numpy(dtype=np.float64),
-	# ((0,0), (1,0)), mode="constant", constant_values=1)
 	X = np.pad(standard_df.iloc[:,1:3].to_numpy(dtype=np.float64),
 			 ((0,0), (1,0)), mode="constant", constant_values=1)
-	y = np.array(df_dummies["emissions"], dtype=np.float64)
+	y = np.array(standard_df["emissions"], dtype=np.float64)
 
 	m = np.matmul(np.linalg.inv(np.matmul(X.T, X)), np.matmul(X.T, y))
 
