@@ -57,7 +57,7 @@ with st.expander("Residential Data"):
                 "water_heating": water_heating,
                 "cooking_gas": cooking_gas}
             try:
-                response = requests.put(API_URL, json=data)
+                response = requests.post(API_URL, json=data)
                 if response.status_code == 201 or response.status_code == 200:
                         st.success("Data successfully inserted!")
                 else:
@@ -112,7 +112,7 @@ with st.expander("Car Data"):
                 "fuel_type": fuel_type,
                 "fuel_used": fuel_used }
             try: 
-                response = requests.put(API_URL, json=data)
+                response = requests.post(API_URL, json=data)
                 if response.status_code == 201 or response.status_code == 200:
                         st.success("Data successfully inserted!")
                 else:

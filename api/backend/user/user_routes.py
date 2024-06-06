@@ -117,9 +117,28 @@ def get_cars():
     return jsonify(json_data)
 
 # Get all the residential history for this user
-@user.route('/UserAddCar', methods=['PUT'])
+# @user.route('/UserAddCar', methods=['PUT'])
+# def add_car():
+#     current_app.logger.info('user_routes.py: PUT /UserAddCar')
+    
+#     received_data = request.json
+#     current_app.logger.info(received_data)
+
+#     fuel_type = received_data['fuel_type']
+#     fuel_used = received_data['fuel_used']
+    
+#     query = "UPDATE Cars SET emission_tags = 'car', fuel_type = %s, fuel_used = %s WHERE user_id = 1"
+
+#     data = (fuel_type, fuel_used)
+#     cursor = db.get_db().cursor()
+#     cursor.execute(query, data)
+#     db.get_db().commit()
+#     return "success"
+
+# Adds car survey data
+@user.route('/UserAddCar', methods=['POST'])
 def add_car():
-    current_app.logger.info('user_routes.py: PUT /UserAddCar')
+    current_app.logger.info('user_routes.py: POST /UserAddCar')
     
     received_data = request.json
     current_app.logger.info(received_data)
@@ -127,15 +146,13 @@ def add_car():
     fuel_type = received_data['fuel_type']
     fuel_used = received_data['fuel_used']
     
-    query = "UPDATE Cars SET emission_tags = 'car', fuel_type = %s, fuel_used = %s WHERE user_id = 1"
+    query = "INSERT INTO Cars (emission_tags, user_id, fuel_type, fuel_used) VALUES ('car', 1, %s, %s)"
 
     data = (fuel_type, fuel_used)
     cursor = db.get_db().cursor()
     cursor.execute(query, data)
     db.get_db().commit()
     return "success"
-    
-
 
 # Get all the residential history for this user
 @user.route('/UserResidential', methods=['GET'])
@@ -155,10 +172,10 @@ def get_residential():
 
     return jsonify(json_data)
 
-# Get all the residential history for this user
-@user.route('/UserAddRes', methods=['PUT'])
+# adding survey residential data 
+@user.route('/UserAddRes', methods=['POST'])
 def add_residential():
-    current_app.logger.info('user_routes.py: PUT /UserAddRes')
+    current_app.logger.info('user_routes.py: POST /UserAddRes')
     
     received_data = request.json
     current_app.logger.info(received_data)
@@ -168,14 +185,14 @@ def add_residential():
     water_heating = received_data['water_heating']
     cooking_gas = received_data['cooking_gas']
     
-    query = "UPDATE ResData SET emission_tags = 'residential', elec_usage = %s, heating = %s, water_heating = %s, cooking_gas = %s WHERE user_id = 1"
+    query = "INSERT INTO ResData (emission_tags, elec_usage, heating, water_heating, cooking_gas, user_id) VALUES ('residential', %s, %s, %s, %s, 1)"
 
     data = (elec_usage, heating, water_heating, cooking_gas)
     cursor = db.get_db().cursor()
     cursor.execute(query, data)
     db.get_db().commit()
     return "success"
-    
+
 
 @user.route('/UserFlights', methods=['GET'])
 def get_flights():
