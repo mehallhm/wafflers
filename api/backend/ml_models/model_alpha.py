@@ -67,6 +67,7 @@ def train() -> np.array:
 									   (merged_df.geo == "EU20")].index)
 	merged_df = merged_df.drop("year", axis=1)
 	standard_df = standardize(merged_df)
+	standard_df = standard_df.fillna(0)
 
 	df_dummies = pd.get_dummies(standard_df, dtype=int, columns=["geo"])
 	df_dummies = df_dummies.fillna(0)
