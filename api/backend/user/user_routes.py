@@ -59,6 +59,44 @@ def predict_value():
     return the_response
 
 
+# Get all the cars history for this user
+@user.route('/UserCountryCarbon', methods=['GET'])
+def get_country_carbon():
+    """returns the carbon of the user's country"""
+    cursor = db.get_db().cursor()
+
+    cursor.execute('SELECT emissions FROM User JOIN Country ON User.country_id = Country.id WHERE User.id = 1')
+
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    returned_data = cursor.fetchall()
+
+    for row in returned_data:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
+
+# Get all the residential history for this user
+@user.route('/UserCountry', methods=['PUT'])
+def add_country():
+    current_app.logger.info('user_routes.py: PUT /UserCountry')
+    
+    recieved_data = request.json
+    current_app.logger.info(recieved_data)
+
+    country_id = recieved_data['country_id']
+
+    query = 'UPDATE User SET country_id = %s WHERE id = 1'
+
+    data = (country_id)
+    cursor = db.get_db().cursor()
+    cursor.execute(query, data)
+    db.get_db().commit()
+    return "success"
+
+
 
 # Get all the cars history for this user
 @user.route('/UserCars', methods=['GET'])
@@ -71,9 +109,9 @@ def get_cars():
 
     json_data = []
 
-    theData = cursor.fetchall()
+    returned_data = cursor.fetchall()
 
-    for row in theData:
+    for row in returned_data:
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
@@ -110,9 +148,9 @@ def get_residential():
 
     json_data = []
 
-    theData = cursor.fetchall()
+    returned_data = cursor.fetchall()
 
-    for row in theData:
+    for row in returned_data:
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
@@ -139,28 +177,9 @@ def add_residential():
     return "success"
     
 
-# # Get all the residential history for this user
-# @user.route('/UserCountry', methods=['PUT'])
-# def add_country():
-#     current_app.logger.info('user_routes.py: PUT /UserCountry')
-    
-#     recieved_data = request.json
-#     current_app.logger.info(recieved_data)
-
-#     name = recieved_data['name']
-#     emissions = recieved_data['website']
-
-#     query = 'UPDATE NGO SET website = %s, name = %s, contact = %s WHERE id = 1'
-
-#     data = (name, website, email)
-#     cursor = db.get_db().cursor()
-#     cursor.execute(query, data)
-#     db.get_db().commit()
-
-
-# Get all the flight history for this user
 @user.route('/UserFlights', methods=['GET'])
 def get_flights():
+    """ Get all the flight history for this user """
     cursor = db.get_db().cursor()
 
     cursor.execute('SELECT * FROM Flight WHERE Flight.user_id = 1')
@@ -169,9 +188,9 @@ def get_flights():
 
     json_data = []
 
-    theData = cursor.fetchall()
+    returned_data = cursor.fetchall()
 
-    for row in theData:
+    for row in returned_data:
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
@@ -187,9 +206,9 @@ def get_transport():
 
     json_data = []
 
-    theData = cursor.fetchall()
+    returned_data = cursor.fetchall()
 
-    for row in theData:
+    for row in returned_data:
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)

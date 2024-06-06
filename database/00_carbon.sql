@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS User (
    match_consent BOOLEAN,
    name VARCHAR(255),
    FOREIGN KEY (country_id) REFERENCES Country(id)
-       ON UPDATE CASCADE
+       ON UPDATE RESTRICT
        ON DELETE RESTRICT
 );
 
