@@ -79,7 +79,7 @@ Gets all the flights history for this enterprise
 
 # Application Prototype
 
-## Database ER Diagrams
+
 
 | User Homescreen                        | Enterprise Homescreen                          | NGO homescreen Diagram               |
 | -------------------------------------- | ---------------------------------------------- | ------------------------------------ |
@@ -105,3 +105,39 @@ In the general user persona, users take a survey, and based on this survey data,
 
 ![User History](./userhistory.jpg)
 Users can also see their survey history and previous emission data.
+
+# Machine Learning
+The ML model developed is a standard linear regression model used to predict the greenhouse gas emissions of an individual (measured in ktonnes) based on two features: household energy consumption (in TJ) and Motor Gasoline Consumption (in KTOES).
+
+Originally, household energy consumption was divided into 4 separate categories: heating, cooling, water heating, and cooking. The correlation matrix can be seen below:
+![Table](./table.jpg)
+
+
+As  observed, all of these features have a strong correlation with carbon, the variable name for what is trying to be predicted. Energy used for cooling (energy_cooling) has the weakest correlation, and, upon being graphed in Figure 2, fails the test of linearity.
+
+![CoolingGraph](./coolinggraph.jpg)
+
+Figure 2: A plot of energy used in household cooling against greenhouse gas emissions. Colors represent different countries.
+
+The was then fitted with the remaining subset features (Energy for heating, water heating, and cooking), reaching an R2 of 0.86 in Leave One Out Cross Validation (LOO-CV). However, the group decided to instead only use the total household value instead of the sub-categories since, for an end user, the total would show up on a power bill rather than each of these categories. Additionally, this is when the Gasoline dataset was added (column name gas) to help incorporate transportation, which is a large share of greenhouse gas emissions. In addition, the countries have been one-hot encoded throughout this process.
+
+When this model was fit, an R2 of -4476.7 immediately threw red flags. Upon further inspection of the residuals, which summed to -4.196 rather than the expected 0, it was found that the one-hot encoded countries were overfitting the model. With only 12 observations per country, the 28 features (26 for the 27 countries + 2 features) was too much. After fixing this change, the final model produced an R2 of 0.96. The graphs of the residuals can be seen below.
+
+![ResidualPlot](./ResidualPlot.jpg)
+
+![Residual vs Gasoline](./ResiVsGas.jpg)
+
+![Residual vs Consumption](./ResiVSConsum.jpg)
+
+The residuals generally appear like random noise, and are likewise usually positive. In Figure 5, some autocorrelation can be seen, as some pattern exists. Potentially adding the countries could resolve this, if not for the overfitting issue. In addition, Figure 3 and 4 have some vertical striping, which certainly is not random, but the issue seems minor.
+
+Finally, the scatterplots for the two features can be seen below.
+![Emissions VS House](./EmissionsVsHouse.jpg)
+
+![Gas Vs Greenhosue](./GasVsGreenHouse.jpg)
+
+The scatterplots demonstrate that the R2 does make sense and fits given the data, which is extremely linear. As such, all the linear regression conditions are met.
+
+![Carbon Footprint](./carbonfootprint.jpg)
+
+This machine learning model predicts the amount of CO2 emissions in tons based on heating and gas usage. This is a rough prediction prone to refinement. 
