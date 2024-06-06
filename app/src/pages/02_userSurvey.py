@@ -11,8 +11,26 @@ st.write("##### Let's take a look at your Carbon Footprint!")
 st.write("Please complete the survey to the best of your ability.")
 country = st.selectbox(
     "Country :flag-eu:",
-    ("Austria 🇦🇹", "Belgium 🇧🇪", "Bulgaria 🇧🇬", "Croatia 🇭🇷", "Cyprus 🇨🇾", "Czechia 🇨🇿", "Denmark 🇩🇰", "Estonia 🇪🇪", "Finland 🇫🇮", "France 🇫🇷", "Germany 🇩🇪", "Greece 🇬🇷", "Hungary 🇭🇺", "Ireland 🇮🇪", "Italy 🇮🇹", "Latvia 🇱🇻", "Lithuania 🇱🇹", "Luxembourg 🇱🇺", "Malta 🇲🇹", "Netherlands 🇳🇱", "Poland 🇵🇱", "Portugal 🇵🇹", "Romania 🇷🇴", "Slovakia 🇸🇰", "Slovenia 🇸🇮", "Spain 🇪🇸", "Sweden 🇸🇪", "Iceland 🇮🇸", "Liechtenstein 🇱🇮", "Norway 🇳🇴", "Switzerland 🇨🇭"))
+    ("Belgium 🇧🇪", "Bulgaria 🇧🇬", "Croatia 🇭🇷", "Cyprus 🇨🇾", "Czechia 🇨🇿", "Denmark 🇩🇰", 
+     "Estonia 🇪🇪", "Finland 🇫🇮", "France 🇫🇷", "Germany 🇩🇪", "Greece 🇬🇷", "Hungary 🇭🇺", "Ireland 🇮🇪", 
+     "Italy 🇮🇹", "Latvia 🇱🇻", "Lithuania 🇱🇹", "Luxembourg 🇱🇺", "Malta 🇲🇹", "Netherlands 🇳🇱", "Poland 🇵🇱", 
+     "Portugal 🇵🇹", "Romania 🇷🇴", "Slovakia 🇸🇰", "Slovenia 🇸🇮", "Spain 🇪🇸", "Sweden 🇸🇪", "Iceland 🇮🇸", 
+     "Liechtenstein 🇱🇮", "Norway 🇳🇴", "Switzerland 🇨🇭"))
 st.write("You selected:", country)
+country_id = [
+    "Belgium 🇧🇪", "Bulgaria 🇧🇬", "Croatia 🇭🇷", "Cyprus 🇨🇾", "Czechia 🇨🇿", "Denmark 🇩🇰", 
+    "Estonia 🇪🇪", "Finland 🇫🇮", "France 🇫🇷", "Germany 🇩🇪", "Greece 🇬🇷", "Hungary 🇭🇺", "Ireland 🇮🇪", 
+    "Italy 🇮🇹", "Latvia 🇱🇻", "Lithuania 🇱🇹", "Luxembourg 🇱🇺", "Malta 🇲🇹", "Netherlands 🇳🇱", 
+    "Poland 🇵🇱", "Portugal 🇵🇹", "Romania 🇷🇴", "Slovakia 🇸🇰", "Slovenia 🇸🇮", "Spain 🇪🇸", 
+    "Sweden 🇸🇪", "Iceland 🇮🇸", "Liechtenstein 🇱🇮", "Norway 🇳🇴", "Switzerland 🇨🇭"
+].index(country) + 1
+
+try: 
+    data = {"country_id": country_id }
+    response = requests.put('http://api:4000/u/UserCountry', json=data)
+except Exception as e:
+                st.error(f"An error occurred: {e}")
+
 
 with st.expander("Residential Data"):
     
@@ -34,7 +52,7 @@ with st.expander("Residential Data"):
     
     if st.button("Submit Residential Data"):
         if household_members and electricity_usage and heating and water_heating and cooking_gas:
-            api_url = "http://api:4000/u/UserAddRes"
+            API_URL = "http://api:4000/u/UserAddRes"
             data = {
                 "elec_usage": electricity_usage,
                 "heating": heating,
@@ -42,7 +60,7 @@ with st.expander("Residential Data"):
                 "cooking_gas": cooking_gas}
             
             try: 
-                response = requests.put(api_url, json=data)
+                response = requests.put(API_URL, json=data)
                 if response.status_code == 201 or response.status_code == 200:
                         st.success("Data successfully inserted!")
                 else:
@@ -71,7 +89,7 @@ with st.expander("Car Data"):
     # if (numCars > 0): 
     fuel_type = st.select_slider(
          "Fuel Type",
-        options=["Gasoline/Hybrid", "Diesel", "Electric"])   
+        options=["Gasoline/Hybrid", "Diesel", "Electric"])
     
     if (fuel_type == "Gasoline/Hybrid"):
         fuel_capacity = st.number_input("How many liters of gasoline does your vehicle hold?", 0.0, None, 50.0)
@@ -82,17 +100,17 @@ with st.expander("Car Data"):
         fuel_used_monthly = st.slider("How many times a month do you fill up your tank?", 0, 10, 5)
         fuel_used = st.number_input("Total fuel used per year (liters): ", 0.0, None, fuel_capacity * fuel_used_monthly * 12) * 1.1571E-6
 
-    elif (fuel_type == "Electric"): 
+    elif (fuel_type == "Electric"):
         st.write("Please include charging data in residential data.")
         
     if st.button("Submit Car Data"):
         if fuel_type and fuel_used:
-            api_url = "http://api:4000/u/UserAddCar"
+            API_URL = "http://api:4000/u/UserAddCar"
             data = {
                 "fuel_type": fuel_type,
                 "fuel_used": fuel_used }
             try: 
-                response = requests.put(api_url, json=data)
+                response = requests.put(API_URL, json=data)
                 if response.status_code == 201 or response.status_code == 200:
                         st.success("Data successfully inserted!")
                 else:
@@ -119,18 +137,19 @@ with st.expander("Car Data"):
 
 
 if st.button("View Prediction"): 
-    api_url = "http://api:4000/u/UserPrediction/"
+    PRED_URL = "http://api:4000/u/UserPrediction/"
     try: 
-        response = requests.get(api_url)
+        response = requests.get(PRED_URL, timeout=10)
         responseJSON = response.json()
         finalCarbon = responseJSON['result']
         st.write("Estimated Carbon Footprint (ktons of CO2 equivalent): ", finalCarbon)
-        
+        country_response = requests.get("http://api:4000/u/UserCountryCarbon", timeout=10).json()
+        st.write("Total Country Carbon Emissions (ktons of CO2 equivalent): ", country_response[0]['emissions'])
+        st.dataframe(country_response) 
+               
         # HEY PROFS: THIS IS THE ML PREDICTION
         if response.status_code == 201 or response.status_code == 200:
             st.success("Successfully Predicted!")
-
-            
         else:
             try:
                 error_message = response.json().get('error', 'No error message provided')
@@ -140,6 +159,4 @@ if st.button("View Prediction"):
             st.error(f"Failed to insert data. Status code: {response.status_code}, Error: {error_message}")
     except Exception as e:
         st.error(f"An error occurred: {e}")
-        
-        
         
