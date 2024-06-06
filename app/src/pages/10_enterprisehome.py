@@ -9,7 +9,7 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.write("Logged in as:")
     st.write(f"{st.session_state['role']} {st.session_state['first_name']}")
-    st.image('https://cdn-icons-png.freepik.com/256/834/834504.png?ga=GA1.1.1507691374.1717099387', width = 50)
+    st.image('assets/suitcase.png', width = 50)
 
 st.write("# Navigate to your desired tool")
 st.write('')
