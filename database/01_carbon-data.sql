@@ -1,35 +1,36 @@
 USE CarbonConnect;
 
-INSERT INTO Country (id, emissions, name) VALUES (1, 108871.68, 'Belgium');
-INSERT INTO Country (id, emissions, name) VALUES (2, 59082.72, 'Bulgaria');
-INSERT INTO Country (id, emissions, name) VALUES (3, 118500.35, 'Czechia');
-INSERT INTO Country (id, emissions, name) VALUES (4, 44243.3, 'Denmark');
-INSERT INTO Country (id, emissions, name) VALUES (5, 777380.09, 'Germany');
-INSERT INTO Country (id, emissions, name) VALUES (6, 14125.06, 'Estonia');
-INSERT INTO Country (id, emissions, name) VALUES (7, 63650.14, 'Ireland');
-INSERT INTO Country (id, emissions, name) VALUES (8, 82242.9, 'Greece');
-INSERT INTO Country (id, emissions, name) VALUES (9, 309286.15, 'Spain');
-INSERT INTO Country (id, emissions, name) VALUES (10, 409732.55, 'France');
-INSERT INTO Country (id, emissions, name) VALUES (11, 26258.1, 'Croatia');
-INSERT INTO Country (id, emissions, name) VALUES (12, 419467.07, 'Italy');
-INSERT INTO Country (id, emissions, name) VALUES (13, 9572.78, 'Cyprus');
-INSERT INTO Country (id, emissions, name) VALUES (14, 10568.91, 'Latvia');
-INSERT INTO Country (id, emissions, name) VALUES (15, 19249.2, 'Lithuania');
-INSERT INTO Country (id, emissions, name) VALUES (16, 10145.27, 'Luxembourg');
-INSERT INTO Country (id, emissions, name) VALUES (17, 60331.72, 'Hungary');
-INSERT INTO Country (id, emissions, name) VALUES (18, 2647.72, 'Malta');
-INSERT INTO Country (id, emissions, name) VALUES (19, 162999.6, 'Netherlands');
-INSERT INTO Country (id, emissions, name) VALUES (20, 74825.78, 'Austria');
-INSERT INTO Country (id, emissions, name) VALUES (21, 383434.04, 'Poland');
-INSERT INTO Country (id, emissions, name) VALUES (22, 60581.36, 'Portugal');
-INSERT INTO Country (id, emissions, name) VALUES (23, 109992.76, 'Romania');
-INSERT INTO Country (id, emissions, name) VALUES (24, 15676.64, 'Slovenia');
-INSERT INTO Country (id, emissions, name) VALUES (25, 37183.78, 'Slovakia');
-INSERT INTO Country (id, emissions, name) VALUES (26, 47341.71, 'Finland');
-INSERT INTO Country (id, emissions, name) VALUES (27, 47074.61, 'Sweden');
-INSERT INTO Country (id, emissions, name) VALUES (28, 5402.55, 'Iceland');
-INSERT INTO Country (id, emissions, name) VALUES (29, 50255.43, 'Norway');
-INSERT INTO Country (id, emissions, name) VALUES (30, 45847.17, 'Switzerland');
+INSERT INTO Country (id, emissions, name) VALUES (1, 108871.68 / 11719000, 'Belgium');
+INSERT INTO Country (id, emissions, name) VALUES (2, 59082.72 / 6519789, 'Bulgaria');
+INSERT INTO Country (id, emissions, name) VALUES (3, 118500.35 / 10693939, 'Czechia');
+INSERT INTO Country (id, emissions, name) VALUES (4, 44243.3 / 5932000, 'Denmark');
+INSERT INTO Country (id, emissions, name) VALUES (5, 777380.09 / 83166711, 'Germany');
+INSERT INTO Country (id, emissions, name) VALUES (6, 14125.06 / 1331796, 'Estonia');
+INSERT INTO Country (id, emissions, name) VALUES (7, 63650.14 / 5158000, 'Ireland');
+INSERT INTO Country (id, emissions, name) VALUES (8, 82242.9 / 10384971, 'Greece');
+INSERT INTO Country (id, emissions, name) VALUES (9, 309286.15 / 47556000, 'Spain');
+INSERT INTO Country (id, emissions, name) VALUES (10, 409732.55 / 68075000, 'France');
+INSERT INTO Country (id, emissions, name) VALUES (11, 26258.1 / 3850000, 'Croatia');
+INSERT INTO Country (id, emissions, name) VALUES (12, 419467.07 / 58982000, 'Italy');
+INSERT INTO Country (id, emissions, name) VALUES (13, 9572.78 / 1231000, 'Cyprus');
+INSERT INTO Country (id, emissions, name) VALUES (14, 10568.91 / 1848837, 'Latvia');
+INSERT INTO Country (id, emissions, name) VALUES (15, 19249.2 / 2857000, 'Lithuania');
+INSERT INTO Country (id, emissions, name) VALUES (16, 10145.27 / 645397, 'Luxembourg');
+INSERT INTO Country (id, emissions, name) VALUES (17, 60331.72 / 9594214, 'Hungary');
+INSERT INTO Country (id, emissions, name) VALUES (18, 2647.72 / 514564, 'Malta');
+INSERT INTO Country (id, emissions, name) VALUES (19, 162999.6 / 17556000, 'Netherlands');
+INSERT INTO Country (id, emissions, name) VALUES (20, 74825.78 / 9121000, 'Austria');
+INSERT INTO Country (id, emissions, name) VALUES (21, 383434.04 / 37623000, 'Poland');
+INSERT INTO Country (id, emissions, name) VALUES (22, 60581.36 / 10352042, 'Portugal');
+INSERT INTO Country (id, emissions, name) VALUES (23, 109992.76 / 18979000, 'Romania');
+INSERT INTO Country (id, emissions, name) VALUES (24, 15676.64 / 2100000, 'Slovenia');
+INSERT INTO Country (id, emissions, name) VALUES (25, 37183.78 / 5404322, 'Slovakia');
+INSERT INTO Country (id, emissions, name) VALUES (26, 47341.71 / 5548000, 'Finland');
+INSERT INTO Country (id, emissions, name) VALUES (27, 47074.61 / 10540725, 'Sweden');
+INSERT INTO Country (id, emissions, name) VALUES (28, 5402.55 / 376248, 'Iceland');
+INSERT INTO Country (id, emissions, name) VALUES (29, 50255.43 / 5488984, 'Norway');
+INSERT INTO Country (id, emissions, name) VALUES (30, 45847.17 / 8803000, 'Switzerland');
+
 
 INSERT INTO EmissionTags (id, description) VALUES
 (1, 'Transport'),
