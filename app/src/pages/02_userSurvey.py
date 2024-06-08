@@ -30,8 +30,9 @@ try:
 except Exception as e:
     st.error(f"An error occurred: {e}")
 
-bio = st.text_area("Bio", help="Enter a quick bio here. Mention some environmental interests if any.", height=100, max_chars=200)
-response = requests.put('http://api:4000/u/UserBio', json=bio, timeout=300)
+bio = st.text_area("Bio", 
+                   help="Enter a quick bio here. Mention some environmental interests if any.",
+                   height=100, max_chars=200)
 
 with st.expander("Residential Data", expanded=1):
     household_members = st.number_input("How many people live in your household?", 1, None, 2)
@@ -136,9 +137,15 @@ with st.expander("Car Data", expanded=1):
 #   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
 # st.dataframe(data)
+consent = st.toggle("NGO Recommendations", value=1,
+                    help="By selecting this option, you consent to your name and description being shared with organizations that also use CarbonConnect. ")
 
+user_data = {
+        'consent': consent, 
+        'bio': bio
+    }
 
-if st.button("View Prediction"): 
+if st.button("View Prediction"):
     PRED_URL = "http://api:4000/u/UserPrediction/"
     try: 
         response = requests.get(PRED_URL, timeout=10)
@@ -163,4 +170,5 @@ if st.button("View Prediction"):
             st.error(f"Failed to insert data. Status code: {response.status_code}, Error: {error_message}")
     except Exception as e:
         st.error(f"An error occurred: {e}")
-        
+    
+    response = requests.put('http://api:4000/u/UserUpdateInfo', json=user_data, timeout=300)

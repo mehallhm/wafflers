@@ -232,18 +232,19 @@ def get_transport():
 
 # Updates match consent and bio for user
 @user.route('/UserUpdateInfo', methods=['PUT'])
-def update_info():
+def update_user():
    current_app.logger.info('user.routes.py: PUT /UserUpdateInfo')
   
-   recieved_data = request.json
-   current_app.logger.info(recieved_data)
+   received_data = request.json
+   current_app.logger.info(received_data)
 
-   bio = recieved_data['bio']
-   match_consent = recieved_data['consent']
+   user_bio = received_data['bio']
+   current_app.logger.info('BIO: ', user_bio)
+   match_consent = received_data['consent']
 
    query = 'UPDATE User SET match_consent = %s, bio = %s WHERE id = 1'
 
-   data = (match_consent, bio)
+   data = (match_consent, user_bio)
    cursor = db.get_db().cursor()
    cursor.execute(query, data)
    db.get_db().commit()
