@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS NGO (
 DROP TABLE IF EXISTS User;
 CREATE TABLE IF NOT EXISTS User (
    id INT PRIMARY KEY,
-   emission_result INT,
+   emission_result FLOAT(5),
    country_id INT,
    email VARCHAR(255),
    match_consent BOOLEAN,
@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS Enterprises (
    id INT PRIMARY KEY,
    name VARCHAR(50),
    type VARCHAR(255),
-   emission_result INT,
-   misc_emissions INT,
+   emission_result FLOAT(5),
+   misc_emissions FLOAT(5),
    country_id INT,
    FOREIGN KEY (country_id) REFERENCES Country(id)
        ON UPDATE CASCADE
