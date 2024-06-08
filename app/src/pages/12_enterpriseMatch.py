@@ -87,7 +87,6 @@ multiplier = your_emissions / avg_emission
 
 st.write('')
 
-if st.button("View comparison"):
-   st.write("#### In", country + ", your emissions in kilotonnes is ", your_emissions, ", while the average enterprise's is ", avg_emission)
-   st.write("#### That means your emissions are", multiplier, "times the average enterprise's emissions in " + country)
+st.write("#### In", country + ", your emissions in kilotonnes is ", round(your_emissions, 2), ", while the average enterprise's is ", round(avg_emission,2))
+st.write("#### That means your emissions are", round(multiplier, 2), "times the average enterprise's emissions in " + country)
 
