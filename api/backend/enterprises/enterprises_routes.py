@@ -87,11 +87,11 @@ def get_comparison():
     cursor = db.get_db().cursor()
 
     cursor.execute('''
-        SELECT AVG(Enterprises.emission_result) AS 'Average Emission (by Country)',
+        SELECT AVG(Enterprises.emission_result) AS 'AVG Emission (by Country in kilotonnes)',
                Country.name                     AS 'Country',
                (SELECT e2.emission_result
                 FROM Enterprises e2
-                WHERE e2.id = 1)                AS 'Your Emissions'
+                WHERE e2.id = 1)                AS 'Your Emissions (in kilotonnes)'
         FROM Enterprises
                  JOIN Country ON Enterprises.country_id = Country.id
         WHERE Country.name =
