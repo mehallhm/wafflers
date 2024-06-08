@@ -82,7 +82,7 @@ if st.button("Submit"):
     else:
         st.error("Please fill in all the fields before submitting and have valid emails/urls")
 
-st.write('## My NGO data')
+st.write('## My current data')
 
 data = {} 
 try:
@@ -95,7 +95,7 @@ except:
 # st.dataframe(data)
 
 
-st.write('### Display my current tags')
+
 #data = {} 
 #try:
 def fetch_tag_descriptions():
@@ -117,49 +117,56 @@ emoji_map = {
 
 tags = [tag["description"] for tag in data]
 
-selected = pills('Your current tags', tags, [emoji_map[tag] for tag in tags])
+selected = pills('Current tags', tags, [emoji_map[tag] for tag in tags])
 
 
 # st.dataframe(data)
 
-def add_tags():
-    st.write('### Add New NGO Tags')
+col1, col2 = st.columns(2)
 
-    options = ["Transport", "Flights", "Energy", "Heat"]
+with col1:
+    def add_tags():
+        st.write('### Add New NGO Tags')
 
-    selected_tags = st.selectbox("Select your associated tags", options)
+        options = ["Transport", "Flights", "Energy", "Heat"]
 
-    if st.button("Add Tags"):
-        add_tags_api_url = "http://api:4000/n/NGOadd"
-        tag_data = {"tag": selected_tags}
-        try:
-            response = requests.post(add_tags_api_url, json=tag_data)
-            if response.status_code == 200:
-                st.success("Tags successfully added!")
-            else:
-                st.error(f"Failed to add tags. Status code: {response.status_code}")
-        except Exception as e:
-            st.error(f"An error occurred while adding tags: {e}")
- 
-add_tags()
-def delete_tags():
-    st.write('### Delete NGO Tags')
+        selected_tags = st.selectbox("Select your associated tags", options)
 
-    options = ["Transport", "Flights", "Energy", "Heat"]
+        if st.button("Add Tags"):
+            add_tags_api_url = "http://api:4000/n/NGOadd"
+            tag_data = {"tag": selected_tags}
+            try:
+                response = requests.post(add_tags_api_url, json=tag_data)
+                if response.status_code == 200:
+                    st.success("Tags successfully added!")
+                else:
+                    st.error(f"Failed to add tags. Status code: {response.status_code}")
+            except Exception as e:
+                st.error(f"An error occurred while adding tags: {e}")
 
-    selected_tag = st.selectbox("Select tags to delete", options)  
+    add_tags()
 
-    if st.button("Delete Tags"):
-        delete_tags_api_url = "http://api:4000/n/TagDelete"
-        tag_data = {"tag": selected_tag}  
+with col2:
+    def delete_tags():
+        st.write('### Delete NGO Tags')
 
-        try:
-            response = requests.delete(delete_tags_api_url, json=tag_data)
-            if response.status_code == 200:
-                st.success("Tags successfully deleted!")
-            
-        except Exception as e:
-            st.error(f"An error occurred while deleting tags: {e}")
+        options = ["Transport", "Flights", "Energy", "Heat"]
 
-delete_tags()
+        selected_tag = st.selectbox("Select tags to delete", options)  
+
+        if st.button("Delete Tags"):
+            delete_tags_api_url = "http://api:4000/n/TagDelete"
+            tag_data = {"tag": selected_tag}  
+
+            try:
+                response = requests.delete(delete_tags_api_url, json=tag_data)
+                if response.status_code == 200:
+                    st.success("Tags successfully deleted!")
+                else:
+                    st.error(f"Failed to delete tags. Status code: {response.status_code}")
+            except Exception as e:
+                st.error(f"An error occurred while deleting tags: {e}")
+
+    delete_tags()
+
 
