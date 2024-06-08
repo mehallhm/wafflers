@@ -45,7 +45,7 @@ with st.expander("Residential Data"):
     cooking_gas = 0.0000036 * 12 * st.number_input("Per month, how much energy is used cooking? (kWh)?", 0.0, None, 2000.0)
     
     kWh_total = ((electricity_usage + heating + water_heating + cooking_gas) / (household_members * 0.0000036 * 12))
-    st.write("Your Total Residential Usage (kWh): ", kWh_total)
+    st.write("Your Total Residential Usage (kWh): ", round(kWh_total, 2))
     st.write("That's equivalent to running a 60w lightbulb for ", round((kWh_total * 1000)/60), " hours!")
     
     if st.button("Submit Residential Data"):
