@@ -92,7 +92,35 @@ except:
     data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
 
-st.dataframe(data)
+# st.dataframe(data)
+
+
+st.write('### Display my current tags')
+#data = {} 
+#try:
+def fetch_tag_descriptions():
+    try:
+        response = requests.get('http://api:4000/n/tags')  
+        response.raise_for_status()  
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        st.error(f"Error fetching data: {e}")
+        return []
+data = fetch_tag_descriptions()
+
+emoji_map = {
+    "Heat": "🔥",
+    "Flights": "🛫",
+    "Energy": "💡",
+    "Transport": "🚗",
+}
+
+tags = [tag["description"] for tag in data]
+
+selected = pills('Your current tags', tags, [emoji_map[tag] for tag in tags])
+
+
+# st.dataframe(data)
 
 def add_tags():
     st.write('### Add New NGO Tags')
@@ -114,45 +142,6 @@ def add_tags():
             st.error(f"An error occurred while adding tags: {e}")
  
 add_tags()
-st.write("Display my current tags")
-#data = {} 
-#try:
-def fetch_tag_descriptions():
-    try:
-        response = requests.get('http://api:4000/n/tags')  # Adjust the URL as per your Flask server's address
-        response.raise_for_status()  # Raise an HTTPError on bad response
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        st.error(f"Error fetching data: {e}")
-        return []
-data = fetch_tag_descriptions()
-
-emoji_map = {
-    "Heat": "🔥",
-    "Flights": "🛫",
-    "Energy": "💡",
-    "Transport": "🚗",
-}
-
-tags = [tag["description"] for tag in data]
-
-selected = pills("Label", tags, [emoji_map[tag] for tag in tags])
-st.write(selected)
-#firsttag = data[0]["description"]
-
-#st.write("Fetched data from API:", firsttag) 
-
-
-#tags = [f"{emoji_map.get(description, '❓')} {description}" for description in data]
-#st.write("Current Tags:")
-#for tag in tags:
-    #st.markdown(f"* {tag}")
-    #pills("Current Tags:", tags)
-#except:
-  #st.write("**Important**: Could not connect to sample api, so using dummy data.")
-  #data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
-st.dataframe(data)
-
 def delete_tags():
     st.write('### Delete NGO Tags')
 
