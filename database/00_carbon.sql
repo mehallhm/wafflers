@@ -29,7 +29,9 @@ CREATE TABLE IF NOT EXISTS NGO (
    id INT PRIMARY KEY AUTO_INCREMENT,
    website VARCHAR(255) NOT NULL,
    name VARCHAR(50),
-   contact VARCHAR(50)
+   contact VARCHAR(50),
+   bio VARCHAR(2000),
+   vectorized_bio VARCHAR(2000)
 );
 
 
@@ -41,6 +43,8 @@ CREATE TABLE IF NOT EXISTS User (
    email VARCHAR(255),
    match_consent BOOLEAN,
    name VARCHAR(255),
+   bio VARCHAR(2000),
+   vectorized_bio VARCHAR(2000),
    FOREIGN KEY (country_id) REFERENCES Country(id)
        ON UPDATE RESTRICT
        ON DELETE RESTRICT
