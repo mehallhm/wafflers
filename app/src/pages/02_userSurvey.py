@@ -2,6 +2,8 @@ import streamlit as st
 from modules.nav import SideBarLinks
 import requests
 import json
+from streamlit_pills import pills
+
 
 # Show appropriate sidebar links for the role of the currently logged in user
 SideBarLinks()
@@ -9,33 +11,10 @@ SideBarLinks()
 st.header("User Survey")
 st.write("##### Let's take a look at your Carbon Footprint!")
 st.write("Please complete the survey to the best of your ability.")
-country = st.selectbox(
-    "Country :flag-eu:",
-    ("Belgium 🇧🇪", "Bulgaria 🇧🇬", "Croatia 🇭🇷", "Cyprus 🇨🇾", "Czechia 🇨🇿", "Denmark 🇩🇰", 
-     "Estonia 🇪🇪", "Finland 🇫🇮", "France 🇫🇷", "Germany 🇩🇪", "Greece 🇬🇷", "Hungary 🇭🇺", "Ireland 🇮🇪", 
-     "Italy 🇮🇹", "Latvia 🇱🇻", "Lithuania 🇱🇹", "Luxembourg 🇱🇺", "Malta 🇲🇹", "Netherlands 🇳🇱", "Poland 🇵🇱", 
-     "Portugal 🇵🇹", "Romania 🇷🇴", "Slovakia 🇸🇰", "Slovenia 🇸🇮", "Spain 🇪🇸", "Sweden 🇸🇪", "Iceland 🇮🇸", 
-     "Liechtenstein 🇱🇮", "Norway 🇳🇴", "Switzerland 🇨🇭"))
-st.write("You selected:", country)
-country_id = [
-    "Belgium 🇧🇪", "Bulgaria 🇧🇬", "Croatia 🇭🇷", "Cyprus 🇨🇾", "Czechia 🇨🇿", "Denmark 🇩🇰", 
-    "Estonia 🇪🇪", "Finland 🇫🇮", "France 🇫🇷", "Germany 🇩🇪", "Greece 🇬🇷", "Hungary 🇭🇺", "Ireland 🇮🇪", 
-    "Italy 🇮🇹", "Latvia 🇱🇻", "Lithuania 🇱🇹", "Luxembourg 🇱🇺", "Malta 🇲🇹", "Netherlands 🇳🇱", 
-    "Poland 🇵🇱", "Portugal 🇵🇹", "Romania 🇷🇴", "Slovakia 🇸🇰", "Slovenia 🇸🇮", "Spain 🇪🇸", 
-    "Sweden 🇸🇪", "Iceland 🇮🇸", "Liechtenstein 🇱🇮", "Norway 🇳🇴", "Switzerland 🇨🇭"
-].index(country) + 1
 
-try: 
-    data = {"country_id": country_id }
-    response = requests.put('http://api:4000/u/UserCountry', json=data)
-except Exception as e:
-                st.error(f"An error occurred: {e}")
-
-
-with st.expander("Residential Data"):
-    
+with st.expander("Residential Data", expanded=1):
     household_members = st.number_input("How many people live in your household?", 1, None, 2)
-    
+
     electricity_usage = 0.0000036 * 12 * st.number_input("How much electricity does your household use per month (kWh)?", 0.0, None, 6320.0)
 
     heating = 0.0000036 * 12 * st.number_input("How much heating does your household use per month (kWh)?", 0.0, None, 3000.0)
@@ -80,7 +59,7 @@ with st.expander("Residential Data"):
 #   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 # st.dataframe(data)
 
-with st.expander("Car Data"):
+with st.expander("Car Data", expanded=1):
     
     # numCars = st.number_input("How many cars do you own?", 0)
     # if (numCars > 0): 
@@ -137,20 +116,20 @@ with st.expander("Car Data"):
 
 # st.dataframe(data)
 
-
-if st.button("View Prediction"): 
+if st.button("View Prediction"):
     PRED_URL = "http://api:4000/u/UserPrediction/"
     try: 
         response = requests.get(PRED_URL, timeout=10)
         responseJSON = response.json()
         finalCarbon = responseJSON['result']
-        st.write("### Estimated Carbon Footprint (kgs of CO2 equivalent): ", round(finalCarbon * 1000000, 4))
-        country_response = requests.get("http://api:4000/u/UserCountryCarbon", timeout=10).json()[0]['emissions']
-        
+        st.write("### Estimated Carbon Footprint (kgs of CO2 equivalent): ",
+                 round(finalCarbon * 1000000, 4))
+        country_response = requests.get("http://api:4000/u/UserCountryCarbon",
+                                        timeout=10).json()[0]['emissions']
         # st.write("Total Country Carbon Emissions (ktons of CO2 equivalent): ", country_response)
-        st.write("#### Your Carbon Footprint is ", round(finalCarbon / country_response, 2), " times the average in ", country)
-               
-               
+        st.write("#### Your Carbon Footprint is ",
+                 round(finalCarbon / country_response, 2), " times the average in your country")
+        
         if response.status_code == 201 or response.status_code == 200:
             st.success("Successfully Predicted!")
         else:
@@ -162,4 +141,5 @@ if st.button("View Prediction"):
             st.error(f"Failed to insert data. Status code: {response.status_code}, Error: {error_message}")
     except Exception as e:
         st.error(f"An error occurred: {e}")
-        
+    
+    

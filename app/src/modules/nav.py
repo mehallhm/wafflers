@@ -12,38 +12,41 @@ def AboutPageNav():
 # user role
 
 def UserHomeNav():
-    st.sidebar.page_link("pages/01_userhome.py", label="General User Home")
+    st.sidebar.page_link("pages/01_userhome.py", label="Home")
 
 def UserSurveyNav():
-    st.sidebar.page_link("pages/02_userSurvey.py", label="General User Survey")
+    st.sidebar.page_link("pages/02_userSurvey.py", label="Survey")
 
 def UserHistoryNav():
-    st.sidebar.page_link("pages/03_userHistory.py", label="General User Survey History")
+    st.sidebar.page_link("pages/03_userHistory.py", label="Survey History")
 
 def UserMatchNav():
     st.sidebar.page_link("pages/04_userMatch.py", label="NGO Suggestions")
 
+def UserSettingsNav():
+    st.sidebar.page_link("pages/05_userSettings.py", label="Settings")
+
 # enterprise role
 
 def EnterpriseHomeNav():
-    st.sidebar.page_link("pages/10_enterprisehome.py", label="Enterprise Home")
+    st.sidebar.page_link("pages/10_enterprisehome.py", label="Home")
 
 def EnterpriseMatchNav():
     st.sidebar.page_link("pages/12_enterpriseMatch.py", label="NGO Match")
 
 def EnterpriseSurveyNav():
-    st.sidebar.page_link("pages/11_enterpriseSurvey.py", label="Enterprise Survey")
+    st.sidebar.page_link("pages/11_enterpriseSurvey.py", label="Survey")
 
 def EnterpriseHistoryNav():
-    st.sidebar.page_link("pages/13_enterpriseHistory.py", label="Enterprise Survey History")
+    st.sidebar.page_link("pages/13_enterpriseHistory.py", label="Survey History")
 
 # NGO role
 
 def NGOHomeNav():
-    st.sidebar.page_link("pages/20_NGOhome.py", label="NGO Home")
+    st.sidebar.page_link("pages/20_NGOhome.py", label="Home")
 
 def NGOInfoNav():
-    st.sidebar.page_link("pages/21_NGOInfo.py", label="NGO Info")
+    st.sidebar.page_link("pages/21_NGOInfo.py", label="Info")
 
 def NGOMatchNav():
     st.sidebar.page_link("pages/22_NGOMatch.py", label="Enterprise/User Match")    
@@ -72,6 +75,7 @@ def SideBarLinks(show_home=False):
             UserSurveyNav()
             UserHistoryNav()
             UserMatchNav()
+            UserSettingsNav()
 
         if st.session_state['role'] == 'Enterprise':
             EnterpriseHomeNav()

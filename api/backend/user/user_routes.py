@@ -229,3 +229,133 @@ def get_transport():
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+# Updates match consent and bio for user
+@user.route('/UserUpdateInfo', methods=['PUT'])
+def update_user():
+   current_app.logger.info('user.routes.py: PUT /UserUpdateInfo')
+  
+   received_data = request.json
+   current_app.logger.info(received_data)
+
+   user_bio = received_data['bio']
+   current_app.logger.info('BIO: ', user_bio)
+   match_consent = received_data['consent']
+
+   query = 'UPDATE User SET match_consent = %s, bio = %s WHERE id = 1'
+
+   data = (match_consent, user_bio)
+   cursor = db.get_db().cursor()
+   cursor.execute(query, data)
+   db.get_db().commit()
+
+   return 'Success'
+
+
+# get this user's tags
+@user.route('/tags', methods=['GET'])
+def get_usertags():
+   cursor = db.get_db().cursor()
+   cursor.execute('''
+       SELECT description
+       FROM EmissionTags
+       WHERE EmissionTags.id IN (
+           SELECT tag_id
+           FROM UserTags
+           WHERE UserTags.user_id = 1
+       );
+   ''')
+  
+   # grab the column headers from the returned data
+   column_headers = [x[0] for x in cursor.description]
+
+
+   # create an empty dictionary object to use in
+   # putting column headers together with data
+   json_data = []
+
+
+   # fetch all the data from the cursor
+   theData = cursor.fetchall()
+
+
+   # for each of the rows, zip the data elements together with
+   # the column headers.
+   for row in theData:
+       json_data.append(dict(zip(column_headers, row)))
+
+
+   return jsonify(json_data)
+
+# deletes selected tag for this user
+@user.route('/TagDelete', methods=['DELETE'])
+def delete_tags():
+    current_app.logger.info('DELETE /user/TagDelete route')
+
+    info = request.json
+    tag_description = info.get('tag')
+
+    cursor = db.get_db().cursor()
+
+
+    select_query = '''
+        SELECT id FROM EmissionTags WHERE description = %s;
+        '''
+    cursor.execute(select_query, (tag_description,))
+    tag_row = cursor.fetchone()
+    current_app.logger.info(select_query)
+
+    if tag_row is None:
+        current_app.logger.info(f'Tag not found: {tag_description}')
+        return jsonify({"error": "Tag not found"}), 404
+
+    tag_id = tag_row[0]
+
+    delete_query = '''
+    DELETE FROM UserTags WHERE user_id = 1 AND tag_id = %s;
+    '''
+    cursor.execute(delete_query, (tag_id,))
+    db.get_db().commit()
+
+    current_app.logger.info(f'Successfully deleted tag: {tag_description} for User ID: 1')
+    return 'Success'
+
+
+# adds selected tag for this user
+@user.route('/TagAdd', methods=['POST'])
+def add_tags():
+   current_app.logger.info('POST /user/TagAdd route')
+
+
+   info = request.json
+   tag_description = info.get('tag')
+
+
+   cursor = db.get_db().cursor()
+
+
+   select_query = '''
+   SELECT
+       ET.id AS tag_id
+   FROM
+       EmissionTags ET
+   WHERE
+       ET.description = %s
+   '''
+   cursor.execute(select_query, (tag_description,))
+   tag_row = cursor.fetchone()
+
+
+   if tag_row is None:
+       return jsonify({"error": "Tag not found"}), 404
+
+
+   new_tag_id = tag_row[0]
+
+
+   insert_query = 'INSERT INTO UserTags (user_id, tag_id) VALUES (1, %s)'
+   cursor.execute(insert_query, (new_tag_id,))
+   db.get_db().commit()
+
+
+   return jsonify({"message": "Success"}), 200
