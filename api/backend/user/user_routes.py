@@ -229,3 +229,23 @@ def get_transport():
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+# Updates match consent and bio for user
+@user.route('/UserUpdateInfo', methods=['PUT'])
+def update_info():
+   current_app.logger.info('user.routes.py: PUT /UserUpdateInfo')
+  
+   recieved_data = request.json
+   current_app.logger.info(recieved_data)
+
+   bio = recieved_data['bio']
+   match_consent = recieved_data['consent']
+
+   query = 'UPDATE User SET match_consent = %s, bio = %s WHERE id = 1'
+
+   data = (match_consent, bio)
+   cursor = db.get_db().cursor()
+   cursor.execute(query, data)
+   db.get_db().commit()
+
+   return 'Success'
