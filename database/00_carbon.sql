@@ -2,6 +2,12 @@ DROP DATABASE IF EXISTS CarbonConnect;
 CREATE DATABASE IF NOT EXISTS CarbonConnect;
 Use CarbonConnect;
 
+DROP TABLE IF EXISTS TFIDF_Encoding;
+CREATE TABLE IF NOT EXISTS TFIDF_Encoding (
+    vector MEDIUMTEXT,
+    vocabulary MEDIUMTEXT,
+    idf MEDIUMTEXT
+);
 
 DROP TABLE IF EXISTS Beta_User;
 CREATE TABLE IF NOT EXISTS Beta_User (
@@ -14,7 +20,6 @@ CREATE TABLE IF NOT EXISTS Beta_Enterprise (
     id INT PRIMARY KEY AUTO_INCREMENT,
     enterprise_values VARCHAR(100)
 );
-
 
 DROP TABLE IF EXISTS Country;
 CREATE TABLE IF NOT EXISTS Country (
@@ -30,8 +35,8 @@ CREATE TABLE IF NOT EXISTS NGO (
    website VARCHAR(255) NOT NULL,
    name VARCHAR(50),
    contact VARCHAR(50),
-   bio VARCHAR(2000),
-   vectorized_bio VARCHAR(2000)
+   bio MEDIUMTEXT,
+   vectorized_bio MEDIUMTEXT
 );
 
 
@@ -43,8 +48,8 @@ CREATE TABLE IF NOT EXISTS User (
    email VARCHAR(255),
    match_consent BOOLEAN,
    name VARCHAR(255),
-   bio VARCHAR(2000),
-   vectorized_bio VARCHAR(2000),
+   bio MEDIUMTEXT,
+   vectorized_bio MEDIUMTEXT,
    FOREIGN KEY (country_id) REFERENCES Country(id)
        ON UPDATE RESTRICT
        ON DELETE RESTRICT

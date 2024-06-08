@@ -36,7 +36,7 @@ def get_mine():
 # updates an ngo to the NGO table given filled out data
 @ngo.route('/NGOupdate', methods=['PUT'])
 def add_new_NGO():
-   current_app.logger.info('ngo_routes.py: POST /NGOadd')
+   current_app.logger.info('ngo_routes.py: PUT /NGOupdate')
   
    recieved_data = request.json
    current_app.logger.info(recieved_data)
