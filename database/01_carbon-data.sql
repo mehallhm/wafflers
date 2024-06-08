@@ -38,56 +38,58 @@ INSERT INTO EmissionTags (id, description) VALUES
 (3, 'Energy'),
 (4, 'Heat');
 
-insert into NGO (id, website, name, contact) values (1, 'EcoUnity.com', 'EcoUnity Europe', 'Joe@EcoUnity.org');
-insert into NGO (id, website, name, contact) values (2, 'seesaa.net', 'Grimes, Fahey and Mertz', 'rattlee1@accuweather.com');
-insert into NGO (id, website, name, contact) values (3, 'fema.gov', 'Terry-Witting', 'sdand2@angelfire.com');
-insert into NGO (id, website, name, contact) values (4, 'twitpic.com', 'Kub-Anderson', 'swilson3@pinterest.com');
-insert into NGO (id, website, name, contact) values (5, 'netvibes.com', 'Bosco, Davis and Feil', 'baspinal4@example.com');
-insert into NGO (id, website, name, contact) values (6, 'pbs.org', 'Morar LLC', 'lwagg5@answers.com');
-insert into NGO (id, website, name, contact) values (7, 'bloglovin.com', 'Macejkovic-Ebert', 'rmushett6@pbs.org');
-insert into NGO (id, website, name, contact) values (8, 'fda.gov', 'Cormier, Ratke and Koelpin', 'weakins7@wordpress.com');
-insert into NGO (id, website, name, contact) values (9, 'ustream.tv', 'Becker-Brakus', 'mchislett8@imdb.com');
-insert into NGO (id, website, name, contact) values (10, 'elegantthemes.com', 'Miller-O''Conner', 'pchrippes9@auda.org.au');
-insert into NGO (id, website, name, contact) values (11, 'ezinearticles.com', 'Hirthe-Emmerich', 'kmillionsa@tamu.edu');
-insert into NGO (id, website, name, contact) values (12, 'simplemachines.org', 'Jacobson, Torphy and Strosin', 'sgowanlockb@nature.com');
-insert into NGO (id, website, name, contact) values (13, 'bigcartel.com', 'Waters, Legros and Toy', 'npirdyc@sphinn.com');
-insert into NGO (id, website, name, contact) values (14, 'apple.com', 'Ortiz, Pollich and Jerde', 'tiversd@wp.com');
-insert into NGO (id, website, name, contact) values (15, 'slashdot.org', 'Corwin-Shields', 'bbeechcrafte@google.com.br');
-insert into NGO (id, website, name, contact) values (16, 'networksolutions.com', 'Zieme, Bergstrom and Schultz', 'srowswellf@moonfruit.com');
-insert into NGO (id, website, name, contact) values (17, 'un.org', 'Hand-Schroeder', 'rtimbridgeg@mayoclinic.com');
-insert into NGO (id, website, name, contact) values (18, 'phoca.cz', 'Feest-Armstrong', 'tionnh@slashdot.org');
-insert into NGO (id, website, name, contact) values (19, 'blogspot.com', 'Rice Inc', 'struelocki@mtv.com');
-insert into NGO (id, website, name, contact) values (20, 'businessinsider.com', 'Marks Group', 'brothamj@addtoany.com');
-insert into NGO (id, website, name, contact) values (21, 'hud.gov', 'Barrows Inc', 'elownesk@gizmodo.com');
-insert into NGO (id, website, name, contact) values (22, 'goodreads.com', 'Deckow-Adams', 'sbrowettl@blogspot.com');
-insert into NGO (id, website, name, contact) values (23, 'homestead.com', 'Brekke, Hauck and Buckridge', 'cjeevesm@japanpost.jp');
-insert into NGO (id, website, name, contact) values (24, 'blogtalkradio.com', 'Hackett Inc', 'skerrichn@nih.gov');
-insert into NGO (id, website, name, contact) values (25, 'economist.com', 'Veum and Sons', 'jphilbrooko@blogspot.com');
-insert into NGO (id, website, name, contact) values (26, 'ameblo.jp', 'Gutmann-Lockman', 'gharkessp@bandcamp.com');
-insert into NGO (id, website, name, contact) values (27, 'dropbox.com', 'Kutch-Hahn', 'eaveyardq@umn.edu');
-insert into NGO (id, website, name, contact) values (28, 'dedecms.com', 'Fay-Murphy', 'kyellowleesr@omniture.com');
-insert into NGO (id, website, name, contact) values (29, '1und1.de', 'Kohler, Ankunding and Doyle', 'darmells@drupal.org');
-insert into NGO (id, website, name, contact) values (30, 'webnode.com', 'Lueilwitz-McGlynn', 'akeeleyt@cyberchimps.com');
-insert into NGO (id, website, name, contact) values (31, 'prnewswire.com', 'Baumbach-Kemmer', 'ksucreu@imageshack.us');
-insert into NGO (id, website, name, contact) values (32, 'lycos.com', 'Rodriguez, Kassulke and Moore', 'ldallingv@phpbb.com');
-insert into NGO (id, website, name, contact) values (33, 't-online.de', 'Grimes Group', 'fjanotaw@odnoklassniki.ru');
-insert into NGO (id, website, name, contact) values (34, 'drupal.org', 'Schmitt Group', 'jhimsworthx@icio.us');
-insert into NGO (id, website, name, contact) values (35, 'mlb.com', 'Mohr-Huel', 'tcunliffey@geocities.com');
-insert into NGO (id, website, name, contact) values (36, 'uol.com.br', 'Mante, Simonis and Gusikowski', 'mgoodwinz@pcworld.com');
-insert into NGO (id, website, name, contact) values (37, 'utexas.edu', 'Upton LLC', 'hjoska10@theglobeandmail.com');
-insert into NGO (id, website, name, contact) values (38, 'infoseek.co.jp', 'Steuber-Pfannerstill', 'aalsina11@cpanel.net');
-insert into NGO (id, website, name, contact) values (39, 'imgur.com', 'Lockman, Baumbach and Cassin', 'cnassie12@diigo.com');
-insert into NGO (id, website, name, contact) values (40, 'list-manage.com', 'Kreiger-Bednar', 'rfretwell13@cnet.com');
-insert into NGO (id, website, name, contact) values (41, 'netscape.com', 'Lindgren, McLaughlin and Wisoky', 'xhealings14@pinterest.com');
-insert into NGO (id, website, name, contact) values (42, 'wikia.com', 'Ernser LLC', 'tdurrad15@dyndns.org');
-insert into NGO (id, website, name, contact) values (43, 'wordpress.org', 'Becker, Quigley and Grimes', 'awaulker16@360.cn');
-insert into NGO (id, website, name, contact) values (44, 'opensource.org', 'Hudson, Shields and Buckridge', 'cgussie17@blinklist.com');
-insert into NGO (id, website, name, contact) values (45, 'businessinsider.com', 'Schaden-Stanton', 'gmangon18@google.com.au');
-insert into NGO (id, website, name, contact) values (46, 'unicef.org', 'Wunsch and Sons', 'pbullock19@amazonaws.com');
-insert into NGO (id, website, name, contact) values (47, 'salon.com', 'Glover-Herzog', 'gvenney1a@dell.com');
-insert into NGO (id, website, name, contact) values (48, 'mac.com', 'Smitham-Konopelski', 'kpugsley1b@dailymail.co.uk');
-insert into NGO (id, website, name, contact) values (49, 'washingtonpost.com', 'Dickens-Rohan', 'nbartoloma1c@yellowpages.com');
-insert into NGO (id, website, name, contact) values (50, 'istockphoto.com', 'Nader Group', 'jletts1d@bbb.org');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (1, 'EcoUnity.com', 'EcoUnity Europe', 'Joe@EcoUnity.org', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (2, 'seesaa.net', 'Grimes, Fahey and Mertz', 'rattlee1@accuweather.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (3, 'fema.gov', 'Terry-Witting', 'sdand2@angelfire.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (4, 'twitpic.com', 'Kub-Anderson', 'swilson3@pinterest.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (5, 'netvibes.com', 'Bosco, Davis and Feil', 'baspinal4@example.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (6, 'pbs.org', 'Morar LLC', 'lwagg5@answers.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (7, 'bloglovin.com', 'Macejkovic-Ebert', 'rmushett6@pbs.org', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (8, 'fda.gov', 'Cormier, Ratke and Koelpin', 'weakins7@wordpress.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (9, 'ustream.tv', 'Becker-Brakus', 'mchislett8@imdb.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (10, 'elegantthemes.com', 'Miller-O''Conner', 'pchrippes9@auda.org.au', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (11, 'ezinearticles.com', 'Hirthe-Emmerich', 'kmillionsa@tamu.edu', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (12, 'simplemachines.org', 'Jacobson, Torphy and Strosin', 'sgowanlockb@nature.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (13, 'bigcartel.com', 'Waters, Legros and Toy', 'npirdyc@sphinn.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (14, 'apple.com', 'Ortiz, Pollich and Jerde', 'tiversd@wp.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (15, 'slashdot.org', 'Corwin-Shields', 'bbeechcrafte@google.com.br', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (16, 'networksolutions.com', 'Zieme, Bergstrom and Schultz', 'srowswellf@moonfruit.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (17, 'un.org', 'Hand-Schroeder', 'rtimbridgeg@mayoclinic.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (18, 'phoca.cz', 'Feest-Armstrong', 'tionnh@slashdot.org', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (19, 'blogspot.com', 'Rice Inc', 'struelocki@mtv.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (20, 'businessinsider.com', 'Marks Group', 'brothamj@addtoany.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (21, 'hud.gov', 'Barrows Inc', 'elownesk@gizmodo.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (22, 'goodreads.com', 'Deckow-Adams', 'sbrowettl@blogspot.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (23, 'homestead.com', 'Brekke, Hauck and Buckridge', 'cjeevesm@japanpost.jp', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (24, 'blogtalkradio.com', 'Hackett Inc', 'skerrichn@nih.gov', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (25, 'economist.com', 'Veum and Sons', 'jphilbrooko@blogspot.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (26, 'ameblo.jp', 'Gutmann-Lockman', 'gharkessp@bandcamp.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (27, 'dropbox.com', 'Kutch-Hahn', 'eaveyardq@umn.edu', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (28, 'dedecms.com', 'Fay-Murphy', 'kyellowleesr@omniture.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (29, '1und1.de', 'Kohler, Ankunding and Doyle', 'darmells@drupal.org', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (30, 'webnode.com', 'Lueilwitz-McGlynn', 'akeeleyt@cyberchimps.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (31, 'prnewswire.com', 'Baumbach-Kemmer', 'ksucreu@imageshack.us', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (32, 'lycos.com', 'Rodriguez, Kassulke and Moore', 'ldallingv@phpbb.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (33, 't-online.de', 'Grimes Group', 'fjanotaw@odnoklassniki.ru', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (34, 'drupal.org', 'Schmitt Group', 'jhimsworthx@icio.us', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (35, 'mlb.com', 'Mohr-Huel', 'tcunliffey@geocities.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (36, 'uol.com.br', 'Mante, Simonis and Gusikowski', 'mgoodwinz@pcworld.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (37, 'utexas.edu', 'Upton LLC', 'hjoska10@theglobeandmail.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (38, 'infoseek.co.jp', 'Steuber-Pfannerstill', 'aalsina11@cpanel.net', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (39, 'imgur.com', 'Lockman, Baumbach and Cassin', 'cnassie12@diigo.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (40, 'list-manage.com', 'Kreiger-Bednar', 'rfretwell13@cnet.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (41, 'netscape.com', 'Lindgren, McLaughlin and Wisoky', 'xhealings14@pinterest.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (42, 'wikia.com', 'Ernser LLC', 'tdurrad15@dyndns.org', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (43, 'wordpress.org', 'Becker, Quigley and Grimes', 'awaulker16@360.cn', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (44, 'opensource.org', 'Hudson, Shields and Buckridge', 'cgussie17@blinklist.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (45, 'businessinsider.com', 'Schaden-Stanton', 'gmangon18@google.com.au', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (46, 'unicef.org', 'Wunsch and Sons', 'pbullock19@amazonaws.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (47, 'salon.com', 'Glover-Herzog', 'gvenney1a@dell.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (48, 'mac.com', 'Smitham-Konopelski', 'kpugsley1b@dailymail.co.uk', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (49, 'washingtonpost.com', 'Dickens-Rohan', 'nbartoloma1c@yellowpages.com', 'empty bio', 'empty vector');
+insert into NGO (id, website, name, contact, bio, vectorized_bio) values (50, 'istockphoto.com', 'Nader Group', 'jletts1d@bbb.org', 'empty bio', 'empty vector');
+
+
 
 insert into Enterprises (id, name, type, emission_result, misc_emissions, country_id) values (1, 'EcoForward Enterprises', 'Lighting', .08932, 112, 20);
 insert into Enterprises (id, name, type, emission_result, misc_emissions, country_id) values (2, 'Koepp, Schoen and McKenzie', 'EDP Services', 0.07, 0.01432, 14);
@@ -142,56 +144,58 @@ insert into Enterprises (id, name, type, emission_result, misc_emissions, countr
 
 
 
-insert into User (id, emission_result, country_id, email, match_consent, name) values (1, 0.00583, 1, 'NatAllard@360.cn', true, 'Natalie');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (2, 0.00528, 22, 'iworham1@rakuten.co.jp', true, 'Innis');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (3, 0.00399, 2, 'lhowselee2@newyorker.com', false, 'Leoline');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (4, 0.00373, 2, 'emintrim3@usatoday.com', false, 'Erl');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (5, 0.01438, 29, 'fbulford4@barnesandnoble.com', false, 'Fidela');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (6, 0.01259, 23, 'pstiegar5@godaddy.com', true, 'Philippa');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (7, 0.01405, 27, 'wbowden6@meetup.com', true, 'Wandie');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (8, 0.00719, 26, 'jhardage7@cafepress.com', true, 'Jeff');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (9, 0.01142, 29, 'jmanston8@bizjournals.com', false, 'Jose');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (10, 0.00432, 24, 'lsmeeton9@hp.com', true, 'Lutero');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (11, 0.00828, 12, 'epentina@economist.com', false, 'Edwin');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (12, 0.00714, 14, 'asivilb@typepad.com', true, 'Alfy');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (13, 0.00384, 8, 'hkinsleyc@cbsnews.com', true, 'Horst');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (14, 0.0107, 5, 'scuestad@smh.com.au', true, 'Sarge');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (15, 0.00623, 13, 'vmaffullie@marriott.com', false, 'Verla');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (16, 0.0078, 30, 'bprewf@intel.com', false, 'Braden');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (17, 0.01114, 5, 'sshimukg@dedecms.com', true, 'Sharla');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (18, 0.00447, 25, 'frothamh@archive.org', false, 'Fanechka');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (19, 0.0112, 1, 'gsteersi@alibaba.com', false, 'Gregory');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (20, 0.01011, 6, 'lstephensj@wunderground.com', false, 'Lester');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (21, 0.00678, 14, 'tbloyk@blogs.com', false, 'Trenton');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (22, 0.00678, 29, 'aleaheyl@barnesandnoble.com', true, 'Anne-marie');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (23, 0.0045, 3, 'jbeckmannm@lulu.com', false, 'Justis');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (24, 0.00828, 29, 'acroftn@mlb.com', false, 'Analiese');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (25, 0.01013, 26, 'qlowatero@google.ca', false, 'Quintin');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (26, 0.00526, 21, 'mendlep@twitter.com', false, 'Moselle');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (27, 0.01406, 7, 'hdyteq@purevolume.com', true, 'Helen-elizabeth');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (28, 0.00851, 24, 'jimortsr@tripod.com', false, 'Jessamine');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (29, 0.00417, 22, 'kmanbys@bravesites.com', false, 'Kev');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (30, 0.00655, 15, 'saldgatet@mediafire.com', true, 'Stavro');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (31, 0.0039, 5, 'tpietrusiaku@soup.io', true, 'Tonye');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (32, 0.01409, 16, 'gcheesmanv@qq.com', false, 'Giorgia');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (33, 0.00453, 28, 'cbrimblecombew@cbsnews.com', false, 'Camellia');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (34, 0.00965, 24, 'hboulex@utexas.edu', false, 'Hillel');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (35, 0.00447, 24, 'lmcilherrany@meetup.com', true, 'Laurice');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (36, 0.0138, 19, 'apfertnerz@intel.com', false, 'Angelita');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (37, 0.01118, 9, 'kseydlitz10@photobucket.com', false, 'Kain');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (38, 0.00957, 23, 'rcicero11@sphinn.com', true, 'Raychel');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (39, 0.01052, 5, 'lhasling12@yelp.com', true, 'Livvie');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (40, 0.01241, 25, 'gdabbs13@taobao.com', false, 'Garvin');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (41, 0.00756, 27, 'jthackray14@naver.com', false, 'Jeffry');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (42, 0.0051, 9, 'psaxon15@uiuc.edu', false, 'Paula');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (43, 0.01175, 20, 'asharplin16@businessweek.com', true, 'Addison');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (44, 0.00704, 11, 'mfrain17@g.co', false, 'Mavis');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (45, 0.00482, 17, 'kkibbye18@friendfeed.com', true, 'Karalee');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (46, 0.01096, 13, 'escurrell19@nasa.gov', false, 'Erwin');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (47, 0.00738, 10, 'mstolli1a@youku.com', false, 'Melany');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (48, 0.01385, 25, 'nstepney1b@e-recht24.de', true, 'Nickey');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (49, 0.00729, 26, 'rsaynor1c@google.com.br', false, 'Randene');
-insert into User (id, emission_result, country_id, email, match_consent, name) values (50, 0.00844, 10, 'rfeake1d@nationalgeographic.com', true, 'Rivalee');
+INSERT INTO User (id, emission_result, country_id, email, match_consent, name, bio, vectorized_bio)
+VALUES
+(1, 0.00583, 1, 'NatAllard@360.cn', true, 'Natalie', 'empty bio', 'empty vector'),
+(2, 0.00528, 22, 'iworham1@rakuten.co.jp', true, 'Innis', 'empty bio', 'empty vector'),
+(3, 0.00399, 2, 'lhowselee2@newyorker.com', false, 'Leoline', 'empty bio', 'empty vector'),
+(4, 0.00373, 2, 'emintrim3@usatoday.com', false, 'Erl', 'empty bio', 'empty vector'),
+(5, 0.01438, 29, 'fbulford4@barnesandnoble.com', false, 'Fidela', 'empty bio', 'empty vector'),
+(6, 0.01259, 23, 'pstiegar5@godaddy.com', true, 'Philippa', 'empty bio', 'empty vector'),
+(7, 0.01405, 27, 'wbowden6@meetup.com', true, 'Wandie', 'empty bio', 'empty vector'),
+(8, 0.00719, 26, 'jhardage7@cafepress.com', true, 'Jeff', 'empty bio', 'empty vector'),
+(9, 0.01142, 29, 'jmanston8@bizjournals.com', false, 'Jose', 'empty bio', 'empty vector'),
+(10, 0.00432, 24, 'lsmeeton9@hp.com', true, 'Lutero', 'empty bio', 'empty vector'),
+(11, 0.00828, 12, 'epentina@economist.com', false, 'Edwin', 'empty bio', 'empty vector'),
+(12, 0.00714, 14, 'asivilb@typepad.com', true, 'Alfy', 'empty bio', 'empty vector'),
+(13, 0.00384, 8, 'hkinsleyc@cbsnews.com', true, 'Horst', 'empty bio', 'empty vector'),
+(14, 0.0107, 5, 'scuestad@smh.com.au', true, 'Sarge', 'empty bio', 'empty vector'),
+(15, 0.00623, 13, 'vmaffullie@marriott.com', false, 'Verla', 'empty bio', 'empty vector'),
+(16, 0.0078, 30, 'bprewf@intel.com', false, 'Braden', 'empty bio', 'empty vector'),
+(17, 0.01114, 5, 'sshimukg@dedecms.com', true, 'Sharla', 'empty bio', 'empty vector'),
+(18, 0.00447, 25, 'frothamh@archive.org', false, 'Fanechka', 'empty bio', 'empty vector'),
+(19, 0.0112, 1, 'gsteersi@alibaba.com', false, 'Gregory', 'empty bio', 'empty vector'),
+(20, 0.01011, 6, 'lstephensj@wunderground.com', false, 'Lester', 'empty bio', 'empty vector'),
+(21, 0.00678, 14, 'tbloyk@blogs.com', false, 'Trenton', 'empty bio', 'empty vector'),
+(22, 0.00678, 29, 'aleaheyl@barnesandnoble.com', true, 'Anne-marie', 'empty bio', 'empty vector'),
+(23, 0.0045, 3, 'jbeckmannm@lulu.com', false, 'Justis', 'empty bio', 'empty vector'),
+(24, 0.00828, 29, 'acroftn@mlb.com', false, 'Analiese', 'empty bio', 'empty vector'),
+(25, 0.01013, 26, 'qlowatero@google.ca', false, 'Quintin', 'empty bio', 'empty vector'),
+(26, 0.00526, 21, 'mendlep@twitter.com', false, 'Moselle', 'empty bio', 'empty vector'),
+(27, 0.01406, 7, 'hdyteq@purevolume.com', true, 'Helen-elizabeth', 'empty bio', 'empty vector'),
+(28, 0.00851, 24, 'jimortsr@tripod.com', false, 'Jessamine', 'empty bio', 'empty vector'),
+(29, 0.00417, 22, 'kmanbys@bravesites.com', false, 'Kev', 'empty bio', 'empty vector'),
+(30, 0.00655, 15, 'saldgatet@mediafire.com', true, 'Stavro', 'empty bio', 'empty vector'),
+(31, 0.0039, 5, 'tpietrusiaku@soup.io', true, 'Tonye', 'empty bio', 'empty vector'),
+(32, 0.01409, 16, 'gcheesmanv@qq.com', false, 'Giorgia', 'empty bio', 'empty vector'),
+(33, 0.00453, 28, 'cbrimblecombew@cbsnews.com', false, 'Camellia', 'empty bio', 'empty vector'),
+(34, 0.00965, 24, 'hboulex@utexas.edu', false, 'Hillel', 'empty bio', 'empty vector'),
+(35, 0.00447, 24, 'lmcilherrany@meetup.com', true, 'Laurice', 'empty bio', 'empty vector'),
+(36, 0.0138, 19, 'apfertnerz@intel.com', false, 'Angelita', 'empty bio', 'empty vector'),
+(37, 0.01118, 9, 'kseydlitz10@photobucket.com', false, 'Kain', 'empty bio', 'empty vector'),
+(38, 0.00957, 23, 'rcicero11@sphinn.com', true, 'Raychel', 'empty bio', 'empty vector'),
+(39, 0.01052, 5, 'lhasling12@yelp.com', true, 'Livvie', 'empty bio', 'empty vector'),
+(40, 0.01241, 25, 'gdabbs13@taobao.com', false, 'Garvin', 'empty bio', 'empty vector'),
+(41, 0.00756, 27, 'jthackray14@naver.com', false, 'Jeffry', 'empty bio', 'empty vector'),
+(42, 0.0051, 9, 'psaxon15@uiuc.edu', false, 'Paula', 'empty bio', 'empty vector'),
+(43, 0.01175, 20, 'asharplin16@businessweek.com', true, 'Addison', 'empty bio', 'empty vector'),
+(44, 0.00704, 11, 'mfrain17@g.co', false, 'Mavis', 'empty bio', 'empty vector'),
+(45, 0.00482, 17, 'kkibbye18@friendfeed.com', true, 'Karalee', 'empty bio', 'empty vector'),
+(46, 0.01096, 13, 'escurrell19@nasa.gov', false, 'Erwin', 'empty bio', 'empty vector'),
+(47, 0.00738, 10, 'mstolli1a@youku.com', false, 'Melany', 'empty bio', 'empty vector'),
+(48, 0.01385, 25, 'nstepney1b@e-recht24.de', true, 'Nickey', 'empty bio', 'empty vector'),
+(49, 0.00729, 26, 'rsaynor1c@google.com.br', false, 'Randene', 'empty bio', 'empty vector'),
+(50, 0.00844, 10, 'rfeake1d@nationalgeographic.com', true, 'Rivalee', 'empty bio', 'empty vector');
 
 
 
