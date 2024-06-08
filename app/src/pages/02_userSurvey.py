@@ -24,18 +24,18 @@ country_id = [
     "Poland 🇵🇱", "Portugal 🇵🇹", "Romania 🇷🇴", "Slovakia 🇸🇰", "Slovenia 🇸🇮", "Spain 🇪🇸", 
     "Sweden 🇸🇪", "Iceland 🇮🇸", "Liechtenstein 🇱🇮", "Norway 🇳🇴", "Switzerland 🇨🇭"
 ].index(country) + 1
-
-try: 
+try:
     data = {"country_id": country_id }
-    response = requests.put('http://api:4000/u/UserCountry', json=data)
+    response = requests.put('http://api:4000/u/UserCountry', json=data, timeout=300)
 except Exception as e:
-                st.error(f"An error occurred: {e}")
+    st.error(f"An error occurred: {e}")
 
+bio = st.text_area("Bio", help="Enter a quick bio here. Mention some environmental interests if any.", height=100, max_chars=200)
+response = requests.put('http://api:4000/u/UserBio', json=bio, timeout=300)
 
-with st.expander("Residential Data"):
-    
+with st.expander("Residential Data", expanded=1):
     household_members = st.number_input("How many people live in your household?", 1, None, 2)
-    
+
     electricity_usage = 0.0000036 * 12 * st.number_input("How much electricity does your household use per month (kWh)?", 0.0, None, 6320.0)
 
     heating = 0.0000036 * 12 * st.number_input("How much heating does your household use per month (kWh)?", 0.0, None, 3000.0)
@@ -80,7 +80,7 @@ with st.expander("Residential Data"):
 #   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 # st.dataframe(data)
 
-with st.expander("Car Data"):
+with st.expander("Car Data", expanded=1):
     
     # numCars = st.number_input("How many cars do you own?", 0)
     # if (numCars > 0): 
@@ -144,13 +144,14 @@ if st.button("View Prediction"):
         response = requests.get(PRED_URL, timeout=10)
         responseJSON = response.json()
         finalCarbon = responseJSON['result']
-        st.write("### Estimated Carbon Footprint (kgs of CO2 equivalent): ", round(finalCarbon * 1000000, 4))
-        country_response = requests.get("http://api:4000/u/UserCountryCarbon", timeout=10).json()[0]['emissions']
-        
+        st.write("### Estimated Carbon Footprint (kgs of CO2 equivalent): ",
+                 round(finalCarbon * 1000000, 4))
+        country_response = requests.get("http://api:4000/u/UserCountryCarbon",
+                                        timeout=10).json()[0]['emissions']
         # st.write("Total Country Carbon Emissions (ktons of CO2 equivalent): ", country_response)
-        st.write("#### Your Carbon Footprint is ", round(finalCarbon / country_response, 2), " times the average in ", country)
-               
-               
+        st.write("#### Your Carbon Footprint is ",
+                 round(finalCarbon / country_response, 2), " times the average in ", country)
+        
         if response.status_code == 201 or response.status_code == 200:
             st.success("Successfully Predicted!")
         else:
