@@ -1,16 +1,17 @@
 import streamlit as st
 from modules.nav import SideBarLinks
 import requests
+from streamlit_pills import pills
 
 # Show appropriate sidebar links for the role of the currently logged in user
 SideBarLinks()
 
-st.write("# NGO suggestions")
+st.write("# NGO Suggestions")
 
 st.write('')
 st.write('')
 
-st.write("## Your emission tags are: ")
+st.write("## Your Emission Tags Are: ")
 
 data = {} 
 try:
@@ -19,9 +20,20 @@ except:
   st.write("**Important**: Could not connect to sample api, so using dummy data.")
   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
-st.dataframe(data)
+emoji_map = {
+    "Heat": "🔥",
+    "Flights": "🛫",
+    "Energy": "💡",
+    "Transport": "🚗",
+}
 
-st.write("## NGOs with these tags are: ")
+tags = [tag["description"] for tag in data]
+
+selected = pills('Current Tags', tags, [emoji_map[tag] for tag in tags])
+
+#st.dataframe(data)
+
+st.write("## NGOs With These Tags Are: ")
 
 data = {} 
 try:
