@@ -19,7 +19,10 @@ def get_ngo_match():
     returned_data = cursor.fetchall()
 
     # Pull user bio from db
-    query = ""
+    bio_query = "SELECT User.bio FROM User WHERE User.id = %s"
+    cursor.execute(bio_query, current_id)
+    bio_row = cursor.fetchone()
+    bio = bio_row[0]
 
     for row in returned_data:
         json_data.append(dict(zip(column_headers, row)))
@@ -34,10 +37,20 @@ def get_ngo_match():
     tfidf = stack_matrices(csr)
 
     # Get the idf and vocab from db, parse into vec using `string_to_sparse_matrix`
-    idf = None
-    vocabulary = None
+    idf_query = "SELECT idf FROM TFIDF_Encoding ORDER BY id DESC LIMIT 1"
+    cursor.execute(idf_query)
+    idf_row = cursor.fetchone()
+    idf_element = idf_row[0]
 
-    orgs, similarity = predict(idf, vocabulary, tfidf, names, query)
+    vocabulary_query = "SELECT vocabulary FROM TFIDF_Encoding ORDER BY id DESC LIMIT 1"
+    cursor.execute(vocabulary_query)
+    vocabulary_row = cursor.fetchone()
+    vocabulary_element = vocabulary_row[0]
+
+    idf = string_to_sparse_matrix(idf_element)
+    vocabulary = string_to_sparse_matrix(vocabulary_element)
+
+    orgs, similarity = predict(idf, vocabulary, tfidf, names, bio)
     # ^ Orgs are a list of names in highest matching order, with the appropriate similarity score
     # Should propbably return just the orgs to the user?
 

@@ -4,6 +4,7 @@ Use CarbonConnect;
 
 DROP TABLE IF EXISTS TFIDF_Encoding;
 CREATE TABLE IF NOT EXISTS TFIDF_Encoding (
+    id INT PRIMARY KEY AUTO_INCREMENT,
     vector MEDIUMTEXT,
     vocabulary MEDIUMTEXT,
     idf MEDIUMTEXT
