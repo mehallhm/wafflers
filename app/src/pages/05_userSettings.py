@@ -98,11 +98,13 @@ def fetch_tag_descriptions():
 
 
 data = fetch_tag_descriptions()
-tags = [tag["description"] for tag in data]
-
-
 st.write("### Tag Settings")
-selected = pills("Current tags", tags, [EMOJI_MAP[tag] for tag in tags], index=None)
+if data:
+    tags = [tag["description"] for tag in data]
+    selected = pills("Current tags", tags, [EMOJI_MAP[tag] for tag in tags], index=None)
+else:
+    st.info("No tags available to display.")
+
 
 col1, col2 = st.columns(2)
 

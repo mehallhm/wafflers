@@ -35,9 +35,6 @@ def side_bar_links():
             st.sidebar.page_link("pages/10_enterprisehome.py", label="Home")
             st.sidebar.page_link("pages/12_enterpriseMatch.py", label="NGO Match")
             st.sidebar.page_link("pages/11_enterpriseSurvey.py", label="Survey")
-            st.sidebar.page_link(
-                "pages/13_enterpriseHistory.py", label="Survey History"
-            )
 
         if st.session_state["role"] == "NGO":
             st.sidebar.page_link("pages/20_NGOhome.py", label="Home")

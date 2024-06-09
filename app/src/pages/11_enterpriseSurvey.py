@@ -43,9 +43,11 @@ emoji_map = {
     "Transport": "🚗",
 }
 
-tags = [tag["description"] for tag in data]
-
-selected = pills("Current Tags", tags, [emoji_map[tag] for tag in tags])
+if data:
+    tags = [tag["description"] for tag in data]
+    selected = pills("Current Tags", tags, [emoji_map[tag] for tag in tags])
+else:
+    st.info("No tags available to display.")
 
 col1, col2 = st.columns(2)
 
