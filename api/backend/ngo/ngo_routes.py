@@ -17,18 +17,19 @@ def get_ngo_match(user_id):
     Gets the NGOs that match to a particular user. Returns
     """
     matching_num = request.args.get("q")
-    cursor = db.get_db().cursor()
 
+    cursor = db.get_db().cursor()
     cursor.execute("SELECT name, website, bio, vectorized_bio FROM NGO")
     column_headers = [x[0] for x in cursor.description]
+    json_data = []
+    returned_data = cursor.fetchall()
 
     # Pull user bio from db
     bio_query = "SELECT User.bio FROM User WHERE User.id = %s"
     cursor.execute(bio_query, user_id)
     bio = cursor.fetchone()[0]
 
-    json_data = []
-    for row in cursor.fetchall():
+    for row in returned_data:
         json_data.append(dict(zip(column_headers, row)))
 
     names = []

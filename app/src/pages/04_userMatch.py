@@ -4,7 +4,7 @@ import requests
 
 side_bar_links()
 
-matches = requests.get("http://api:4000/n/NGOMatch/1?q=100", timeout=100).json()
+matches = requests.get("http://api:4000/n/NGOMatch/1?q=100", timeout=500).json()
 
 st.header("My Matches")
 st.write("")
