@@ -85,7 +85,6 @@ except requests.exceptions.RequestException as e:
 
 
 emoji_map = {
-    '''Emojis for Tags'''
     "Heat": "🔥",
     "Flights": "🛫",
     "Energy": "💡",
@@ -96,8 +95,9 @@ tags = [tag["description"] for tag in data]
 
 if data:
     tags = [tag["description"] for tag in data]
-    selected = pills("Current Tags", tags, [emoji_map[tag] for tag in tags])
+    selected = pills("Current tags", tags, [emoji_map[tag] for tag in tags], index=None)
 else:
+    tags = []
     st.info("No tags available to display.")
 
 
@@ -121,6 +121,7 @@ with col1:
 with col2:
     st.write("### Delete NGO Tags")
     options = ["Transport", "Flights", "Energy", "Heat"]
+    options = [option for option in options if option in tags]
     selected_tag = st.selectbox("Select Tags To Delete", options)
     if st.button("Delete Tags"):
         tag_data = {"tag": selected_tag}
