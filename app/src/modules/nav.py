@@ -81,7 +81,7 @@ def SideBarLinks(show_home=False):
             EnterpriseHomeNav()
             EnterpriseMatchNav()
             EnterpriseSurveyNav()
-            EnterpriseHistoryNav()
+           
         
         if st.session_state['role'] == 'NGO':
             NGOHomeNav()
