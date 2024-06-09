@@ -10,7 +10,7 @@ ngo = Blueprint("ngo", __name__)
 current_id = 1
 
 
-# All of the NGO Data for use in the tfidf model
+# All the NGO Data for use in the tfidf model
 @ngo.route("/NGOMatch/<int:user_id>", methods=["GET"])
 def get_ngo_match(user_id):
     """
@@ -19,7 +19,7 @@ def get_ngo_match(user_id):
     matching_num = request.args.get("q")
 
     cursor = db.get_db().cursor()
-    cursor.execute("SELECT name, vectorized_bio FROM NGO")
+    cursor.execute("SELECT name, website, vectorized_bio FROM NGO")
     column_headers = [x[0] for x in cursor.description]
     json_data = []
     returned_data = cursor.fetchall()
@@ -35,7 +35,7 @@ def get_ngo_match(user_id):
     names = []
     vecs = []
     for item in json_data:
-        names.append(item["name"])
+        names.append({"name": item["name"], "website": item["website"]})
         vecs.append(item["vectorized_bio"])
 
     # Get the idf and vocab from db, parse into vec using `string_to_sparse_matrix`

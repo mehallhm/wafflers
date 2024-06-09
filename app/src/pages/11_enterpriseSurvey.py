@@ -1,11 +1,11 @@
 import streamlit as st
-from modules.nav import SideBarLinks
+from modules.nav import side_bar_links
 import requests
 from streamlit_pills import pills
 import pandas as pd
 
 # Show appropriate sidebar links for the role of the currently logged in user
-SideBarLinks()
+side_bar_links()
 
 st.write("# Enterprise survey")
 
@@ -26,13 +26,14 @@ if st.button("Submit Emission"):
 
 def fetch_tag_descriptions():
     try:
-        response = requests.get('http://api:4000/e/tags')  
-        response.raise_for_status()  
+        response = requests.get("http://api:4000/e/tags")
+        response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
         st.error(f"Error fetching data: {e}")
         return []
-    
+
+
 data = fetch_tag_descriptions()
 
 emoji_map = {
@@ -44,13 +45,14 @@ emoji_map = {
 
 tags = [tag["description"] for tag in data]
 
-selected = pills('Current Tags', tags, [emoji_map[tag] for tag in tags])
+selected = pills("Current Tags", tags, [emoji_map[tag] for tag in tags])
 
 col1, col2 = st.columns(2)
 
 with col1:
+
     def add_tags():
-        st.write('### Add New Enterprise Tags')
+        st.write("### Add New Enterprise Tags")
 
         options = ["Transport", "Flights", "Energy", "Heat"]
 
@@ -71,44 +73,57 @@ with col1:
     add_tags()
 
 with col2:
+
     def delete_tags():
-        st.write('### Delete NGO Tags')
+        st.write("### Delete NGO Tags")
 
         options = ["Transport", "Flights", "Energy", "Heat"]
 
-        selected_tag = st.selectbox("Select Tags To Delete", options)  
+        selected_tag = st.selectbox("Select Tags To Delete", options)
 
         if st.button("Delete Tags"):
             delete_tags_api_url = "http://api:4000/e/TagDelete"
-            tag_data = {"tag": selected_tag}  
+            tag_data = {"tag": selected_tag}
 
             try:
                 response = requests.delete(delete_tags_api_url, json=tag_data)
                 if response.status_code == 200:
                     st.success("Tags Successfully Deleted!")
                 else:
-                    st.error(f"Failed To Delete Tags. Status Code: {response.status_code}")
+                    st.error(
+                        f"Failed To Delete Tags. Status Code: {response.status_code}"
+                    )
             except Exception as e:
                 st.error(f"An Error Occurred While Deleting Tags: {e}")
 
     delete_tags()
 
-data = {} 
+data = {}
 try:
-  data = requests.get('http://api:4000/e/EntCompare').json()
+    data = requests.get("http://api:4000/e/EntCompare").json()
 except:
-  st.write("**Important**: Could not connect to sample api, so using dummy data.")
-  data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+    st.write("**Important**: Could not connect to sample api, so using dummy data.")
+    data = {"a": {"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
 avg_emission = data[0]["AVG Emission (by Country in kilotonnes)"]
 country = data[0]["Country"]
 your_emissions = data[0]["Your Emissions (in kilotonnes)"]
 multiplier = your_emissions / avg_emission
 
-st.write('')
+st.write("")
 
-st.write("#### In", country + ", your emissions in kilotonnes is ", round(your_emissions, 2), ", while the average enterprise's is ", round(avg_emission,2))
-st.write("#### That means your emissions are", round(multiplier, 2), "times the average enterprise's emissions in " + country)
+st.write(
+    "#### In",
+    country + ", your emissions in kilotonnes is ",
+    round(your_emissions, 2),
+    ", while the average enterprise's is ",
+    round(avg_emission, 2),
+)
+st.write(
+    "#### That means your emissions are",
+    round(multiplier, 2),
+    "times the average enterprise's emissions in " + country,
+)
 
 # st.write('### Display Enterprise Survey Result History')
 
@@ -122,17 +137,12 @@ st.write("#### That means your emissions are", round(multiplier, 2), "times the 
 # st.dataframe(data)
 
 
-
-
-
-
-
-st.write('### Enterprise Emission Result History')
+st.write("### Enterprise Emission Result History")
 
 data = []
 
 try:
-    response = requests.get('http://api:4000/e/EnterpriseHistory', timeout=100)
+    response = requests.get("http://api:4000/e/EnterpriseHistory", timeout=100)
     response.raise_for_status()
     data = response.json()
 except requests.exceptions.RequestException as e:
@@ -140,11 +150,10 @@ except requests.exceptions.RequestException as e:
 
 if data:
     df = pd.DataFrame(data)
-    
+
     # Automatically display each history result in an expander
     for index, row in df.iterrows():
         with st.expander(f"Emission result {index + 1}"):
-            st.write(row['emission_history'])
+            st.write(row["emission_history"])
 else:
     st.write("No data available to display.")
-

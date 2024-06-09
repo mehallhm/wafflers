@@ -1,9 +1,9 @@
 import streamlit as st
-from modules.nav import SideBarLinks
+from modules.nav import side_bar_links
 import requests
 
 # Show appropriate sidebar links for the role of the currently logged in user
-SideBarLinks()
+side_bar_links()
 
 st.title("Survey History")
 st.write("##### Sorted by Completion Date")
@@ -90,4 +90,3 @@ with outCol2:
 #   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
 # st.dataframe(data)
-

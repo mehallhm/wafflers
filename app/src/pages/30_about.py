@@ -1,13 +1,13 @@
 import streamlit as st
-from modules.nav import SideBarLinks
+from modules.nav import side_bar_links
 
 # Show appropriate sidebar links for the role of the currently logged in user
-SideBarLinks()
+side_bar_links()
 
 st.write("# About this app")
 
 
-st.markdown (
+st.markdown(
     """
     This app is being built as an exemplar for Northeastern University's 
     Summer 2024 Dialogue of Civilization Program titled *Data and 
@@ -21,4 +21,4 @@ st.markdown (
 
     - The Wafflers: Aahil, Anjola, Justin, Michael
     """
-        )
+)

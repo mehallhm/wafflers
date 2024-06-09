@@ -2,9 +2,9 @@
 fileWatcherType = "poll"
 
 [theme]
-primaryColor="#B9B1BE"
-backgroundColor="#2D2D2A"
-secondaryBackgroundColor="#151514"
+primaryColor="#8FE1A8"
+backgroundColor="#151515"
+secondaryBackgroundColor="#2D2D2A"
 textColor="#00000"
 font="sans serif"
 
