@@ -51,7 +51,6 @@ SideBarLinks()
 st.header("My Settings")
 current_country_data = requests.get("http://api:4000/u/UserCountryCarbon",
                                     timeout=200).json()
-st.dataframe(current_country_data)
 country_id = current_country_data[0]['id']
 country = st.selectbox("Country :flag-eu:", COUNTRY_FLAGS, index=country_id)
 country_id = COUNTRY_FLAGS.index(country)
@@ -61,11 +60,14 @@ try:
 except Exception as e:
     st.error(f"An error occurred: {e}")
 
+current_bio = requests.get("http://api:4000/u/UserBio", timeout=200).json()['bio']
+
 bio = st.text_area(
     "Bio",
     help="Enter a quick bio here. Mention some environmental interests if any",
     height=100,
     max_chars=200,
+    value=current_bio
 )
 
 consent = st.toggle(

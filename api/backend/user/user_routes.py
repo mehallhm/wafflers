@@ -207,6 +207,15 @@ def get_transport():
     return jsonify(json_data)
 
 
+@user.route("/UserBio", methods=["GET"])
+def get_bio ():
+    cursor = db.get_db().cursor()
+
+    cursor.execute("SELECT bio FROM User WHERE id = 1")
+    bio = cursor.fetchone()[0]
+
+    return jsonify({"bio": bio})
+
 # Updates match consent and bio for user
 @user.route("/UserUpdateInfo", methods=["PUT"])
 def update_user():
