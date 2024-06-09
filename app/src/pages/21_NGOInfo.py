@@ -40,6 +40,15 @@ if contact_email:
     else:
         st.error("Invalid Email Address. Please Enter A Valid Email.")
 
+current_bio = requests.get("http://api:4000/n/Bio", timeout=200).json()["bio"]
+
+bio = st.text_area(
+    "Bio",
+    help="Enter a quick bio here. Mention some environmental interests if any",
+    height=100,
+    value=current_bio,
+)
+
 if st.button("Submit"):
     if (ngo_name
         and url_check(
@@ -49,7 +58,7 @@ if st.button("Submit"):
         and validators.email(contact_email)
     ):
 
-        data = {"name": ngo_name, "website": website_link, "email": contact_email}
+        data = {"name": ngo_name, "website": website_link, "email": contact_email, "bio": bio}
 
         try:
             response = requests.put("http://api:4000/n/NGOUpdate", json=data, timeout=200)

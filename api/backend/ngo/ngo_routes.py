@@ -92,10 +92,11 @@ def add_new_NGO():
     name = recieved_data["name"]
     website = recieved_data["website"]
     email = recieved_data["email"]
+    bio = recieved_data["bio"]
 
-    query = "UPDATE NGO SET website = %s, name = %s, contact = %s WHERE id = 1"
+    query = "UPDATE NGO SET website = %s, name = %s, contact = %s, bio = %s WHERE id = 1"
 
-    data = (name, website, email)
+    data = (name, website, email, bio)
     cursor = db.get_db().cursor()
     cursor.execute(query, data)
     db.get_db().commit()
@@ -293,3 +294,13 @@ def get_usermatches():
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+@ngo.route("/Bio", methods=["GET"])
+def get_bio ():
+    '''Get the bio for this NGO'''
+    cursor = db.get_db().cursor()
+
+    cursor.execute("SELECT bio FROM NGO WHERE id = 1")
+    bio = cursor.fetchone()[0]
+
+    return jsonify({"bio": bio})
