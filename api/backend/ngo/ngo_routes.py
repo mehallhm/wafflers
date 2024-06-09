@@ -1,31 +1,45 @@
 from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from backend.db_connection import db
+from backend.ml_models.db_vector_helpers import stack_matrices, string_to_sparse_matrix
+from backend.ml_models.model_beta import predict
 
 
 ngo = Blueprint("ngo", __name__)
 current_id = 1
 
+
 # All of the NGO Data for use in the tfidf model
-@ngo.route('/NGOMatch', methods=['GET'])
+@ngo.route("/NGOMatch", methods=["GET"])
 def get_ngo_match():
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT name, vectorized_bio FROM NGO')
+    cursor.execute("SELECT name, vectorized_bio FROM NGO")
     column_headers = [x[0] for x in cursor.description]
     json_data = []
     returned_data = cursor.fetchall()
+
+    # Pull user bio from db
+    query = ""
 
     for row in returned_data:
         json_data.append(dict(zip(column_headers, row)))
 
     names = []
     vecs = []
-    for item in json_data: 
-        names.append(item['name'])
-        vecs.append(item['vectorized_bio'])
+    for item in json_data:
+        names.append(item["name"])
+        vecs.append(item["vectorized_bio"])
 
-    return jsonify({"names": names, "vecs": vecs})
+    csr = [string_to_sparse_matrix(v) for v in vecs]
+    tfidf = stack_matrices(csr)
 
+    # Get the idf and vocab from db, parse into vec using `string_to_sparse_matrix`
+    idf = None
+    vocabulary = None
+
+    orgs, similarity = predict(idf, vocabulary, tfidf, names, query)
+    # ^ Orgs are a list of names in highest matching order, with the appropriate similarity score
+    # Should propbably return just the orgs to the user?
 
 
 # Gets my ngo data
