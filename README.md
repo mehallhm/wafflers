@@ -50,6 +50,30 @@ Welcome to **Carbon Connect**, an app to help users, enterprises, and NGOs reduc
 - **Database**: MySQL
 - **Containerization**: Docker (with three containers: front-end, web-api, and mysql_db)
 
+## Running the App with Docker
+
+To run this app using Docker, follow these steps:
+
+### Prerequisites
+
+Make sure you have Docker installed on your machine. You can download Docker from [here](https://www.docker.com/products/docker-desktop).
+
+### Build the Docker Image
+
+First, you need to build the Docker image from the Dockerfile. Navigate to the root directory of the project and run the following command:
+
+docker compose build
+
+To stop or down the containers you can use the following commands:
+
+docker compose down
+
+docker compose stop
+
+To start the containers you can use the following command:
+
+docker compose up -d
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
