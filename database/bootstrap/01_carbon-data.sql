@@ -1,35 +1,35 @@
 USE CarbonConnect;
 
+INSERT INTO Country (id, emissions, name) VALUES (0, 74825.78 / 9121000, 'Austria');
 INSERT INTO Country (id, emissions, name) VALUES (1, 108871.68 / 11719000, 'Belgium');
 INSERT INTO Country (id, emissions, name) VALUES (2, 59082.72 / 6519789, 'Bulgaria');
-INSERT INTO Country (id, emissions, name) VALUES (3, 118500.35 / 10693939, 'Czechia');
-INSERT INTO Country (id, emissions, name) VALUES (4, 44243.3 / 5932000, 'Denmark');
-INSERT INTO Country (id, emissions, name) VALUES (5, 777380.09 / 83166711, 'Germany');
-INSERT INTO Country (id, emissions, name) VALUES (6, 14125.06 / 1331796, 'Estonia');
-INSERT INTO Country (id, emissions, name) VALUES (7, 63650.14 / 5158000, 'Ireland');
-INSERT INTO Country (id, emissions, name) VALUES (8, 82242.9 / 10384971, 'Greece');
-INSERT INTO Country (id, emissions, name) VALUES (9, 309286.15 / 47556000, 'Spain');
-INSERT INTO Country (id, emissions, name) VALUES (10, 409732.55 / 68075000, 'France');
-INSERT INTO Country (id, emissions, name) VALUES (11, 26258.1 / 3850000, 'Croatia');
-INSERT INTO Country (id, emissions, name) VALUES (12, 419467.07 / 58982000, 'Italy');
-INSERT INTO Country (id, emissions, name) VALUES (13, 9572.78 / 1231000, 'Cyprus');
-INSERT INTO Country (id, emissions, name) VALUES (14, 10568.91 / 1848837, 'Latvia');
-INSERT INTO Country (id, emissions, name) VALUES (15, 19249.2 / 2857000, 'Lithuania');
-INSERT INTO Country (id, emissions, name) VALUES (16, 10145.27 / 645397, 'Luxembourg');
-INSERT INTO Country (id, emissions, name) VALUES (17, 60331.72 / 9594214, 'Hungary');
+INSERT INTO Country (id, emissions, name) VALUES (3, 26258.1 / 3850000, 'Croatia');
+INSERT INTO Country (id, emissions, name) VALUES (4, 9572.78 / 1231000, 'Cyprus');
+INSERT INTO Country (id, emissions, name) VALUES (5, 118500.35 / 10693939, 'Czechia');
+INSERT INTO Country (id, emissions, name) VALUES (6, 44243.3 / 5932000, 'Denmark');
+INSERT INTO Country (id, emissions, name) VALUES (7, 14125.06 / 1331796, 'Estonia');
+INSERT INTO Country (id, emissions, name) VALUES (8, 47341.71 / 5548000, 'Finland');
+INSERT INTO Country (id, emissions, name) VALUES (9, 409732.55 / 68075000, 'France');
+INSERT INTO Country (id, emissions, name) VALUES (10, 777380.09 / 83166711, 'Germany');
+INSERT INTO Country (id, emissions, name) VALUES (11, 82242.9 / 10384971, 'Greece');
+INSERT INTO Country (id, emissions, name) VALUES (12, 60331.72 / 9594214, 'Hungary');
+INSERT INTO Country (id, emissions, name) VALUES (13, 63650.14 / 5158000, 'Ireland');
+INSERT INTO Country (id, emissions, name) VALUES (14, 419467.07 / 58982000, 'Italy');
+INSERT INTO Country (id, emissions, name) VALUES (15, 10568.91 / 1848837, 'Latvia');
+INSERT INTO Country (id, emissions, name) VALUES (16, 19249.2 / 2857000, 'Lithuania');
+INSERT INTO Country (id, emissions, name) VALUES (17, 10145.27 / 645397, 'Luxembourg');
 INSERT INTO Country (id, emissions, name) VALUES (18, 2647.72 / 514564, 'Malta');
 INSERT INTO Country (id, emissions, name) VALUES (19, 162999.6 / 17556000, 'Netherlands');
-INSERT INTO Country (id, emissions, name) VALUES (20, 74825.78 / 9121000, 'Austria');
-INSERT INTO Country (id, emissions, name) VALUES (21, 383434.04 / 37623000, 'Poland');
-INSERT INTO Country (id, emissions, name) VALUES (22, 60581.36 / 10352042, 'Portugal');
-INSERT INTO Country (id, emissions, name) VALUES (23, 109992.76 / 18979000, 'Romania');
+INSERT INTO Country (id, emissions, name) VALUES (20, 383434.04 / 37623000, 'Poland');
+INSERT INTO Country (id, emissions, name) VALUES (21, 60581.36 / 10352042, 'Portugal');
+INSERT INTO Country (id, emissions, name) VALUES (22, 109992.76 / 18979000, 'Romania');
+INSERT INTO Country (id, emissions, name) VALUES (23, 37183.78 / 5404322, 'Slovakia');
 INSERT INTO Country (id, emissions, name) VALUES (24, 15676.64 / 2100000, 'Slovenia');
-INSERT INTO Country (id, emissions, name) VALUES (25, 37183.78 / 5404322, 'Slovakia');
-INSERT INTO Country (id, emissions, name) VALUES (26, 47341.71 / 5548000, 'Finland');
-INSERT INTO Country (id, emissions, name) VALUES (27, 47074.61 / 10540725, 'Sweden');
-INSERT INTO Country (id, emissions, name) VALUES (28, 5402.55 / 376248, 'Iceland');
-INSERT INTO Country (id, emissions, name) VALUES (29, 50255.43 / 5488984, 'Norway');
-INSERT INTO Country (id, emissions, name) VALUES (30, 45847.17 / 8803000, 'Switzerland');
+INSERT INTO Country (id, emissions, name) VALUES (25, 309286.15 / 47556000, 'Spain');
+INSERT INTO Country (id, emissions, name) VALUES (26, 47074.61 / 10540725, 'Sweden');
+INSERT INTO Country (id, emissions, name) VALUES (27, 5402.55 / 376248, 'Iceland');
+INSERT INTO Country (id, emissions, name) VALUES (28, 50255.43 / 5488984, 'Norway');
+INSERT INTO Country (id, emissions, name) VALUES (29, 45847.17 / 8803000, 'Switzerland');
 
 
 INSERT INTO EmissionTags (id, description) VALUES
@@ -106,13 +106,13 @@ insert into Enterprises (survey_id, id, name, type, emission_result, country_id)
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (15, 15, 'Hessel-Rowe', 'Biotechnology: Biological Products (No Diagnostic Substances)', 0.04416, 17);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (16, 16, 'Spinka, Ziemann and Cronin', 'n/a', 0.04827, 16);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (17, 17, 'Jenkins, Pagac and Gibson', 'n/a', 0.02494, 7);
-insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (18, 18, 'Boyer-Heller', 'Package Goods/Cosmetics', 0.08924, 30);
+insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (18, 18, 'Boyer-Heller', 'Package Goods/Cosmetics', 0.08924, 25);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (19, 19, 'Morissette Group', 'Major Banks', 0.03168, 18);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (20, 20, 'Little, Hintz and Blanda', 'n/a', 0.07561, 25);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (21, 21, 'Kuhlman-Vandervort', 'Telecommunications Equipment', 0.05408, 22);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (22, 22, 'Harvey, Mann and Carter', 'Major Pharmaceuticals', 0.05748, 2);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (23, 23, 'Bruen, Beier and Bins', 'Apparel', 0.04154, 17);
-insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (24, 24, 'Keebler and Sons', 'Specialty Chemicals', 0.07983, 30);
+insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (24, 24, 'Keebler and Sons', 'Specialty Chemicals', 0.07983, 2);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (25, 25, 'Turcotte, Baumbach and Cruickshank', 'Oil & Gas Production', 0.07671, 26);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (26, 26, 'Kozey Inc', 'Major Pharmaceuticals', 0.04877, 14);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (27, 27, 'Pagac, Stiedemann and Cormier', 'Major Pharmaceuticals', 0.08622, 16);
@@ -157,7 +157,7 @@ VALUES
 (13, 0.00384, 8, 'hkinsleyc@cbsnews.com', true, 'Horst', 'empty bio', 'empty vector'),
 (14, 0.0107, 5, 'scuestad@smh.com.au', true, 'Sarge', 'empty bio', 'empty vector'),
 (15, 0.00623, 13, 'vmaffullie@marriott.com', false, 'Verla', 'empty bio', 'empty vector'),
-(16, 0.0078, 30, 'bprewf@intel.com', false, 'Braden', 'empty bio', 'empty vector'),
+(16, 0.0078, 20, 'bprewf@intel.com', false, 'Braden', 'empty bio', 'empty vector'),
 (17, 0.01114, 5, 'sshimukg@dedecms.com', true, 'Sharla', 'empty bio', 'empty vector'),
 (18, 0.00447, 25, 'frothamh@archive.org', false, 'Fanechka', 'empty bio', 'empty vector'),
 (19, 0.0112, 1, 'gsteersi@alibaba.com', false, 'Gregory', 'empty bio', 'empty vector'),

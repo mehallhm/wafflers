@@ -5,6 +5,7 @@ from streamlit_pills import pills
 
 
 COUNTRY_FLAGS = [
+    "Austria 🇦🇹",
     "Belgium 🇧🇪",
     "Bulgaria 🇧🇬",
     "Croatia 🇭🇷",
@@ -32,7 +33,6 @@ COUNTRY_FLAGS = [
     "Spain 🇪🇸",
     "Sweden 🇸🇪",
     "Iceland 🇮🇸",
-    "Liechtenstein 🇱🇮",
     "Norway 🇳🇴",
     "Switzerland 🇨🇭",
 ]
@@ -49,8 +49,12 @@ EMOJI_MAP = {
 SideBarLinks()
 
 st.header("My Settings")
-country = st.selectbox("Country :flag-eu:", COUNTRY_FLAGS)
-country_id = COUNTRY_FLAGS.index(country) + 1
+current_country_data = requests.get("http://api:4000/u/UserCountryCarbon",
+                                    timeout=200).json()
+st.dataframe(current_country_data)
+country_id = current_country_data[0]['id']
+country = st.selectbox("Country :flag-eu:", COUNTRY_FLAGS, index=country_id)
+country_id = COUNTRY_FLAGS.index(country)
 try:
     data = {"country_id": country_id}
     response = requests.put("http://api:4000/u/UserCountry", json=data, timeout=300)
@@ -89,10 +93,7 @@ def fetch_tag_descriptions():
         st.error(f"Error fetching data: {e}")
         return []
 
-
 data = fetch_tag_descriptions()
-
-
 tags = [tag["description"] for tag in data]
 
 

@@ -53,7 +53,7 @@ def get_country_carbon():
     cursor = db.get_db().cursor()
 
     cursor.execute(
-        "SELECT Country.emissions, Country.name FROM User JOIN Country ON User.country_id = Country.id WHERE User.id = 1"
+        "SELECT Country.* FROM Country JOIN User ON User.country_id = Country.id WHERE User.id = 1"
     )
 
     column_headers = [x[0] for x in cursor.description]
@@ -64,6 +64,8 @@ def get_country_carbon():
 
     for row in returned_data:
         json_data.append(dict(zip(column_headers, row)))
+        
+    current_app.logger.info(jsonify(json_data))
 
     return jsonify(json_data)
 
