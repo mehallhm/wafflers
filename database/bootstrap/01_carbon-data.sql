@@ -38,59 +38,6 @@ INSERT INTO EmissionTags (id, description) VALUES
 (3, 'Energy'),
 (4, 'Heat');
 
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (1, 'EcoUnity.com', 'EcoUnity Europe', 'Joe@EcoUnity.org', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (2, 'seesaa.net', 'Grimes, Fahey and Mertz', 'rattlee1@accuweather.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (3, 'fema.gov', 'Terry-Witting', 'sdand2@angelfire.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (4, 'twitpic.com', 'Kub-Anderson', 'swilson3@pinterest.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (5, 'netvibes.com', 'Bosco, Davis and Feil', 'baspinal4@example.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (6, 'pbs.org', 'Morar LLC', 'lwagg5@answers.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (7, 'bloglovin.com', 'Macejkovic-Ebert', 'rmushett6@pbs.org', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (8, 'fda.gov', 'Cormier, Ratke and Koelpin', 'weakins7@wordpress.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (9, 'ustream.tv', 'Becker-Brakus', 'mchislett8@imdb.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (10, 'elegantthemes.com', 'Miller-O''Conner', 'pchrippes9@auda.org.au', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (11, 'ezinearticles.com', 'Hirthe-Emmerich', 'kmillionsa@tamu.edu', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (12, 'simplemachines.org', 'Jacobson, Torphy and Strosin', 'sgowanlockb@nature.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (13, 'bigcartel.com', 'Waters, Legros and Toy', 'npirdyc@sphinn.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (14, 'apple.com', 'Ortiz, Pollich and Jerde', 'tiversd@wp.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (15, 'slashdot.org', 'Corwin-Shields', 'bbeechcrafte@google.com.br', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (16, 'networksolutions.com', 'Zieme, Bergstrom and Schultz', 'srowswellf@moonfruit.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (17, 'un.org', 'Hand-Schroeder', 'rtimbridgeg@mayoclinic.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (18, 'phoca.cz', 'Feest-Armstrong', 'tionnh@slashdot.org', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (19, 'blogspot.com', 'Rice Inc', 'struelocki@mtv.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (20, 'businessinsider.com', 'Marks Group', 'brothamj@addtoany.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (21, 'hud.gov', 'Barrows Inc', 'elownesk@gizmodo.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (22, 'goodreads.com', 'Deckow-Adams', 'sbrowettl@blogspot.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (23, 'homestead.com', 'Brekke, Hauck and Buckridge', 'cjeevesm@japanpost.jp', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (24, 'blogtalkradio.com', 'Hackett Inc', 'skerrichn@nih.gov', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (25, 'economist.com', 'Veum and Sons', 'jphilbrooko@blogspot.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (26, 'ameblo.jp', 'Gutmann-Lockman', 'gharkessp@bandcamp.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (27, 'dropbox.com', 'Kutch-Hahn', 'eaveyardq@umn.edu', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (28, 'dedecms.com', 'Fay-Murphy', 'kyellowleesr@omniture.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (29, '1und1.de', 'Kohler, Ankunding and Doyle', 'darmells@drupal.org', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (30, 'webnode.com', 'Lueilwitz-McGlynn', 'akeeleyt@cyberchimps.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (31, 'prnewswire.com', 'Baumbach-Kemmer', 'ksucreu@imageshack.us', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (32, 'lycos.com', 'Rodriguez, Kassulke and Moore', 'ldallingv@phpbb.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (33, 't-online.de', 'Grimes Group', 'fjanotaw@odnoklassniki.ru', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (34, 'drupal.org', 'Schmitt Group', 'jhimsworthx@icio.us', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (35, 'mlb.com', 'Mohr-Huel', 'tcunliffey@geocities.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (36, 'uol.com.br', 'Mante, Simonis and Gusikowski', 'mgoodwinz@pcworld.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (37, 'utexas.edu', 'Upton LLC', 'hjoska10@theglobeandmail.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (38, 'infoseek.co.jp', 'Steuber-Pfannerstill', 'aalsina11@cpanel.net', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (39, 'imgur.com', 'Lockman, Baumbach and Cassin', 'cnassie12@diigo.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (40, 'list-manage.com', 'Kreiger-Bednar', 'rfretwell13@cnet.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (41, 'netscape.com', 'Lindgren, McLaughlin and Wisoky', 'xhealings14@pinterest.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (42, 'wikia.com', 'Ernser LLC', 'tdurrad15@dyndns.org', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (43, 'wordpress.org', 'Becker, Quigley and Grimes', 'awaulker16@360.cn', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (44, 'opensource.org', 'Hudson, Shields and Buckridge', 'cgussie17@blinklist.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (45, 'businessinsider.com', 'Schaden-Stanton', 'gmangon18@google.com.au', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (46, 'unicef.org', 'Wunsch and Sons', 'pbullock19@amazonaws.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (47, 'salon.com', 'Glover-Herzog', 'gvenney1a@dell.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (48, 'mac.com', 'Smitham-Konopelski', 'kpugsley1b@dailymail.co.uk', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (49, 'washingtonpost.com', 'Dickens-Rohan', 'nbartoloma1c@yellowpages.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (50, 'istockphoto.com', 'Nader Group', 'jletts1d@bbb.org', 'empty bio', 'empty vector');
-
-
-
 insert into Enterprises (id, name, type, emission_result, misc_emissions, country_id) values (1, 'EcoForward Enterprises', 'Lighting', .08932, 112, 20);
 insert into Enterprises (id, name, type, emission_result, misc_emissions, country_id) values (2, 'Koepp, Schoen and McKenzie', 'EDP Services', 0.07, 0.01432, 14);
 insert into Enterprises (id, name, type, emission_result, misc_emissions, country_id) values (3, 'Reinger-Tremblay', 'Telecommunications Equipment', 0.09559, 0.07182, 6);

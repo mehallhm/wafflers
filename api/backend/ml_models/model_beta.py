@@ -6,7 +6,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from scipy.sparse import csr_matrix
 
 
-def train(corpus: list[str]) -> tuple[TfidfVectorizer, csr_matrix]:
+def train(corpus: list[str]) -> tuple[csr_matrix, csr_matrix]:
     """
     Fits the vectorizer on the matrix, returning both the vectorizer and tf-idf
 
@@ -14,12 +14,19 @@ def train(corpus: list[str]) -> tuple[TfidfVectorizer, csr_matrix]:
     :returns: The fitted vectorizer and csr matrix
     """
     vectorizer = TfidfVectorizer(stop_words="english")
-    tfidf = vectorizer.fit_transform(corpus)
-    return vectorizer, tfidf
+    vectorizer.fit(corpus)
+
+    idf = vectorizer.idf_
+    vocabulary = vectorizer.vocabulary_
+    return idf, vocabulary
 
 
 def predict(
-    tfidf: csr_matrix, orgs: dict[str:str], query: str
+    idf: csr_matrix,
+    vocabulary: csr_matrix,
+    tfidf: csr_matrix,
+    orgs: dict[str:str],
+    query: str,
 ) -> tuple[list[dict[str:str]], list[float]]:
     """
     Returns both a list of the orgs and their match similarity for a given query
@@ -32,7 +39,11 @@ def predict(
     :returns: A tuple with a list of org dicts and list of similarity scores, sorted
         highest to lowest
     """
-    query_tfidf = TfidfVectorizer(stop_words="english").transform([query], tfidf)
+    vectorizer = TfidfVectorizer(stop_words="english")
+    vectorizer.idf_ = idf
+    vectorizer.vocabulary_ = vocabulary
+
+    query_tfidf = vectorizer.transform([query])
     cos_sim = cosine_similarity(query_tfidf, tfidf).flatten()
     sim_scores, sorted_orgs = (
         list(t) for t in zip(*sorted(zip(cos_sim, orgs), key=lambda x: x[0]))
