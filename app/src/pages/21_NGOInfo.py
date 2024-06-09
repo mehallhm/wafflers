@@ -11,15 +11,15 @@ SideBarLinks()
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.write("Logged in as:")
+    st.write("Logged In As:")
     st.write("NGO")
-    st.image('https://cdn-icons-png.freepik.com/256/3101/3101045.png?ga=GA1.1.1507691374.1717099387', width = 50)
+    st.image('assets/NGOicon.png', width = 50)
 
 st.write("# Account Info")
-st.write("## Edit your account info")
+st.write("### Edit Your Account Info")
 st.write('')
 
-NGO_name = st.text_input("NGO name")
+NGO_name = st.text_input("NGO Name")
 
 def is_valid_url_with_tld(url, tld_list):
     if not url.startswith(('http://', 'https://')):
@@ -32,7 +32,7 @@ def is_valid_url_with_tld(url, tld_list):
                 return True
     return False
 
-Website_link = st.text_input("Website link:")
+Website_link = st.text_input("Website Link:")
 
 if Website_link:
     if is_valid_url_with_tld(Website_link, ['.com', '.gov', '.net', '.org', '.tv', '.cz', '.jp', '.de', '.br', '.edu']):
@@ -40,13 +40,13 @@ if Website_link:
     else:
         st.error('Invalid URL or TLD')
 
-Contact_email = st.text_input("Head contact email:")
+Contact_email = st.text_input("Head Contact Email:")
 
 if Contact_email:
     if validators.email(Contact_email):
-        st.success('Valid email address!')
+        st.success('Valid Email Address!')
     else:
-        st.error('Invalid email address. Please enter a valid email.')
+        st.error('Invalid Email Address. Please Enter A Valid Email.')
 
 # Multiselect tags option
 # options = ["Transport", "Flights", "Energy", "Heat"]
@@ -69,26 +69,26 @@ if st.button("Submit"):
             response = requests.put(api_url, json=data)
             
             if response.status_code == 201 or response.status_code == 200:
-                st.success("Data successfully inserted!")
+                st.success("Data Successfully Inserted!")
             else:
                 try:
-                    error_message = response.json().get('error', 'No error message provided')
+                    error_message = response.json().get('error', 'No Error Message Provided')
                 except json.JSONDecodeError:
                     error_message = response.text  # Raw response if not JSON
                 
-                st.error(f"Failed to insert data. Status code: {response.status_code}, Error: {error_message}")
+                st.error(f"Failed To Insert Data. Status Code: {response.status_code}, Error: {error_message}")
         except Exception as e:
-            st.error(f"An error occurred: {e}")
+            st.error(f"An Error Occurred: {e}")
     else:
-        st.error("Please fill in all the fields before submitting and have valid emails/urls")
+        st.error("Please Fill In All The Fields Before Submitting And Have Valid Emails/Urls")
 
-st.write('## My current data')
+st.write('### My Current Data')
 
 data = {} 
 try:
     data = requests.get('http://api:4000/n/ngomine').json()
 except:
-    st.write("**Important**: Could not connect to sample api, so using dummy data.")
+    st.write("**Important**: Could Not Connect To Sample API, So Using Dummy Data.")
     data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
 
@@ -117,7 +117,7 @@ emoji_map = {
 
 tags = [tag["description"] for tag in data]
 
-selected = pills('Current tags', tags, [emoji_map[tag] for tag in tags])
+selected = pills('Current Tags', tags, [emoji_map[tag] for tag in tags])
 
 
 # st.dataframe(data)
@@ -130,7 +130,7 @@ with col1:
 
         options = ["Transport", "Flights", "Energy", "Heat"]
 
-        selected_tags = st.selectbox("Select your associated tags", options)
+        selected_tags = st.selectbox("Select Your Associated Tags", options)
 
         if st.button("Add Tags"):
             add_tags_api_url = "http://api:4000/n/NGOadd"
@@ -138,11 +138,11 @@ with col1:
             try:
                 response = requests.post(add_tags_api_url, json=tag_data)
                 if response.status_code == 200:
-                    st.success("Tags successfully added!")
+                    st.success("Tags Successfully Added!")
                 else:
-                    st.error(f"Failed to add tags. Status code: {response.status_code}")
+                    st.error(f"Failed To Add Tags. Status Code: {response.status_code}")
             except Exception as e:
-                st.error(f"An error occurred while adding tags: {e}")
+                st.error(f"An Error Occurred While Adding Tags: {e}")
 
     add_tags()
 
@@ -152,7 +152,7 @@ with col2:
 
         options = ["Transport", "Flights", "Energy", "Heat"]
 
-        selected_tag = st.selectbox("Select tags to delete", options)  
+        selected_tag = st.selectbox("Select Tags To Delete", options)  
 
         if st.button("Delete Tags"):
             delete_tags_api_url = "http://api:4000/n/TagDelete"
@@ -161,11 +161,11 @@ with col2:
             try:
                 response = requests.delete(delete_tags_api_url, json=tag_data)
                 if response.status_code == 200:
-                    st.success("Tags successfully deleted!")
+                    st.success("Tags Successfully Deleted!")
                 else:
-                    st.error(f"Failed to delete tags. Status code: {response.status_code}")
+                    st.error(f"Failed To Delete Tags. Status Code: {response.status_code}")
             except Exception as e:
-                st.error(f"An error occurred while deleting tags: {e}")
+                st.error(f"An Error Occurred While Deleting Tags: {e}")
 
     delete_tags()
 
