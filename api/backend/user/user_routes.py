@@ -1,3 +1,4 @@
+# this page defines routes needed for the user entity 
 from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from backend.db_connection import db
@@ -250,11 +251,8 @@ def get_usertags():
    """
     )
 
-    # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
     json_data = []
-
-    # fetch all the data from the cursor
     the_data = cursor.fetchall()
     for row in the_data:
         json_data.append(dict(zip(column_headers, row)))
