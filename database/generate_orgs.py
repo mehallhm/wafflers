@@ -1,12 +1,12 @@
 """
+Generates NGO starting data by scraping Wikipedia for actual organzation info. Also seeds
+the inital idf and vocabulary encodings
 """
 
-import io
 import requests
 from bs4 import BeautifulSoup
 from sklearn.feature_extraction.text import TfidfVectorizer
-from scipy.sparse import csr_matrix, save_npz
-import numpy as np
+from scipy.sparse import csr_matrix
 from faker import Faker
 
 
@@ -23,6 +23,7 @@ def clean_wiki_entry(entry: str) -> str:
     if references_index != -1:
         entry = entry[: references_index + len(key)]
 
+    # Cleans up tricky characters
     entry = entry.replace("\n", " ")
     entry = entry.replace("'", "")
 
@@ -30,7 +31,11 @@ def clean_wiki_entry(entry: str) -> str:
 
 
 def get_org_links() -> list[str]:
-    """ """
+    """
+    Gets links for environmental organizations from Wikipedia, with some basic filtering applied
+
+    :returns: A list of links NOTE: these are relative links from a root of `https://wikipedia.com`
+    """
     links_page = requests.get(
         "https://en.wikipedia.org/wiki/List_of_environmental_organizations"
     )
@@ -104,37 +109,35 @@ def generate_sql_state(sql_id, website, name, contact, bio, vectorized_bio) -> s
     return f"insert into NGO (id, website, name, contact, bio, vectorized_bio) values ({sql_id}, '{website}', '{name}', '{contact}', '{bio}', '{vectorized_bio}');"
 
 
-def sparse_matrix_to_string(sparse_matrix):
+def sparse_matrix_to_string(s_matrix) -> str:
     """
-    Converts a SciPy sparse matrix to a string representation.
+    converts a scipy sparse matrix to a string
 
-    Parameters:
-    sparse_matrix (scipy.sparse.spmatrix): The input sparse matrix.
-
-    Returns:
-    str: String representation of the sparse matrix.
+    :params s_matrix: the input sparse matrix
+    :returns: a string representation of the sparse matrix
     """
-    if not isinstance(sparse_matrix, csr_matrix):
+    if not isinstance(s_matrix, csr_matrix):
         raise ValueError("Input matrix must be a CSR (Compressed Sparse Row) matrix.")
 
-    rows, cols = sparse_matrix.shape
+    rows, cols = s_matrix.shape
     entries = []
 
-    # Get the row, col, and data arrays from the sparse matrix
-    row_indices, col_indices = sparse_matrix.nonzero()
-    data = sparse_matrix.data
+    row_indices, col_indices = s_matrix.nonzero()
+    data = s_matrix.data
 
-    # Iterate through the non-zero elements
-    for i in range(len(data)):
+    for i, val in enumerate(data):
         row = row_indices[i]
         col = col_indices[i]
-        value = data[i]
+        value = val
         entries.append(f"({row}, {col}, {value})")
 
     return f"SparseMatrix({rows}, {cols}, [{', '.join(entries)}])"
 
 
 def main():
+    """
+    Scrapes the articles, generating the appropriate SQL statements and saves them to a file
+    """
     fake = Faker()
     links = get_org_links()
     orgs = get_orgs(links)
@@ -154,10 +157,21 @@ def main():
         for i, org in enumerate(orgs)
     ]
 
+    idf = sparse_matrix_to_string(vectorizer.idf_)
+    vocabulary = sparse_matrix_to_string(vectorizer.vocabulary_)
+
     try:
         with open("output.sql", "w", encoding="UTF-8") as file:
+            # Save the first encondings
+            file.write(
+                f"INSERT INTO TFIDF_Encoding (vector, vocabulary) VALUES (1, {idf}, {vocabulary})"
+            )
+            file.write("\n")
+
+            # Save all the generated NGOs
             for statement in sql_statements:
                 file.write(statement + "\n")
+
     except Exception as e:
         print(f"An error occurred: {e}")
 
