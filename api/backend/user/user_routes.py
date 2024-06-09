@@ -117,25 +117,6 @@ def get_cars():
 
     return jsonify(json_data)
 
-# Get all the residential history for this user
-# @user.route('/UserAddCar', methods=['PUT'])
-# def add_car():
-#     current_app.logger.info('user_routes.py: PUT /UserAddCar')
-    
-#     received_data = request.json
-#     current_app.logger.info(received_data)
-
-#     fuel_type = received_data['fuel_type']
-#     fuel_used = received_data['fuel_used']
-    
-#     query = "UPDATE Cars SET emission_tags = 'car', fuel_type = %s, fuel_used = %s WHERE user_id = 1"
-
-#     data = (fuel_type, fuel_used)
-#     cursor = db.get_db().cursor()
-#     cursor.execute(query, data)
-#     db.get_db().commit()
-#     return "success"
-
 # Adds car survey data
 @user.route('/UserAddCar', methods=['POST'])
 def add_car():

@@ -6,6 +6,27 @@ from backend.db_connection import db
 ngo = Blueprint("ngo", __name__)
 current_id = 1
 
+# All of the NGO Data for use in the tfidf model
+@ngo.route('/NGOMatch', methods=['GET'])
+def get_ngo_match():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT name, vectorized_bio FROM NGO')
+    column_headers = [x[0] for x in cursor.description]
+    json_data = []
+    returned_data = cursor.fetchall()
+
+    for row in returned_data:
+        json_data.append(dict(zip(column_headers, row)))
+
+    names = []
+    vecs = []
+    for item in json_data: 
+        names.append(item['name'])
+        vecs.append(item['vectorized_bio'])
+
+    return jsonify({"names": names, "vecs": vecs})
+
+
 
 # Gets my ngo data
 @ngo.route("/ngomine", methods=["GET"])

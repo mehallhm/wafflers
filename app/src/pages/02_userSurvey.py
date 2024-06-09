@@ -91,3 +91,8 @@ if st.button("View Prediction"):
             and (res_response.status_code == 201 or res_response.status_code == 200) \
             and (pred_response.status_code == 201 or pred_response.status_code == 200):
             st.success("Successfully Predicted!")
+
+## HEY MICHAEL THIS IS FOR U
+# data = requests.get('http://api:4000/n/NGOMatch', timeout=100).json()
+# names = data['names']
+# vecs = data['vecs']
