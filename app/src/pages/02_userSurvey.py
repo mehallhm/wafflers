@@ -8,11 +8,14 @@ from streamlit_pills import pills
 # Show appropriate sidebar links for the role of the currently logged in user
 SideBarLinks()
 
+#header telling the user what to do 
 st.header("User Survey")
 st.write("##### Let's take a look at your Carbon Footprint!")
 st.write("Please complete the survey to the best of your ability.")
 
+#expandable section that is expanded by default 
 with st.expander("Residential Data", expanded=1):
+    #user input section 
     household_members = st.number_input("How many people live in your household?", 1, None, 2)
 
     electricity_usage = 0.0000036 * 12 * st.number_input("How much electricity does your household use per month (kWh)?", 0.0, None, 6320.0)
