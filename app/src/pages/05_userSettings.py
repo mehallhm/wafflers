@@ -103,8 +103,8 @@ if data:
     tags = [tag["description"] for tag in data]
     selected = pills("Current tags", tags, [EMOJI_MAP[tag] for tag in tags], index=None)
 else:
+    tags = []
     st.info("No tags available to display.")
-
 
 col1, col2 = st.columns(2)
 

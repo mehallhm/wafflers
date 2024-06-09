@@ -8,6 +8,7 @@ user = Blueprint("user", __name__)
 
 @user.route("/UserPrediction/", methods=["GET"])
 def predict_value():
+    '''Connection to ML: Predicts Carbon Footprint'''
     cursor = db.get_db().cursor()
 
     select_heating_query = """
@@ -51,30 +52,22 @@ def predict_value():
 def get_country_carbon():
     """returns the carbon of the user's country"""
     cursor = db.get_db().cursor()
-
     cursor.execute(
         "SELECT Country.* FROM Country JOIN User ON User.country_id = Country.id WHERE User.id = 1"
     )
-
     column_headers = [x[0] for x in cursor.description]
 
     json_data = []
-
     returned_data = cursor.fetchall()
-
     for row in returned_data:
         json_data.append(dict(zip(column_headers, row)))
-        
-    current_app.logger.info(jsonify(json_data))
-
-    current_app.logger.info(jsonify(json_data))
-
     return jsonify(json_data)
 
 
 # Get all the residential history for this user
 @user.route("/UserCountry", methods=["PUT"])
 def add_country():
+    '''Updates Country Data for this user'''
     current_app.logger.info("user_routes.py: PUT /UserCountry")
 
     recieved_data = request.json
@@ -94,6 +87,7 @@ def add_country():
 # Get all the cars history for this user
 @user.route("/UserCars", methods=["GET"])
 def get_cars():
+    '''Returns car data for this user'''
     cursor = db.get_db().cursor()
 
     cursor.execute("SELECT * FROM Cars WHERE Cars.user_id = 1")
@@ -113,6 +107,7 @@ def get_cars():
 # Adds car survey data
 @user.route("/UserAddCar", methods=["POST"])
 def add_car():
+    '''Adds car survey data to the database'''
     current_app.logger.info("user_routes.py: POST /UserAddCar")
 
     received_data = request.json
@@ -121,7 +116,8 @@ def add_car():
     fuel_type = received_data["fuel_type"]
     fuel_used = received_data["fuel_used"]
 
-    query = "INSERT INTO Cars (emission_tags, user_id, fuel_type, fuel_used) VALUES ('car', 1, %s, %s)"
+    query = "INSERT INTO Cars (emission_tags, user_id, fuel_type, \
+            fuel_used) VALUES ('car', 1, %s, %s)"
 
     data = (fuel_type, fuel_used)
     cursor = db.get_db().cursor()
@@ -133,6 +129,7 @@ def add_car():
 # Get all the residential history for this user
 @user.route("/UserResidential", methods=["GET"])
 def get_residential():
+    '''Returns residential data for this user'''
     cursor = db.get_db().cursor()
 
     cursor.execute("SELECT * FROM ResData WHERE ResData.user_id = 1")
@@ -152,6 +149,7 @@ def get_residential():
 # adding survey residential data
 @user.route("/UserAddRes", methods=["POST"])
 def add_residential():
+    '''Adds residential survey data to the database'''
     current_app.logger.info("user_routes.py: POST /UserAddRes")
 
     received_data = request.json
@@ -162,7 +160,8 @@ def add_residential():
     water_heating = received_data["water_heating"]
     cooking_gas = received_data["cooking_gas"]
 
-    query = "INSERT INTO ResData (emission_tags, elec_usage, heating, water_heating, cooking_gas, user_id) VALUES ('residential', %s, %s, %s, %s, 1)"
+    query = "INSERT INTO ResData (emission_tags, elec_usage, heating, water_heating, \
+            cooking_gas, user_id) VALUES ('residential', %s, %s, %s, %s, 1)"
 
     data = (elec_usage, heating, water_heating, cooking_gas)
     cursor = db.get_db().cursor()
@@ -175,42 +174,36 @@ def add_residential():
 def get_flights():
     """Get all the flight history for this user"""
     cursor = db.get_db().cursor()
-
     cursor.execute("SELECT * FROM Flight WHERE Flight.user_id = 1")
 
     column_headers = [x[0] for x in cursor.description]
-
     json_data = []
-
     returned_data = cursor.fetchall()
 
     for row in returned_data:
         json_data.append(dict(zip(column_headers, row)))
-
     return jsonify(json_data)
 
 
 # Get all the public transport history for this user
 @user.route("/UserTransport", methods=["GET"])
 def get_transport():
+    '''Get all the public transport history for this user'''
     cursor = db.get_db().cursor()
-
     cursor.execute("SELECT * FROM PublicTransport WHERE PublicTransport.user_id = 1")
 
     column_headers = [x[0] for x in cursor.description]
-
     json_data = []
-
     returned_data = cursor.fetchall()
 
     for row in returned_data:
         json_data.append(dict(zip(column_headers, row)))
-
     return jsonify(json_data)
 
 
 @user.route("/UserBio", methods=["GET"])
 def get_bio ():
+    '''Get the bio for this user'''
     cursor = db.get_db().cursor()
 
     cursor.execute("SELECT bio FROM User WHERE id = 1")
@@ -221,6 +214,7 @@ def get_bio ():
 # Updates match consent and bio for user
 @user.route("/UserUpdateInfo", methods=["PUT"])
 def update_user():
+    '''Update user info (consent and bio)'''
     current_app.logger.info("user.routes.py: PUT /UserUpdateInfo")
 
     received_data = request.json
@@ -236,13 +230,13 @@ def update_user():
     cursor = db.get_db().cursor()
     cursor.execute(query, data)
     db.get_db().commit()
-
     return "Success"
 
 
 # get this user's tags
 @user.route("/tags", methods=["GET"])
 def get_usertags():
+    '''Get all the tags for this user'''
     cursor = db.get_db().cursor()
     cursor.execute(
         """
@@ -258,17 +252,11 @@ def get_usertags():
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
-
-    # create an empty dictionary object to use in
-    # putting column headers together with data
     json_data = []
 
     # fetch all the data from the cursor
-    theData = cursor.fetchall()
-
-    # for each of the rows, zip the data elements together with
-    # the column headers.
-    for row in theData:
+    the_data = cursor.fetchall()
+    for row in the_data:
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
@@ -277,13 +265,13 @@ def get_usertags():
 # deletes selected tag for this user
 @user.route("/TagDelete", methods=["DELETE"])
 def delete_tags():
+    '''Deletes a tag from the user's tags'''
     current_app.logger.info("DELETE /user/TagDelete route")
 
     info = request.json
     tag_description = info.get("tag")
 
     cursor = db.get_db().cursor()
-
     select_query = """
         SELECT id FROM EmissionTags WHERE description = %s;
         """
@@ -312,6 +300,7 @@ def delete_tags():
 # adds selected tag for this user
 @user.route("/TagAdd", methods=["POST"])
 def add_tags():
+    '''Adds a tag to the user's tags'''
     current_app.logger.info("POST /user/TagAdd route")
 
     info = request.json

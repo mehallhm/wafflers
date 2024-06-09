@@ -45,8 +45,9 @@ emoji_map = {
 
 if data:
     tags = [tag["description"] for tag in data]
-    selected = pills("Current Tags", tags, [emoji_map[tag] for tag in tags])
+    selected = pills("Current tags", tags, [emoji_map[tag] for tag in tags], index=None)
 else:
+    tags = []
     st.info("No tags available to display.")
 
 col1, col2 = st.columns(2)
@@ -57,6 +58,7 @@ with col1:
         st.write("### Add New Enterprise Tags")
 
         options = ["Transport", "Flights", "Energy", "Heat"]
+        options = [option for option in options if option not in tags]
 
         selected_tags = st.selectbox("Select Your Associated Tags", options)
 
@@ -80,6 +82,7 @@ with col2:
         st.write("### Delete NGO Tags")
 
         options = ["Transport", "Flights", "Energy", "Heat"]
+        options = [option for option in options if option in tags]
 
         selected_tag = st.selectbox("Select Tags To Delete", options)
 
