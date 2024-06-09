@@ -122,7 +122,7 @@ st.write("#### That means your emissions are", round(multiplier, 2), "times the 
 # st.dataframe(data)
 
 
-st.write('### Display Enterprise Survey Result History')
+
 
 
 
@@ -141,18 +141,10 @@ except requests.exceptions.RequestException as e:
 if data:
     df = pd.DataFrame(data)
     
-    display_option = st.selectbox(
-        'Select how to display the data:',
-        ('View entire history', 'Show one history result at a time')
-    )
-
-    if display_option == 'View entire history':
-        st.dataframe(df)
-
-    elif display_option == 'Show one history result at a time':
-        for index, row in df.iterrows():
-            with st.expander(f"Result {index + 1}"):
-                st.write(row['emission_history'])
+    # Automatically display each history result in an expander
+    for index, row in df.iterrows():
+        with st.expander(f"Emission result {index + 1}"):
+            st.write(row['emission_history'])
 else:
     st.write("No data available to display.")
 
