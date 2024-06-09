@@ -108,7 +108,7 @@ def get_people() -> list[str]:
 
 
 def generate_sql_state(sql_id, website, name, contact, bio, vectorized_bio) -> str:
-    return f"insert into NGO (id, website, name, contact, bio, vectorized_bio) values ({sql_id}, '{website}', '{name}', '{contact}', '{bio}', '{vectorized_bio}');"
+    return f"INSERT INTO NGO (id, website, name, contact, bio, vectorized_bio) VALUES ({sql_id}, '{website}', '{name}', '{contact}', '{bio}', '{vectorized_bio}');"
 
 
 def sparse_matrix_to_string(s_matrix) -> str:
@@ -149,9 +149,9 @@ def main():
 
     sql_statements = [
         generate_sql_state(
-            i,
+            i + 1,
             f"https://en.wikipedia.org{links[i]}",
-            org["name"],
+            org["name"].replace("'", ""),
             fake.ascii_email(),
             org["text"],
             sparse_matrix_to_string(vectors[i]),
@@ -166,9 +166,10 @@ def main():
 
     try:
         with open("output.sql", "w", encoding="UTF-8") as file:
+            file.write("USE CarbonConnect;")
             # Save the first encondings
             file.write(
-                f"INSERT INTO TFIDF_Encoding (id, vector, vocabulary) VALUES (1, '{idf}', '{vocabulary}')"
+                f"INSERT INTO TFIDF_Encoding (id, vector, vocabulary) VALUES (1, '{idf}', '{vocabulary}');"
             )
             file.write("\n")
 

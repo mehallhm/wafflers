@@ -1,8 +1,9 @@
-from flask import Blueprint, request, jsonify, make_response, current_app
 import json
+from flask import Blueprint, request, jsonify, current_app
 from backend.db_connection import db
 from backend.ml_models.db_vector_helpers import stack_matrices, string_to_sparse_matrix
 from backend.ml_models.model_beta import predict
+import numpy as np
 
 
 ngo = Blueprint("ngo", __name__)
@@ -10,8 +11,13 @@ current_id = 1
 
 
 # All of the NGO Data for use in the tfidf model
-@ngo.route("/NGOMatch", methods=["GET"])
-def get_ngo_match():
+@ngo.route("/NGOMatch/<int:user_id>", methods=["GET"])
+def get_ngo_match(user_id):
+    """
+    Gets the NGOs that match to a particular user. Returns
+    """
+    matching_num = request.args.get("q")
+
     cursor = db.get_db().cursor()
     cursor.execute("SELECT name, vectorized_bio FROM NGO")
     column_headers = [x[0] for x in cursor.description]
@@ -20,9 +26,8 @@ def get_ngo_match():
 
     # Pull user bio from db
     bio_query = "SELECT User.bio FROM User WHERE User.id = %s"
-    cursor.execute(bio_query, current_id)
-    bio_row = cursor.fetchone()
-    bio = bio_row[0]
+    cursor.execute(bio_query, user_id)
+    bio = cursor.fetchone()[0]
 
     for row in returned_data:
         json_data.append(dict(zip(column_headers, row)))
@@ -33,26 +38,24 @@ def get_ngo_match():
         names.append(item["name"])
         vecs.append(item["vectorized_bio"])
 
-    csr = [string_to_sparse_matrix(v) for v in vecs]
-    tfidf = stack_matrices(csr)
-
     # Get the idf and vocab from db, parse into vec using `string_to_sparse_matrix`
     idf_query = "SELECT idf FROM TFIDF_Encoding ORDER BY id DESC LIMIT 1"
     cursor.execute(idf_query)
-    idf_row = cursor.fetchone()
-    idf_element = idf_row[0]
+    idf_element = cursor.fetchone()[0]
 
     vocabulary_query = "SELECT vocabulary FROM TFIDF_Encoding ORDER BY id DESC LIMIT 1"
     cursor.execute(vocabulary_query)
-    vocabulary_row = cursor.fetchone()
-    vocabulary_element = vocabulary_row[0]
+    vocabulary_element = cursor.fetchone()[0]
 
-    idf = string_to_sparse_matrix(idf_element)
-    vocabulary = string_to_sparse_matrix(vocabulary_element)
+    idf = np.fromstring(idf_element[1:-1], dtype=np.float64, sep=",")
+    vocabulary = json.loads(vocabulary_element)
 
-    orgs, similarity = predict(idf, vocabulary, tfidf, names, bio)
-    # ^ Orgs are a list of names in highest matching order, with the appropriate similarity score
-    # Should propbably return just the orgs to the user?
+    csr = [string_to_sparse_matrix(v) for v in vecs]
+    tfidf = stack_matrices(csr)
+
+    orgs, _ = predict(idf, vocabulary, tfidf, names, bio)
+
+    return jsonify(orgs[: int(matching_num)])
 
 
 # Gets my ngo data
