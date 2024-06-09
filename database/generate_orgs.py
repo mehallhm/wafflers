@@ -43,8 +43,9 @@ def get_org_links() -> list[str]:
     ]
 
     shortened_links = links[: links.index("/wiki/Woodland_Trust")]
+    parsed_links = [l for l in shortened_links if not ":" in l]
 
-    return shortened_links
+    return parsed_links
 
 
 def get_orgs(links: list[str]) -> list[dict[str:str]]:
@@ -56,9 +57,6 @@ def get_orgs(links: list[str]) -> list[dict[str:str]]:
 
     corpus = []
     for link in links:
-        # None of the good links have a `:`, only bad things do
-        if ":" in link:
-            continue
 
         res = requests.get(f"https://en.wikipedia.org{link}")
         soup = BeautifulSoup(res.text, features="html.parser")
@@ -147,7 +145,7 @@ def main():
     sql_statements = [
         generate_sql_state(
             i,
-            fake.domain_name(),
+            f"https://en.wikipedia.org{links[i]}",
             org["name"],
             fake.ascii_email(),
             org["text"],
