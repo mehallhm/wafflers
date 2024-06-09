@@ -30,42 +30,7 @@ with st.expander("Residential Data", expanded=1):
     st.write("Your Total Residential Usage (kWh): ", round(kWh_total, 2))
     st.write("That's equivalent to running a 60w lightbulb for ", round((kWh_total * 1000)/60), " hours!")
     
-    if st.button("Submit Residential Data"):
-        if household_members and electricity_usage and heating and water_heating and cooking_gas:
-            API_URL = "http://api:4000/u/UserAddRes"
-            data = {
-                "elec_usage": electricity_usage,
-                "heating": heating,
-                "water_heating": water_heating,
-                "cooking_gas": cooking_gas}
-            try:
-                response = requests.post(API_URL, json=data)
-                if response.status_code == 201 or response.status_code == 200:
-                        st.success("Data successfully inserted!")
-                else:
-                    try:
-                        error_message = response.json().get('error', 'No error message provided')
-                    except json.JSONDecodeError:
-                        error_message = response.text  # Raw response if not JSON
-                    
-                    st.error(f"Failed to insert data. Status code: {response.status_code}, Error: {error_message}")
-            except Exception as e:
-                st.error(f"An error occurred: {e}")
-        else:
-            st.error("Please fill in all the fields before submitting.")
-   
-# data = {} 
-# try:
-#   data = requests.get('http://api:4000/u/UserResidential').json()
-# except:
-#   st.write("**Important**: Could not connect to sample api, so using dummy data.")
-#   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
-# st.dataframe(data)
-
 with st.expander("Car Data", expanded=1):
-    
-    # numCars = st.number_input("How many cars do you own?", 0)
-    # if (numCars > 0): 
     fuel_type = st.select_slider(
          "Fuel Type",
         options=["Gasoline/Hybrid", "Diesel", "Electric"])
@@ -86,63 +51,43 @@ with st.expander("Car Data", expanded=1):
 
     elif (fuel_type == "Electric"):
         st.write("Please include charging data in residential data.")
-        
-    if st.button("Submit Car Data"):
-        if fuel_type and fuel_used:
-            API_URL = "http://api:4000/u/UserAddCar"
-            data = {
-                "fuel_type": fuel_type,
-                "fuel_used": fuel_used }
-            try: 
-                response = requests.post(API_URL, json=data)
-                if response.status_code == 201 or response.status_code == 200:
-                        st.success("Data successfully inserted!")
-                else:
-                    try:
-                        error_message = response.json().get('error', 'No error message provided')
-                    except json.JSONDecodeError:
-                        error_message = response.text  # Raw response if not JSON
-                    
-                    st.error(f"Failed to insert data. Status code: {response.status_code}, Error: {error_message}")
-            except Exception as e:
-                st.error(f"An error occurred: {e}")
-        else:
-            st.error("Please fill in all the fields before submitting.")
-   
-# # View Car Data   
-# data = {} 
-# try:
-#   data = requests.get('http://api:4000/u/UserCars').json()
-# except:
-#   st.write("**Important**: Could not connect to sample api, so using dummy data.")
-#   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
-
-# st.dataframe(data)
 
 if st.button("View Prediction"):
-    PRED_URL = "http://api:4000/u/UserPrediction/"
-    try: 
-        response = requests.get(PRED_URL, timeout=10)
-        responseJSON = response.json()
-        finalCarbon = responseJSON['result']
-        st.write("### Estimated Carbon Footprint (kgs of CO2 equivalent): ",
-                 round(finalCarbon * 1000000, 4))
-        country_response = requests.get("http://api:4000/u/UserCountryCarbon",
-                                        timeout=10).json()[0]['emissions']
-        # st.write("Total Country Carbon Emissions (ktons of CO2 equivalent): ", country_response)
-        st.write("#### Your Carbon Footprint is ",
-                 round(finalCarbon / country_response, 2), " times the average in your country")
+    country_data = requests.get("http://api:4000/u/UserCountryCarbon",
+                                    timeout=10).json()
+    country_name = country_data[0]['name']
+    country_response = country_data[0]['emissions']
+    
+    if household_members and electricity_usage and heating and water_heating and cooking_gas:
+        API_URL = "http://api:4000/u/UserAddRes"
+        data = {
+            "elec_usage": electricity_usage,
+            "heating": heating,
+            "water_heating": water_heating,
+            "cooking_gas": cooking_gas}
+        res_response = requests.post(API_URL, json=data, timeout=300)
         
-        if response.status_code == 201 or response.status_code == 200:
+    else:
+        st.error("Please fill in all the fields before submitting.")     
+        
+    API_URL = "http://api:4000/u/UserAddCar"
+    data = {
+        "fuel_type": fuel_type,
+        "fuel_used": fuel_used }
+    car_response = requests.post(API_URL, json=data, timeout=300)
+    
+    PRED_URL = "http://api:4000/u/UserPrediction/"
+    pred_response = requests.get(PRED_URL, timeout=10)
+    responseJSON = pred_response.json()
+    finalCarbon = responseJSON['result']
+    
+    with st.container(border=True): 
+        st.write("### Estimated Carbon Footprint \n #####" ,
+                round(finalCarbon * 1000000, 2), " kgs of CO2 equivalent")
+        st.write("##### Your Carbon Footprint is ",
+                round(finalCarbon / country_response, 2), " times the average person in ", country_name)
+        
+        if (car_response.status_code == 201 or car_response.status_code == 200) \
+            and (res_response.status_code == 201 or res_response.status_code == 200) \
+            and (pred_response.status_code == 201 or pred_response.status_code == 200):
             st.success("Successfully Predicted!")
-        else:
-            try:
-                error_message = response.json().get('error', 'No error message provided')
-            except json.JSONDecodeError:
-                error_message = response.text  # Raw response if not JSON
-            
-            st.error(f"Failed to insert data. Status code: {response.status_code}, Error: {error_message}")
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
-    
-    
