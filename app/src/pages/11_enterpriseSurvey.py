@@ -2,6 +2,7 @@ import streamlit as st
 from modules.nav import SideBarLinks
 import requests
 from streamlit_pills import pills
+import pandas as pd
 
 # Show appropriate sidebar links for the role of the currently logged in user
 SideBarLinks()
@@ -108,4 +109,42 @@ st.write('')
 
 st.write("#### In", country + ", your emissions in kilotonnes is ", round(your_emissions, 2), ", while the average enterprise's is ", round(avg_emission,2))
 st.write("#### That means your emissions are", round(multiplier, 2), "times the average enterprise's emissions in " + country)
+
+# st.write('### Display Enterprise Survey Result History')
+
+# data = {}
+
+# try:
+#     data = requests.get('http://api:4000/e/EnterpriseHistory', timeout=100).json()
+# except requests.exceptions.RequestException as e:
+#     st.error(f"An error occurred: {e}")
+
+# st.dataframe(data)
+
+
+
+
+
+
+
+st.write('### Enterprise Emission Result History')
+
+data = []
+
+try:
+    response = requests.get('http://api:4000/e/EnterpriseHistory', timeout=100)
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    st.error(f"An error occurred: {e}")
+
+if data:
+    df = pd.DataFrame(data)
+    
+    # Automatically display each history result in an expander
+    for index, row in df.iterrows():
+        with st.expander(f"Emission result {index + 1}"):
+            st.write(row['emission_history'])
+else:
+    st.write("No data available to display.")
 

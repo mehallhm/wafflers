@@ -202,3 +202,35 @@ def add_tags():
     db.get_db().commit()
 
     return jsonify({"message": "Success"}), 200
+
+
+@enterprises.route('/EnterpriseHistory', methods=['GET'])
+def get_history():
+    # get a cursor object from the database
+    cursor = db.get_db().cursor()
+
+    cursor.execute('''
+    SELECT emission_result AS emission_history
+    FROM Enterprises
+    WHERE Enterprises.id = 1
+    ''')
+
+   # grab the column headers from the returned data
+    column_headers = [x[0] for x in cursor.description]
+
+    # create an empty dictionary object to use in 
+    # putting column headers together with data
+    json_data = []
+
+    # fetch all the data from the cursor
+    theData = cursor.fetchall()
+    current_app.logger.info(theData)
+
+
+    # for each of the rows, zip the data elements together with
+    # the column headers. 
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+
+    return jsonify(json_data)
