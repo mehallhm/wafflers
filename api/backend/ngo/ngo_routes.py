@@ -105,14 +105,14 @@ def get_matches():
 
     cursor.execute(
         """
-   SELECT Enterprises.name, EmissionTags.description
+   SELECT DISTINCT Enterprises.name, EmissionTags.description
    FROM Enterprises
-   JOIN EntTags ON Enterprises.id = EntTags.enterprise_id
+   JOIN EntTags ON Enterprises.id = EntTags.enterprise_survey_id
    JOIN EmissionTags ON EntTags.tag_id = EmissionTags.id
    WHERE EmissionTags.id IN (
        SELECT tag_id
        FROM EntTags
-       WHERE EntTags.enterprise_id = 1
+       WHERE EntTags.enterprise_survey_id = 1
    );
 """
     )

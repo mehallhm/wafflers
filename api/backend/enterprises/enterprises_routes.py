@@ -22,7 +22,7 @@ def get_tags():
     WHERE EmissionTags.id IN (
         SELECT tag_id 
         FROM EntTags 
-        WHERE EntTags.enterprise_id = 1
+        WHERE EntTags.enterprise_survey_id = 1
     );
 ''')
     
@@ -58,7 +58,7 @@ def get_matches():
     WHERE EmissionTags.id IN (
         SELECT tag_id
         FROM EntTags
-        WHERE EntTags.enterprise_id = 1
+        WHERE EntTags.enterprise_survey_id = 1
     );
 ''')
     
@@ -91,7 +91,9 @@ def get_comparison():
                Country.name                     AS 'Country',
                (SELECT e2.emission_result
                 FROM Enterprises e2
-                WHERE e2.id = 1)                AS 'Your Emissions (in kilotonnes)'
+                WHERE e2.id = 1
+                ORDER BY e2.survey_id DESC
+                LIMIT 1)                AS 'Your Emissions (in kilotonnes)'
         FROM Enterprises
                  JOIN Country ON Enterprises.country_id = Country.id
         WHERE Country.name =
@@ -120,57 +122,83 @@ def get_comparison():
 
     return jsonify(json_data)
 
+# adds new survey entry to make new emission_result for enterprise
+@enterprises.route('/EntResult', methods=['POST'])
+def add_entry():
+    
+    received_data = request.json
+    current_app.logger.info(received_data)
 
-# Get all the supply chain history for this enterprise
-@enterprises.route('/EntSupplyChain', methods=['GET'])
-def get_supplychain():
+    emission = received_data['emission']
+    
+    query = "INSERT INTO Enterprises (id, name, type, emission_result, country_id) VALUES (1, 'EcoForward Enterprises', 'Lighting', %s, 20)"
+
+    data = (emission)
+    cursor = db.get_db().cursor()
+    cursor.execute(query, emission)
+    db.get_db().commit()
+    return "success"
+
+
+@enterprises.route("/TagDelete", methods=["DELETE"])
+def delete_tags():
+
+    info = request.json
+    tag_description = info.get("tag")
+
     cursor = db.get_db().cursor()
 
-    cursor.execute('SELECT * FROM SupplyChain WHERE SupplyChain.enterprise_id = 1')
+    select_query = """
+        SELECT id FROM EmissionTags WHERE description = %s;
+        """
+    cursor.execute(select_query, (tag_description,))
+    tag_row = cursor.fetchone()
+    current_app.logger.info(select_query)
 
-    column_headers = [x[0] for x in cursor.description]
+    if tag_row is None:
+        current_app.logger.info(f"Tag not found: {tag_description}")
+        return jsonify({"error": "Tag not found"}), 404
 
-    json_data = []
+    tag_id = tag_row[0]
 
-    theData = cursor.fetchall()
+    delete_query = """
+    DELETE FROM EntTags WHERE enterprise_survey_id = 1 AND tag_id = %s;
+    """
+    cursor.execute(delete_query, (tag_id,))
+    db.get_db().commit()
 
-    for row in theData:
-        json_data.append(dict(zip(column_headers, row)))
+    current_app.logger.info(
+        f"Successfully deleted tag: {tag_description} for Enterprise"
+    )
+    return "Success"
 
-    return jsonify(json_data)
 
-# Get all the operating cost history for this enterprise
-@enterprises.route('/EntCosts', methods=['GET'])
-def get_costs():
+@enterprises.route("/TagAdd", methods=["POST"])
+def add_tags():
+
+    info = request.json
+    tag_description = info.get("tag")
+
     cursor = db.get_db().cursor()
 
-    cursor.execute('SELECT * FROM operatingEmission WHERE operatingEmission.enterprise_id = 1')
+    select_query = """
+   SELECT
+       ET.id AS tag_id
+   FROM
+       EmissionTags ET
+   WHERE
+       ET.description = %s
+   """
+    cursor.execute(select_query, (tag_description,))
+    tag_row = cursor.fetchone()
 
-    column_headers = [x[0] for x in cursor.description]
+    if tag_row is None:
+        return jsonify({"error": "Tag not found"}), 404
 
-    json_data = []
+    new_tag_id = tag_row[0]
 
-    theData = cursor.fetchall()
+    insert_query = "INSERT INTO EntTags (enterprise_survey_id, tag_id) VALUES (1, %s)"
+    cursor.execute(insert_query, (new_tag_id,))
+    db.get_db().commit()
 
-    for row in theData:
-        json_data.append(dict(zip(column_headers, row)))
-
-    return jsonify(json_data)
-
-# Get all the flights history for this enterprise
-@enterprises.route('/EntFlights', methods=['GET'])
-def get_flights():
-    cursor = db.get_db().cursor()
-
-    cursor.execute('SELECT * FROM Flight WHERE Flight.enterprise_id = 1')
-
-    column_headers = [x[0] for x in cursor.description]
-
-    json_data = []
-
-    theData = cursor.fetchall()
-
-    for row in theData:
-        json_data.append(dict(zip(column_headers, row)))
-
-    return jsonify(json_data)
+    return jsonify({"message": "Success"}), 200
