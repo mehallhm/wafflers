@@ -52,4 +52,6 @@ Welcome to **Carbon Connect**, an app to help users, enterprises, and NGOs reduc
 
 ## License
 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 Thank you for using Carbon Connect!
