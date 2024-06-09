@@ -62,17 +62,17 @@ Make sure you have Docker installed on your machine. You can download Docker fro
 
 First, you need to build the Docker image from the Dockerfile. Navigate to the root directory of the project and run the following command:
 
-docker compose build
+**docker compose build**
 
 To stop or down the containers you can use the following commands:
 
-docker compose down
+**docker compose down**
 
-docker compose stop
+**docker compose stop**
 
 To start the containers you can use the following command:
 
-docker compose up -d
+**docker compose up -d**
 
 ## License
 
