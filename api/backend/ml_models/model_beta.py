@@ -46,6 +46,6 @@ def predict(
     query_tfidf = vectorizer.transform([query])
     cos_sim = cosine_similarity(query_tfidf, tfidf).flatten()
     sim_scores, sorted_orgs = (
-        list(t) for t in zip(*sorted(zip(cos_sim, orgs), key=lambda x: x[0]))
+        list(t)[::-1] for t in zip(*sorted(zip(cos_sim, orgs), key=lambda x: x[0]))
     )
     return sorted_orgs, sim_scores
