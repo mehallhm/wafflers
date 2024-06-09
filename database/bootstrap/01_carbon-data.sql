@@ -1,35 +1,35 @@
 USE CarbonConnect;
 
+INSERT INTO Country (id, emissions, name) VALUES (0, 74825.78 / 9121000, 'Austria');
 INSERT INTO Country (id, emissions, name) VALUES (1, 108871.68 / 11719000, 'Belgium');
 INSERT INTO Country (id, emissions, name) VALUES (2, 59082.72 / 6519789, 'Bulgaria');
-INSERT INTO Country (id, emissions, name) VALUES (3, 118500.35 / 10693939, 'Czechia');
-INSERT INTO Country (id, emissions, name) VALUES (4, 44243.3 / 5932000, 'Denmark');
-INSERT INTO Country (id, emissions, name) VALUES (5, 777380.09 / 83166711, 'Germany');
-INSERT INTO Country (id, emissions, name) VALUES (6, 14125.06 / 1331796, 'Estonia');
-INSERT INTO Country (id, emissions, name) VALUES (7, 63650.14 / 5158000, 'Ireland');
-INSERT INTO Country (id, emissions, name) VALUES (8, 82242.9 / 10384971, 'Greece');
-INSERT INTO Country (id, emissions, name) VALUES (9, 309286.15 / 47556000, 'Spain');
-INSERT INTO Country (id, emissions, name) VALUES (10, 409732.55 / 68075000, 'France');
-INSERT INTO Country (id, emissions, name) VALUES (11, 26258.1 / 3850000, 'Croatia');
-INSERT INTO Country (id, emissions, name) VALUES (12, 419467.07 / 58982000, 'Italy');
-INSERT INTO Country (id, emissions, name) VALUES (13, 9572.78 / 1231000, 'Cyprus');
-INSERT INTO Country (id, emissions, name) VALUES (14, 10568.91 / 1848837, 'Latvia');
-INSERT INTO Country (id, emissions, name) VALUES (15, 19249.2 / 2857000, 'Lithuania');
-INSERT INTO Country (id, emissions, name) VALUES (16, 10145.27 / 645397, 'Luxembourg');
-INSERT INTO Country (id, emissions, name) VALUES (17, 60331.72 / 9594214, 'Hungary');
+INSERT INTO Country (id, emissions, name) VALUES (3, 26258.1 / 3850000, 'Croatia');
+INSERT INTO Country (id, emissions, name) VALUES (4, 9572.78 / 1231000, 'Cyprus');
+INSERT INTO Country (id, emissions, name) VALUES (5, 118500.35 / 10693939, 'Czechia');
+INSERT INTO Country (id, emissions, name) VALUES (6, 44243.3 / 5932000, 'Denmark');
+INSERT INTO Country (id, emissions, name) VALUES (7, 14125.06 / 1331796, 'Estonia');
+INSERT INTO Country (id, emissions, name) VALUES (8, 47341.71 / 5548000, 'Finland');
+INSERT INTO Country (id, emissions, name) VALUES (9, 409732.55 / 68075000, 'France');
+INSERT INTO Country (id, emissions, name) VALUES (10, 777380.09 / 83166711, 'Germany');
+INSERT INTO Country (id, emissions, name) VALUES (11, 82242.9 / 10384971, 'Greece');
+INSERT INTO Country (id, emissions, name) VALUES (12, 60331.72 / 9594214, 'Hungary');
+INSERT INTO Country (id, emissions, name) VALUES (13, 63650.14 / 5158000, 'Ireland');
+INSERT INTO Country (id, emissions, name) VALUES (14, 419467.07 / 58982000, 'Italy');
+INSERT INTO Country (id, emissions, name) VALUES (15, 10568.91 / 1848837, 'Latvia');
+INSERT INTO Country (id, emissions, name) VALUES (16, 19249.2 / 2857000, 'Lithuania');
+INSERT INTO Country (id, emissions, name) VALUES (17, 10145.27 / 645397, 'Luxembourg');
 INSERT INTO Country (id, emissions, name) VALUES (18, 2647.72 / 514564, 'Malta');
 INSERT INTO Country (id, emissions, name) VALUES (19, 162999.6 / 17556000, 'Netherlands');
-INSERT INTO Country (id, emissions, name) VALUES (20, 74825.78 / 9121000, 'Austria');
-INSERT INTO Country (id, emissions, name) VALUES (21, 383434.04 / 37623000, 'Poland');
-INSERT INTO Country (id, emissions, name) VALUES (22, 60581.36 / 10352042, 'Portugal');
-INSERT INTO Country (id, emissions, name) VALUES (23, 109992.76 / 18979000, 'Romania');
+INSERT INTO Country (id, emissions, name) VALUES (20, 383434.04 / 37623000, 'Poland');
+INSERT INTO Country (id, emissions, name) VALUES (21, 60581.36 / 10352042, 'Portugal');
+INSERT INTO Country (id, emissions, name) VALUES (22, 109992.76 / 18979000, 'Romania');
+INSERT INTO Country (id, emissions, name) VALUES (23, 37183.78 / 5404322, 'Slovakia');
 INSERT INTO Country (id, emissions, name) VALUES (24, 15676.64 / 2100000, 'Slovenia');
-INSERT INTO Country (id, emissions, name) VALUES (25, 37183.78 / 5404322, 'Slovakia');
-INSERT INTO Country (id, emissions, name) VALUES (26, 47341.71 / 5548000, 'Finland');
-INSERT INTO Country (id, emissions, name) VALUES (27, 47074.61 / 10540725, 'Sweden');
-INSERT INTO Country (id, emissions, name) VALUES (28, 5402.55 / 376248, 'Iceland');
-INSERT INTO Country (id, emissions, name) VALUES (29, 50255.43 / 5488984, 'Norway');
-INSERT INTO Country (id, emissions, name) VALUES (30, 45847.17 / 8803000, 'Switzerland');
+INSERT INTO Country (id, emissions, name) VALUES (25, 309286.15 / 47556000, 'Spain');
+INSERT INTO Country (id, emissions, name) VALUES (26, 47074.61 / 10540725, 'Sweden');
+INSERT INTO Country (id, emissions, name) VALUES (27, 5402.55 / 376248, 'Iceland');
+INSERT INTO Country (id, emissions, name) VALUES (28, 50255.43 / 5488984, 'Norway');
+INSERT INTO Country (id, emissions, name) VALUES (29, 45847.17 / 8803000, 'Switzerland');
 
 
 INSERT INTO EmissionTags (id, description) VALUES
@@ -37,57 +37,6 @@ INSERT INTO EmissionTags (id, description) VALUES
 (2, 'Flights'),
 (3, 'Energy'),
 (4, 'Heat');
-
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (1, 'EcoUnity.com', 'EcoUnity Europe', 'Joe@EcoUnity.org', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (2, 'seesaa.net', 'Grimes, Fahey and Mertz', 'rattlee1@accuweather.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (3, 'fema.gov', 'Terry-Witting', 'sdand2@angelfire.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (4, 'twitpic.com', 'Kub-Anderson', 'swilson3@pinterest.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (5, 'netvibes.com', 'Bosco, Davis and Feil', 'baspinal4@example.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (6, 'pbs.org', 'Morar LLC', 'lwagg5@answers.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (7, 'bloglovin.com', 'Macejkovic-Ebert', 'rmushett6@pbs.org', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (8, 'fda.gov', 'Cormier, Ratke and Koelpin', 'weakins7@wordpress.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (9, 'ustream.tv', 'Becker-Brakus', 'mchislett8@imdb.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (10, 'elegantthemes.com', 'Miller-O''Conner', 'pchrippes9@auda.org.au', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (11, 'ezinearticles.com', 'Hirthe-Emmerich', 'kmillionsa@tamu.edu', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (12, 'simplemachines.org', 'Jacobson, Torphy and Strosin', 'sgowanlockb@nature.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (13, 'bigcartel.com', 'Waters, Legros and Toy', 'npirdyc@sphinn.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (14, 'apple.com', 'Ortiz, Pollich and Jerde', 'tiversd@wp.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (15, 'slashdot.org', 'Corwin-Shields', 'bbeechcrafte@google.com.br', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (16, 'networksolutions.com', 'Zieme, Bergstrom and Schultz', 'srowswellf@moonfruit.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (17, 'un.org', 'Hand-Schroeder', 'rtimbridgeg@mayoclinic.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (18, 'phoca.cz', 'Feest-Armstrong', 'tionnh@slashdot.org', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (19, 'blogspot.com', 'Rice Inc', 'struelocki@mtv.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (20, 'businessinsider.com', 'Marks Group', 'brothamj@addtoany.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (21, 'hud.gov', 'Barrows Inc', 'elownesk@gizmodo.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (22, 'goodreads.com', 'Deckow-Adams', 'sbrowettl@blogspot.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (23, 'homestead.com', 'Brekke, Hauck and Buckridge', 'cjeevesm@japanpost.jp', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (24, 'blogtalkradio.com', 'Hackett Inc', 'skerrichn@nih.gov', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (25, 'economist.com', 'Veum and Sons', 'jphilbrooko@blogspot.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (26, 'ameblo.jp', 'Gutmann-Lockman', 'gharkessp@bandcamp.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (27, 'dropbox.com', 'Kutch-Hahn', 'eaveyardq@umn.edu', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (28, 'dedecms.com', 'Fay-Murphy', 'kyellowleesr@omniture.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (29, '1und1.de', 'Kohler, Ankunding and Doyle', 'darmells@drupal.org', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (30, 'webnode.com', 'Lueilwitz-McGlynn', 'akeeleyt@cyberchimps.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (31, 'prnewswire.com', 'Baumbach-Kemmer', 'ksucreu@imageshack.us', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (32, 'lycos.com', 'Rodriguez, Kassulke and Moore', 'ldallingv@phpbb.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (33, 't-online.de', 'Grimes Group', 'fjanotaw@odnoklassniki.ru', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (34, 'drupal.org', 'Schmitt Group', 'jhimsworthx@icio.us', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (35, 'mlb.com', 'Mohr-Huel', 'tcunliffey@geocities.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (36, 'uol.com.br', 'Mante, Simonis and Gusikowski', 'mgoodwinz@pcworld.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (37, 'utexas.edu', 'Upton LLC', 'hjoska10@theglobeandmail.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (38, 'infoseek.co.jp', 'Steuber-Pfannerstill', 'aalsina11@cpanel.net', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (39, 'imgur.com', 'Lockman, Baumbach and Cassin', 'cnassie12@diigo.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (40, 'list-manage.com', 'Kreiger-Bednar', 'rfretwell13@cnet.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (41, 'netscape.com', 'Lindgren, McLaughlin and Wisoky', 'xhealings14@pinterest.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (42, 'wikia.com', 'Ernser LLC', 'tdurrad15@dyndns.org', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (43, 'wordpress.org', 'Becker, Quigley and Grimes', 'awaulker16@360.cn', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (44, 'opensource.org', 'Hudson, Shields and Buckridge', 'cgussie17@blinklist.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (45, 'businessinsider.com', 'Schaden-Stanton', 'gmangon18@google.com.au', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (46, 'unicef.org', 'Wunsch and Sons', 'pbullock19@amazonaws.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (47, 'salon.com', 'Glover-Herzog', 'gvenney1a@dell.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (48, 'mac.com', 'Smitham-Konopelski', 'kpugsley1b@dailymail.co.uk', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (49, 'washingtonpost.com', 'Dickens-Rohan', 'nbartoloma1c@yellowpages.com', 'empty bio', 'empty vector');
-insert into NGO (id, website, name, contact, bio, vectorized_bio) values (50, 'istockphoto.com', 'Nader Group', 'jletts1d@bbb.org', 'empty bio', 'empty vector');
 
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (1, 1, 'EcoForward Enterprises', 'Lighting', .08932, 20);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (2, 1, 'EcoForward Enterprises', 'Lighting', .09332, 20);
@@ -106,13 +55,13 @@ insert into Enterprises (survey_id, id, name, type, emission_result, country_id)
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (15, 15, 'Hessel-Rowe', 'Biotechnology: Biological Products (No Diagnostic Substances)', 0.04416, 17);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (16, 16, 'Spinka, Ziemann and Cronin', 'n/a', 0.04827, 16);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (17, 17, 'Jenkins, Pagac and Gibson', 'n/a', 0.02494, 7);
-insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (18, 18, 'Boyer-Heller', 'Package Goods/Cosmetics', 0.08924, 30);
+insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (18, 18, 'Boyer-Heller', 'Package Goods/Cosmetics', 0.08924, 25);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (19, 19, 'Morissette Group', 'Major Banks', 0.03168, 18);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (20, 20, 'Little, Hintz and Blanda', 'n/a', 0.07561, 25);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (21, 21, 'Kuhlman-Vandervort', 'Telecommunications Equipment', 0.05408, 22);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (22, 22, 'Harvey, Mann and Carter', 'Major Pharmaceuticals', 0.05748, 2);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (23, 23, 'Bruen, Beier and Bins', 'Apparel', 0.04154, 17);
-insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (24, 24, 'Keebler and Sons', 'Specialty Chemicals', 0.07983, 30);
+insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (24, 24, 'Keebler and Sons', 'Specialty Chemicals', 0.07983, 2);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (25, 25, 'Turcotte, Baumbach and Cruickshank', 'Oil & Gas Production', 0.07671, 26);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (26, 26, 'Kozey Inc', 'Major Pharmaceuticals', 0.04877, 14);
 insert into Enterprises (survey_id, id, name, type, emission_result, country_id) values (27, 27, 'Pagac, Stiedemann and Cormier', 'Major Pharmaceuticals', 0.08622, 16);
@@ -157,7 +106,7 @@ VALUES
 (13, 0.00384, 8, 'hkinsleyc@cbsnews.com', true, 'Horst', 'empty bio', 'empty vector'),
 (14, 0.0107, 5, 'scuestad@smh.com.au', true, 'Sarge', 'empty bio', 'empty vector'),
 (15, 0.00623, 13, 'vmaffullie@marriott.com', false, 'Verla', 'empty bio', 'empty vector'),
-(16, 0.0078, 30, 'bprewf@intel.com', false, 'Braden', 'empty bio', 'empty vector'),
+(16, 0.0078, 20, 'bprewf@intel.com', false, 'Braden', 'empty bio', 'empty vector'),
 (17, 0.01114, 5, 'sshimukg@dedecms.com', true, 'Sharla', 'empty bio', 'empty vector'),
 (18, 0.00447, 25, 'frothamh@archive.org', false, 'Fanechka', 'empty bio', 'empty vector'),
 (19, 0.0112, 1, 'gsteersi@alibaba.com', false, 'Gregory', 'empty bio', 'empty vector'),
@@ -272,102 +221,7 @@ insert into EntTags (enterprise_survey_id, tag_id) values (23, 1);
 insert into EntTags (enterprise_survey_id, tag_id) values (15, 4);
 
 
-insert into NGOTags (ngo_id, tag_id) values (32, 3);
-insert into NGOTags (ngo_id, tag_id) values (29, 1);
-insert into NGOTags (ngo_id, tag_id) values (9, 1);
-insert into NGOTags (ngo_id, tag_id) values (34, 3);
-insert into NGOTags (ngo_id, tag_id) values (22, 4);
-insert into NGOTags (ngo_id, tag_id) values (17, 3);
-insert into NGOTags (ngo_id, tag_id) values (6, 3);
-insert into NGOTags (ngo_id, tag_id) values (2, 1);
-insert into NGOTags (ngo_id, tag_id) values (17, 2);
-insert into NGOTags (ngo_id, tag_id) values (41, 4);
-insert into NGOTags (ngo_id, tag_id) values (21, 4);
-insert into NGOTags (ngo_id, tag_id) values (40, 4);
-insert into NGOTags (ngo_id, tag_id) values (30, 3);
-insert into NGOTags (ngo_id, tag_id) values (15, 2);
-insert into NGOTags (ngo_id, tag_id) values (25, 4);
-insert into NGOTags (ngo_id, tag_id) values (44, 1);
-insert into NGOTags (ngo_id, tag_id) values (33, 4);
-insert into NGOTags (ngo_id, tag_id) values (37, 4);
-insert into NGOTags (ngo_id, tag_id) values (22, 2);
-insert into NGOTags (ngo_id, tag_id) values (22, 3);
-insert into NGOTags (ngo_id, tag_id) values (9, 2);
-insert into NGOTags (ngo_id, tag_id) values (46, 1);
-insert into NGOTags (ngo_id, tag_id) values (12, 1);
-insert into NGOTags (ngo_id, tag_id) values (43, 3);
-insert into NGOTags (ngo_id, tag_id) values (27, 4);
-insert into NGOTags (ngo_id, tag_id) values (24, 2);
-insert into NGOTags (ngo_id, tag_id) values (44, 3);
-insert into NGOTags (ngo_id, tag_id) values (11, 4);
-insert into NGOTags (ngo_id, tag_id) values (1, 4);
-insert into NGOTags (ngo_id, tag_id) values (18, 1);
-insert into NGOTags (ngo_id, tag_id) values (39, 2);
-insert into NGOTags (ngo_id, tag_id) values (10, 2);
-insert into NGOTags (ngo_id, tag_id) values (38, 2);
-insert into NGOTags (ngo_id, tag_id) values (31, 3);
-insert into NGOTags (ngo_id, tag_id) values (50, 2);
-insert into NGOTags (ngo_id, tag_id) values (30, 4);
-insert into NGOTags (ngo_id, tag_id) values (37, 2);
-insert into NGOTags (ngo_id, tag_id) values (42, 3);
-insert into NGOTags (ngo_id, tag_id) values (35, 3);
-insert into NGOTags (ngo_id, tag_id) values (8, 3);
-insert into NGOTags (ngo_id, tag_id) values (20, 4);
-insert into NGOTags (ngo_id, tag_id) values (45, 3);
-insert into NGOTags (ngo_id, tag_id) values (23, 3);
-insert into NGOTags (ngo_id, tag_id) values (5, 1);
-insert into NGOTags (ngo_id, tag_id) values (38, 1);
-insert into NGOTags (ngo_id, tag_id) values (15, 4);
-insert into NGOTags (ngo_id, tag_id) values (38, 4);
-insert into NGOTags (ngo_id, tag_id) values (49, 2);
-insert into NGOTags (ngo_id, tag_id) values (36, 1);
-insert into NGOTags (ngo_id, tag_id) values (13, 1);
-insert into NGOTags (ngo_id, tag_id) values (28, 1);
-insert into NGOTags (ngo_id, tag_id) values (43, 4);
-insert into NGOTags (ngo_id, tag_id) values (36, 2);
-insert into NGOTags (ngo_id, tag_id) values (33, 3);
-insert into NGOTags (ngo_id, tag_id) values (14, 2);
-insert into NGOTags (ngo_id, tag_id) values (4, 2);
-insert into NGOTags (ngo_id, tag_id) values (50, 4);
-insert into NGOTags (ngo_id, tag_id) values (16, 4);
-insert into NGOTags (ngo_id, tag_id) values (47, 1);
-insert into NGOTags (ngo_id, tag_id) values (48, 3);
-insert into NGOTags (ngo_id, tag_id) values (1, 3);
-insert into NGOTags (ngo_id, tag_id) values (26, 3);
-insert into NGOTags (ngo_id, tag_id) values (42, 1);
-insert into NGOTags (ngo_id, tag_id) values (19, 1);
-insert into NGOTags (ngo_id, tag_id) values (20, 3);
-insert into NGOTags (ngo_id, tag_id) values (7, 4);
-insert into NGOTags (ngo_id, tag_id) values (18, 4);
-insert into NGOTags (ngo_id, tag_id) values (3, 2);
-insert into NGOTags (ngo_id, tag_id) values (14, 4);
-insert into NGOTags (ngo_id, tag_id) values (47, 4);
-insert into NGOTags (ngo_id, tag_id) values (12, 2);
-insert into NGOTags (ngo_id, tag_id) values (31, 1);
-insert into NGOTags (ngo_id, tag_id) values (7, 2);
-insert into NGOTags (ngo_id, tag_id) values (34, 1);
-insert into NGOTags (ngo_id, tag_id) values (8, 1);
-insert into NGOTags (ngo_id, tag_id) values (50, 1);
-insert into NGOTags (ngo_id, tag_id) values (37, 3);
-insert into NGOTags (ngo_id, tag_id) values (13, 3);
-insert into NGOTags (ngo_id, tag_id) values (35, 4);
-insert into NGOTags (ngo_id, tag_id) values (41, 2);
-insert into NGOTags (ngo_id, tag_id) values (10, 4);
-insert into NGOTags (ngo_id, tag_id) values (25, 1);
-insert into NGOTags (ngo_id, tag_id) values (48, 4);
-insert into NGOTags (ngo_id, tag_id) values (24, 4);
-insert into NGOTags (ngo_id, tag_id) values (2, 4);
-insert into NGOTags (ngo_id, tag_id) values (19, 4);
-insert into NGOTags (ngo_id, tag_id) values (5, 4);
-insert into NGOTags (ngo_id, tag_id) values (28, 4);
-insert into NGOTags (ngo_id, tag_id) values (12, 4);
-insert into NGOTags (ngo_id, tag_id) values (3, 1);
-insert into NGOTags (ngo_id, tag_id) values (6, 4);
-insert into NGOTags (ngo_id, tag_id) values (43, 1);
-insert into NGOTags (ngo_id, tag_id) values (39, 4);
-insert into NGOTags (ngo_id, tag_id) values (23, 4);
-insert into NGOTags (ngo_id, tag_id) values (26, 1);
-insert into NGOTags (ngo_id, tag_id) values (4, 3);
+
 
 insert into UserTags (user_id, tag_id) values (5, 1);
 insert into UserTags (user_id, tag_id) values (33, 3);

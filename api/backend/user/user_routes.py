@@ -53,7 +53,7 @@ def get_country_carbon():
     cursor = db.get_db().cursor()
 
     cursor.execute(
-        "SELECT Country.emissions, Country.name FROM User JOIN Country ON User.country_id = Country.id WHERE User.id = 1"
+        "SELECT Country.* FROM Country JOIN User ON User.country_id = Country.id WHERE User.id = 1"
     )
 
     column_headers = [x[0] for x in cursor.description]
@@ -64,6 +64,10 @@ def get_country_carbon():
 
     for row in returned_data:
         json_data.append(dict(zip(column_headers, row)))
+        
+    current_app.logger.info(jsonify(json_data))
+
+    current_app.logger.info(jsonify(json_data))
 
     return jsonify(json_data)
 
@@ -104,26 +108,6 @@ def get_cars():
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
-
-
-# Get all the residential history for this user
-# @user.route('/UserAddCar', methods=['PUT'])
-# def add_car():
-#     current_app.logger.info('user_routes.py: PUT /UserAddCar')
-
-#     received_data = request.json
-#     current_app.logger.info(received_data)
-
-#     fuel_type = received_data['fuel_type']
-#     fuel_used = received_data['fuel_used']
-
-#     query = "UPDATE Cars SET emission_tags = 'car', fuel_type = %s, fuel_used = %s WHERE user_id = 1"
-
-#     data = (fuel_type, fuel_used)
-#     cursor = db.get_db().cursor()
-#     cursor.execute(query, data)
-#     db.get_db().commit()
-#     return "success"
 
 
 # Adds car survey data
@@ -224,6 +208,15 @@ def get_transport():
 
     return jsonify(json_data)
 
+
+@user.route("/UserBio", methods=["GET"])
+def get_bio ():
+    cursor = db.get_db().cursor()
+
+    cursor.execute("SELECT bio FROM User WHERE id = 1")
+    bio = cursor.fetchone()[0]
+
+    return jsonify({"bio": bio})
 
 # Updates match consent and bio for user
 @user.route("/UserUpdateInfo", methods=["PUT"])
