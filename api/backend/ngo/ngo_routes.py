@@ -5,16 +5,14 @@ from backend.ml_models.db_vector_helpers import stack_matrices, string_to_sparse
 from backend.ml_models.model_beta import predict
 import numpy as np
 
-
 ngo = Blueprint("ngo", __name__)
-current_id = 1
+CURRENT_ID = 1
 
 
-# All the NGO Data for use in the tfidf model
 @ngo.route("/NGOMatch/<int:user_id>", methods=["GET"])
 def get_ngo_match(user_id):
     """
-    Gets the NGOs that match to a particular user. Returns
+    All the NGO Data for use in the tfidf model. Matches Users.
     """
     matching_num = request.args.get("q")
 
@@ -64,9 +62,9 @@ def get_ngo_match(user_id):
     return jsonify(orgs[: int(matching_num)])
 
 
-# Gets my ngo data
-@ngo.route("/ngomine", methods=["GET"])
+@ngo.route("/NGOMine", methods=["GET"])
 def get_mine():
+    '''Gets my ngo data'''
     cursor = db.get_db().cursor()
 
     cursor.execute("SELECT * FROM NGO WHERE id = 1")
@@ -75,18 +73,18 @@ def get_mine():
 
     json_data = []
 
-    theData = cursor.fetchall()
+    the_data = cursor.fetchall()
 
-    for row in theData:
+    for row in the_data:
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
 
 
-# updates an ngo to the NGO table given filled out data
-@ngo.route("/NGOupdate", methods=["PUT"])
+@ngo.route("/NGOUpdate", methods=["PUT"])
 def add_new_NGO():
-    current_app.logger.info("ngo_routes.py: POST /NGOadd")
+    '''updates an org to the NGO table given filled out data'''
+    current_app.logger.info("ngo_routes.py: POST /NGOAdd")
 
     recieved_data = request.json
     current_app.logger.info(recieved_data)
@@ -122,7 +120,7 @@ def add_new_NGO():
 
 @ngo.route("/tags", methods=["GET"])
 def get_tags():
-    # get a cursor object from the database
+    '''get a cursor object from the database'''
     cursor = db.get_db().cursor()
     cursor.execute(
         """
@@ -144,11 +142,11 @@ def get_tags():
     json_data = []
 
     # fetch all the data from the cursor
-    theData = cursor.fetchall()
+    the_data = cursor.fetchall()
 
     # for each of the rows, zip the data elements together with
     # the column headers.
-    for row in theData:
+    for row in the_data:
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
@@ -157,7 +155,7 @@ def get_tags():
 # get all of the matching Enterprises based on tags
 @ngo.route("/EnterpriseMatch", methods=["GET"])
 def get_matches():
-    # get a cursor object from the database
+    '''get a cursor object from the database'''
     cursor = db.get_db().cursor()
 
     cursor.execute(
@@ -182,18 +180,19 @@ def get_matches():
     json_data = []
 
     # fetch all the data from the cursor
-    theData = cursor.fetchall()
+    the_data = cursor.fetchall()
 
     # for each of the rows, zip the data elements together with
     # the column headers.
-    for row in theData:
+    for row in the_data:
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
 
 
-@ngo.route("/NGOadd", methods=["POST"])
+@ngo.route("/NGOAdd", methods=["POST"])
 def add_tags():
+    '''Adds a tag to the NGO's tags'''
     current_app.logger.info("POST /ngo/tags route")
 
     info = request.json
@@ -226,6 +225,7 @@ def add_tags():
 
 @ngo.route("/TagDelete", methods=["DELETE"])
 def delete_tags():
+    '''Deletes a tag from the NGO's tags'''
     current_app.logger.info("DELETE /ngo/tags route")
 
     info = request.json
@@ -259,6 +259,7 @@ def delete_tags():
 # get all of the matching users based on tags
 @ngo.route("/UserMatch", methods=["GET"])
 def get_usermatches():
+    '''Gets all the users that match the NGO based on tags'''
     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
@@ -284,11 +285,11 @@ def get_usermatches():
     json_data = []
 
     # fetch all the data from the cursor
-    theData = cursor.fetchall()
+    the_data = cursor.fetchall()
 
     # for each of the rows, zip the data elements together with
     # the column headers.
-    for row in theData:
+    for row in the_data:
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)

@@ -15,8 +15,8 @@ def side_bar_links():
     """
 
     # add a logo to the sidebar always
-    st.sidebar.image("assets/thin-logo.png", width=150)
-    # If there is no logged in user, redirect to the Home (Landing) page
+    st.sidebar.image("assets/thin-logo.png", width=190)
+    # If there is no logged in user, redirect to the Home(Landing) page
     if "authenticated" not in st.session_state:
         st.session_state.authenticated = False
         st.switch_page("App.py")
