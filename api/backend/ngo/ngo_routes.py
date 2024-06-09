@@ -247,7 +247,7 @@ def delete_tags():
     db.get_db().commit()
 
     current_app.logger.info(
-        f"Successfully deleted tag: {tag_description} for NGO ID: {ngo_id}"
+        f"Successfully deleted tag: {tag_description} for NGO"
     )
     return "Success"
 
