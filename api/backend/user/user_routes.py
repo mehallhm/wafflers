@@ -3,69 +3,58 @@ import json
 from backend.db_connection import db
 from backend.ml_models.model_alpha import predict, train
 
-user = Blueprint('user', __name__)
+user = Blueprint("user", __name__)
 
-@user.route('/UserPrediction/', methods=['GET'])
+
+@user.route("/UserPrediction/", methods=["GET"])
 def predict_value():
     cursor = db.get_db().cursor()
-    
-    select_heating_query = '''
+
+    select_heating_query = """
         SELECT heating FROM ResData;
-    '''
+    """
     cursor.execute(select_heating_query)
     heating = cursor.fetchone()[0]
     current_app.logger.info("THIS IS HEATING", heating)
-    
-    # select_water_query = '''
-    #     SELECT water_heating FROM ResData WHERE user_id = 1;
-    # '''
-    # cursor.execute(select_water_query)
-    # water_heating = cursor.fetchone()[0]
-    # current_app.logger.info(select_water_query)
-    
-    # select_cooking_query = '''
-    #     SELECT cooking_gas FROM ResData WHERE user_id = 1;
-    # '''
-    # cursor.execute(select_cooking_query)
-    # cooking_gas = cursor.fetchone()[0]
-    # current_app.logger.info(select_cooking_query)
-    
-    select_car_query = '''
+
+    select_car_query = """
         SELECT fuel_used FROM Cars WHERE user_id = 1;
-    '''
+    """
     cursor.execute(select_car_query)
     fuel_used = cursor.fetchone()[0]
     current_app.logger.info(select_car_query)
-    
-    select_beta_query = '''
+
+    select_beta_query = """
         SELECT user_values FROM Beta_User ORDER BY id DESC LIMIT 1;
-        '''
-    
+        """
+
     cursor.execute(select_beta_query)
-    betaValue = cursor.fetchone()[0].split(', ')
+    beta_val = cursor.fetchone()[0].split(", ")
     current_app.logger.info(select_beta_query)
-    
-    if betaValue is None:
-        current_app.logger.info(f'Beta Value not Found: {betaValue}')
+
+    if beta_val is None:
+        current_app.logger.info(f"Beta Value not Found: {beta_val}")
         return jsonify({"error": "BV not found"}), 404
-    
+
     feats = [heating, fuel_used]
-    returnVal = predict(feats, betaValue)
-    return_dict = {'result': returnVal}
+    return_val = predict(feats, beta_val)
+    return_dict = {"result": return_val}
 
     the_response = make_response(jsonify(return_dict))
     the_response.status_code = 200
-    the_response.mimetype = 'application/json'
+    the_response.mimetype = "application/json"
     return the_response
 
 
 # Get all the cars history for this user
-@user.route('/UserCountryCarbon', methods=['GET'])
+@user.route("/UserCountryCarbon", methods=["GET"])
 def get_country_carbon():
     """returns the carbon of the user's country"""
     cursor = db.get_db().cursor()
 
-    cursor.execute('SELECT Country.emissions, Country.name FROM User JOIN Country ON User.country_id = Country.id WHERE User.id = 1')
+    cursor.execute(
+        "SELECT Country.emissions, Country.name FROM User JOIN Country ON User.country_id = Country.id WHERE User.id = 1"
+    )
 
     column_headers = [x[0] for x in cursor.description]
 
@@ -80,31 +69,30 @@ def get_country_carbon():
 
 
 # Get all the residential history for this user
-@user.route('/UserCountry', methods=['PUT'])
+@user.route("/UserCountry", methods=["PUT"])
 def add_country():
-    current_app.logger.info('user_routes.py: PUT /UserCountry')
-    
+    current_app.logger.info("user_routes.py: PUT /UserCountry")
+
     recieved_data = request.json
     current_app.logger.info(recieved_data)
 
-    country_id = recieved_data['country_id']
+    country_id = recieved_data["country_id"]
 
-    query = 'UPDATE User SET country_id = %s WHERE id = 1'
+    query = "UPDATE User SET country_id = %s WHERE id = 1"
 
-    data = (country_id)
+    data = country_id
     cursor = db.get_db().cursor()
     cursor.execute(query, data)
     db.get_db().commit()
     return "success"
 
 
-
 # Get all the cars history for this user
-@user.route('/UserCars', methods=['GET'])
+@user.route("/UserCars", methods=["GET"])
 def get_cars():
     cursor = db.get_db().cursor()
 
-    cursor.execute('SELECT * FROM Cars WHERE Cars.user_id = 1')
+    cursor.execute("SELECT * FROM Cars WHERE Cars.user_id = 1")
 
     column_headers = [x[0] for x in cursor.description]
 
@@ -117,17 +105,18 @@ def get_cars():
 
     return jsonify(json_data)
 
+
 # Get all the residential history for this user
 # @user.route('/UserAddCar', methods=['PUT'])
 # def add_car():
 #     current_app.logger.info('user_routes.py: PUT /UserAddCar')
-    
+
 #     received_data = request.json
 #     current_app.logger.info(received_data)
 
 #     fuel_type = received_data['fuel_type']
 #     fuel_used = received_data['fuel_used']
-    
+
 #     query = "UPDATE Cars SET emission_tags = 'car', fuel_type = %s, fuel_used = %s WHERE user_id = 1"
 
 #     data = (fuel_type, fuel_used)
@@ -136,17 +125,18 @@ def get_cars():
 #     db.get_db().commit()
 #     return "success"
 
+
 # Adds car survey data
-@user.route('/UserAddCar', methods=['POST'])
+@user.route("/UserAddCar", methods=["POST"])
 def add_car():
-    current_app.logger.info('user_routes.py: POST /UserAddCar')
-    
+    current_app.logger.info("user_routes.py: POST /UserAddCar")
+
     received_data = request.json
     current_app.logger.info(received_data)
 
-    fuel_type = received_data['fuel_type']
-    fuel_used = received_data['fuel_used']
-    
+    fuel_type = received_data["fuel_type"]
+    fuel_used = received_data["fuel_used"]
+
     query = "INSERT INTO Cars (emission_tags, user_id, fuel_type, fuel_used) VALUES ('car', 1, %s, %s)"
 
     data = (fuel_type, fuel_used)
@@ -155,12 +145,13 @@ def add_car():
     db.get_db().commit()
     return "success"
 
+
 # Get all the residential history for this user
-@user.route('/UserResidential', methods=['GET'])
+@user.route("/UserResidential", methods=["GET"])
 def get_residential():
     cursor = db.get_db().cursor()
 
-    cursor.execute('SELECT * FROM ResData WHERE ResData.user_id = 1')
+    cursor.execute("SELECT * FROM ResData WHERE ResData.user_id = 1")
 
     column_headers = [x[0] for x in cursor.description]
 
@@ -173,19 +164,20 @@ def get_residential():
 
     return jsonify(json_data)
 
-# adding survey residential data 
-@user.route('/UserAddRes', methods=['POST'])
+
+# adding survey residential data
+@user.route("/UserAddRes", methods=["POST"])
 def add_residential():
-    current_app.logger.info('user_routes.py: POST /UserAddRes')
-    
+    current_app.logger.info("user_routes.py: POST /UserAddRes")
+
     received_data = request.json
     current_app.logger.info(received_data)
 
-    elec_usage = received_data['elec_usage']
-    heating = received_data['heating']
-    water_heating = received_data['water_heating']
-    cooking_gas = received_data['cooking_gas']
-    
+    elec_usage = received_data["elec_usage"]
+    heating = received_data["heating"]
+    water_heating = received_data["water_heating"]
+    cooking_gas = received_data["cooking_gas"]
+
     query = "INSERT INTO ResData (emission_tags, elec_usage, heating, water_heating, cooking_gas, user_id) VALUES ('residential', %s, %s, %s, %s, 1)"
 
     data = (elec_usage, heating, water_heating, cooking_gas)
@@ -195,12 +187,12 @@ def add_residential():
     return "success"
 
 
-@user.route('/UserFlights', methods=['GET'])
+@user.route("/UserFlights", methods=["GET"])
 def get_flights():
-    """ Get all the flight history for this user """
+    """Get all the flight history for this user"""
     cursor = db.get_db().cursor()
 
-    cursor.execute('SELECT * FROM Flight WHERE Flight.user_id = 1')
+    cursor.execute("SELECT * FROM Flight WHERE Flight.user_id = 1")
 
     column_headers = [x[0] for x in cursor.description]
 
@@ -213,12 +205,13 @@ def get_flights():
 
     return jsonify(json_data)
 
+
 # Get all the public transport history for this user
-@user.route('/UserTransport', methods=['GET'])
+@user.route("/UserTransport", methods=["GET"])
 def get_transport():
     cursor = db.get_db().cursor()
 
-    cursor.execute('SELECT * FROM PublicTransport WHERE PublicTransport.user_id = 1')
+    cursor.execute("SELECT * FROM PublicTransport WHERE PublicTransport.user_id = 1")
 
     column_headers = [x[0] for x in cursor.description]
 
@@ -231,33 +224,35 @@ def get_transport():
 
     return jsonify(json_data)
 
+
 # Updates match consent and bio for user
-@user.route('/UserUpdateInfo', methods=['PUT'])
+@user.route("/UserUpdateInfo", methods=["PUT"])
 def update_user():
-   current_app.logger.info('user.routes.py: PUT /UserUpdateInfo')
-  
-   received_data = request.json
-   current_app.logger.info(received_data)
+    current_app.logger.info("user.routes.py: PUT /UserUpdateInfo")
 
-   user_bio = received_data['bio']
-   current_app.logger.info('BIO: ', user_bio)
-   match_consent = received_data['consent']
+    received_data = request.json
+    current_app.logger.info(received_data)
 
-   query = 'UPDATE User SET match_consent = %s, bio = %s WHERE id = 1'
+    user_bio = received_data["bio"]
+    current_app.logger.info("BIO: ", user_bio)
+    match_consent = received_data["consent"]
 
-   data = (match_consent, user_bio)
-   cursor = db.get_db().cursor()
-   cursor.execute(query, data)
-   db.get_db().commit()
+    query = "UPDATE User SET match_consent = %s, bio = %s WHERE id = 1"
 
-   return 'Success'
+    data = (match_consent, user_bio)
+    cursor = db.get_db().cursor()
+    cursor.execute(query, data)
+    db.get_db().commit()
+
+    return "Success"
 
 
 # get this user's tags
-@user.route('/tags', methods=['GET'])
+@user.route("/tags", methods=["GET"])
 def get_usertags():
-   cursor = db.get_db().cursor()
-   cursor.execute('''
+    cursor = db.get_db().cursor()
+    cursor.execute(
+        """
        SELECT description
        FROM EmissionTags
        WHERE EmissionTags.id IN (
@@ -265,98 +260,90 @@ def get_usertags():
            FROM UserTags
            WHERE UserTags.user_id = 1
        );
-   ''')
-  
-   # grab the column headers from the returned data
-   column_headers = [x[0] for x in cursor.description]
+   """
+    )
 
+    # grab the column headers from the returned data
+    column_headers = [x[0] for x in cursor.description]
 
-   # create an empty dictionary object to use in
-   # putting column headers together with data
-   json_data = []
+    # create an empty dictionary object to use in
+    # putting column headers together with data
+    json_data = []
 
+    # fetch all the data from the cursor
+    theData = cursor.fetchall()
 
-   # fetch all the data from the cursor
-   theData = cursor.fetchall()
+    # for each of the rows, zip the data elements together with
+    # the column headers.
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
 
+    return jsonify(json_data)
 
-   # for each of the rows, zip the data elements together with
-   # the column headers.
-   for row in theData:
-       json_data.append(dict(zip(column_headers, row)))
-
-
-   return jsonify(json_data)
 
 # deletes selected tag for this user
-@user.route('/TagDelete', methods=['DELETE'])
+@user.route("/TagDelete", methods=["DELETE"])
 def delete_tags():
-    current_app.logger.info('DELETE /user/TagDelete route')
+    current_app.logger.info("DELETE /user/TagDelete route")
 
     info = request.json
-    tag_description = info.get('tag')
+    tag_description = info.get("tag")
 
     cursor = db.get_db().cursor()
 
-
-    select_query = '''
+    select_query = """
         SELECT id FROM EmissionTags WHERE description = %s;
-        '''
+        """
     cursor.execute(select_query, (tag_description,))
     tag_row = cursor.fetchone()
     current_app.logger.info(select_query)
 
     if tag_row is None:
-        current_app.logger.info(f'Tag not found: {tag_description}')
+        current_app.logger.info(f"Tag not found: {tag_description}")
         return jsonify({"error": "Tag not found"}), 404
 
     tag_id = tag_row[0]
 
-    delete_query = '''
+    delete_query = """
     DELETE FROM UserTags WHERE user_id = 1 AND tag_id = %s;
-    '''
+    """
     cursor.execute(delete_query, (tag_id,))
     db.get_db().commit()
 
-    current_app.logger.info(f'Successfully deleted tag: {tag_description} for User ID: 1')
-    return 'Success'
+    current_app.logger.info(
+        f"Successfully deleted tag: {tag_description} for User ID: 1"
+    )
+    return "Success"
 
 
 # adds selected tag for this user
-@user.route('/TagAdd', methods=['POST'])
+@user.route("/TagAdd", methods=["POST"])
 def add_tags():
-   current_app.logger.info('POST /user/TagAdd route')
+    current_app.logger.info("POST /user/TagAdd route")
 
+    info = request.json
+    tag_description = info.get("tag")
 
-   info = request.json
-   tag_description = info.get('tag')
+    cursor = db.get_db().cursor()
 
-
-   cursor = db.get_db().cursor()
-
-
-   select_query = '''
+    select_query = """
    SELECT
        ET.id AS tag_id
    FROM
        EmissionTags ET
    WHERE
        ET.description = %s
-   '''
-   cursor.execute(select_query, (tag_description,))
-   tag_row = cursor.fetchone()
+   """
+    cursor.execute(select_query, (tag_description,))
+    tag_row = cursor.fetchone()
 
+    if tag_row is None:
+        return jsonify({"error": "Tag not found"}), 404
 
-   if tag_row is None:
-       return jsonify({"error": "Tag not found"}), 404
+    new_tag_id = tag_row[0]
 
+    insert_query = "INSERT INTO UserTags (user_id, tag_id) VALUES (1, %s)"
+    cursor.execute(insert_query, (new_tag_id,))
+    db.get_db().commit()
 
-   new_tag_id = tag_row[0]
-
-
-   insert_query = 'INSERT INTO UserTags (user_id, tag_id) VALUES (1, %s)'
-   cursor.execute(insert_query, (new_tag_id,))
-   db.get_db().commit()
-
-
-   return jsonify({"message": "Success"}), 200
+    return jsonify({"message": "Success"}), 200
