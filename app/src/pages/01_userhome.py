@@ -1,3 +1,4 @@
+# User home page with user page navigation
 import streamlit as st
 from modules.nav import side_bar_links
 

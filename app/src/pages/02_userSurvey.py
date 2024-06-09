@@ -1,3 +1,5 @@
+# Robust user survey with energy and transport questions to calculate predicted
+# carbon footprint. Shows comparison insight to average user in same country
 from requests.api import options
 import streamlit as st
 from modules.nav import side_bar_links

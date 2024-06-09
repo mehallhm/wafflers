@@ -1,3 +1,5 @@
+# NGO info page allowing editing of name, website, email, and bio, 
+# Shows my NGO tags and features add/delete tag functionality
 import streamlit as st
 from modules.nav import side_bar_links
 import requests

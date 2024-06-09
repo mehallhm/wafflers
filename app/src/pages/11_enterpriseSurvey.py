@@ -1,3 +1,5 @@
+# Enterprise survey tool where enterprises can input their emissions, see/add/delete tags
+# View result history and see context on average enterprise in country
 import streamlit as st
 from modules.nav import side_bar_links
 import requests

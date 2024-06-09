@@ -1,3 +1,4 @@
+# User history page showing survey history data and charts
 import streamlit as st
 from modules.nav import side_bar_links
 import requests
@@ -71,22 +72,3 @@ with outCol2:
             with col2:
                 st.write(round(fuel_used / 1.1571e-6, 2), "liters")
         st.bar_chart(data, y="fuel_used")
-
-
-# data = {}
-# try:
-#   data = requests.get('http://api:4000/u/UserFlights').json()
-# except:
-#   st.write("**Important**: Could not connect to sample api, so using dummy data.")
-#   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
-
-# st.dataframe(data)
-
-# data = {}
-# try:
-#   data = requests.get('http://api:4000/u/UserTransport').json()
-# except:
-#   st.write("**Important**: Could not connect to sample api, so using dummy data.")
-#   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
-
-# st.dataframe(data)

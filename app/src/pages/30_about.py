@@ -1,3 +1,4 @@
+# About page detailing extra info on Carbon Connect
 import streamlit as st
 from modules.nav import side_bar_links
 

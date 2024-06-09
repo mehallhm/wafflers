@@ -1,3 +1,5 @@
+# User settings page allowing information editing with country, bio, match consent
+# Shows my user tags and has add/delete tag functionality
 import streamlit as st
 from modules.nav import side_bar_links
 import requests

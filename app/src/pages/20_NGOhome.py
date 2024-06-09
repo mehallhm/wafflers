@@ -1,3 +1,4 @@
+# Outlines NGO page navigation
 import streamlit as st
 from modules.nav import side_bar_links
 

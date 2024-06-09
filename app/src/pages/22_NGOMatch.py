@@ -1,3 +1,4 @@
+# NGO match page showing tags, enterprises with same tags, matched users
 import streamlit as st
 from modules.nav import side_bar_links
 import requests
@@ -57,19 +58,19 @@ for item in data:
     elif item["description"] == "Heat":
         heat.append(item["name"])
 
-with st.expander("Transport NGOs", expanded=False):
+with st.expander("Transport Enterprises", expanded=False):
     st.write("#### NGO list:")
     st.markdown("- " + "\n- ".join(transport))
 
-with st.expander("Flights NGOs", expanded=False):
+with st.expander("Flights Enterprises", expanded=False):
     st.write("#### NGO list:")
     st.markdown("- " + "\n- ".join(flights))
 
-with st.expander("Energy NGOs", expanded=False):
+with st.expander("Energy Enterprises", expanded=False):
     st.write("#### NGO list:")
     st.markdown("- " + "\n- ".join(energy))
 
-with st.expander("Heat NGOs", expanded=False):
+with st.expander("Heat Enterprises", expanded=False):
     st.write("#### NGO list:")
     st.markdown("- " + "\n- ".join(heat))
 

@@ -1,3 +1,4 @@
+# Shows my NGO suggestions with the text similarity model
 import streamlit as st
 from modules.nav import side_bar_links
 import requests
