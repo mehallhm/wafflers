@@ -1,3 +1,4 @@
+from requests.api import options
 import streamlit as st
 from modules.nav import side_bar_links
 import requests
@@ -87,7 +88,7 @@ if fuel_type == "Gasoline/Hybrid":
         "How many times a month do you fill up your tank?", 0, 10, 5
     )
     fuel_used = fuel_capacity * fuel_used_monthly * 12 * 1.11302e-6
-    st.write("Approx. fuel used per year (liters): ", fuel_used / 1.11302e-6)
+    st.write("Approx. fuel used per year (liters): ", round(fuel_used / 1.11302e-6))
     st.write(
         "That's equivalent to ",
         round((fuel_used / 1.11302e-6) / 302, 2),

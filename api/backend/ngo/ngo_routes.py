@@ -17,25 +17,30 @@ def get_ngo_match(user_id):
     Gets the NGOs that match to a particular user. Returns
     """
     matching_num = request.args.get("q")
-
     cursor = db.get_db().cursor()
-    cursor.execute("SELECT name, website, vectorized_bio FROM NGO")
+
+    cursor.execute("SELECT name, website, bio, vectorized_bio FROM NGO")
     column_headers = [x[0] for x in cursor.description]
-    json_data = []
-    returned_data = cursor.fetchall()
 
     # Pull user bio from db
     bio_query = "SELECT User.bio FROM User WHERE User.id = %s"
     cursor.execute(bio_query, user_id)
     bio = cursor.fetchone()[0]
 
-    for row in returned_data:
+    json_data = []
+    for row in cursor.fetchall():
         json_data.append(dict(zip(column_headers, row)))
 
     names = []
     vecs = []
     for item in json_data:
-        names.append({"name": item["name"], "website": item["website"]})
+        names.append(
+            {
+                "name": item["name"],
+                "website": item["website"],
+                "bio": item["bio"][:200] + "...",
+            }
+        )
         vecs.append(item["vectorized_bio"])
 
     # Get the idf and vocab from db, parse into vec using `string_to_sparse_matrix`
@@ -246,9 +251,7 @@ def delete_tags():
     cursor.execute(delete_query, (tag_id,))
     db.get_db().commit()
 
-    current_app.logger.info(
-        f"Successfully deleted tag: {tag_description} for NGO"
-    )
+    current_app.logger.info(f"Successfully deleted tag: {tag_description} for NGO")
     return "Success"
 
 
