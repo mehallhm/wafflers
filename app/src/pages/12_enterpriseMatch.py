@@ -72,21 +72,3 @@ with st.expander("Energy NGOs", expanded=False):
 with st.expander("Heat NGOs", expanded=False):
     st.write("#### NGO list:")
     st.markdown("- " + "\n- ".join(heat))
-
-data = {} 
-try:
-  data = requests.get('http://api:4000/e/EntCompare').json()
-except:
-  st.write("**Important**: Could not connect to sample api, so using dummy data.")
-  data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
-
-avg_emission = data[0]["AVG Emission (by Country in kilotonnes)"]
-country = data[0]["Country"]
-your_emissions = data[0]["Your Emissions (in kilotonnes)"]
-multiplier = your_emissions / avg_emission
-
-st.write('')
-
-st.write("#### In", country + ", your emissions in kilotonnes is ", round(your_emissions, 2), ", while the average enterprise's is ", round(avg_emission,2))
-st.write("#### That means your emissions are", round(multiplier, 2), "times the average enterprise's emissions in " + country)
-
