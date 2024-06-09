@@ -1,3 +1,4 @@
+#routes for ngo enterprise functionality 
 import json
 from flask import Blueprint, request, jsonify, current_app
 from backend.db_connection import db
@@ -8,7 +9,7 @@ import numpy as np
 ngo = Blueprint("ngo", __name__)
 CURRENT_ID = 1
 
-
+# re
 @ngo.route("/NGOMatch/<int:user_id>", methods=["GET"])
 def get_ngo_match(user_id):
     """
@@ -80,7 +81,7 @@ def get_mine():
 
     return jsonify(json_data)
 
-
+#updates an org to the NGO table given filled out data
 @ngo.route("/NGOUpdate", methods=["PUT"])
 def add_new_NGO():
     '''updates an org to the NGO table given filled out data'''
@@ -101,24 +102,11 @@ def add_new_NGO():
     cursor.execute(query, data)
     db.get_db().commit()
 
-    # new_id = cursor.lastrowid
-
-    # selected_tags = recieved_data.get('tags', [])
-    # if selected_tags:
-    #     insert_query = 'INSERT INTO NGOTags (ngo_id, tag_id) VALUES (%s, %s)'
-    #     # for each tag gets the tag_id from the emission tags table, :)
-    #     # also inserts into NGO tags
-    #     for tag_name in selected_tags:
-    #         tag_query = 'SELECT id FROM EmissionTags WHERE description = %s'
-    #         cursor.execute(tag_query, (tag_name,))
-    #         tag_row = cursor.fetchone()
-    #         tag_id = tag_row[0]
-    #         cursor.execute(insert_query, (new_id, tag_id))
-    #         db.get_db().commit()
+ 
 
     return "Success"
 
-
+#get the current tags of the ngo 
 @ngo.route("/tags", methods=["GET"])
 def get_tags():
     '''get a cursor object from the database'''
@@ -135,18 +123,15 @@ def get_tags():
    """
     )
 
-    # grab the column headers from the returned data
+   
     column_headers = [x[0] for x in cursor.description]
 
-    # create an empty dictionary object to use in
-    # putting column headers together with data
+
     json_data = []
 
-    # fetch all the data from the cursor
+
     the_data = cursor.fetchall()
 
-    # for each of the rows, zip the data elements together with
-    # the column headers.
     for row in the_data:
         json_data.append(dict(zip(column_headers, row)))
 
@@ -156,7 +141,6 @@ def get_tags():
 # get all of the matching Enterprises based on tags
 @ngo.route("/EnterpriseMatch", methods=["GET"])
 def get_matches():
-    '''get a cursor object from the database'''
     cursor = db.get_db().cursor()
 
     cursor.execute(
@@ -173,27 +157,24 @@ def get_matches():
 """
     )
 
-    # grab the column headers from the returned data
+
     column_headers = [x[0] for x in cursor.description]
 
-    # create an empty dictionary object to use in
-    # putting column headers together with data
+ 
     json_data = []
 
-    # fetch all the data from the cursor
+
     the_data = cursor.fetchall()
 
-    # for each of the rows, zip the data elements together with
-    # the column headers.
+    
     for row in the_data:
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
 
-
+#adds tags to the current ngo tags 
 @ngo.route("/NGOAdd", methods=["POST"])
 def add_tags():
-    '''Adds a tag to the NGO's tags'''
     current_app.logger.info("POST /ngo/tags route")
 
     info = request.json
@@ -223,7 +204,7 @@ def add_tags():
 
     return jsonify({"message": "Success"}), 200
 
-
+# delete tags from the ngo tags
 @ngo.route("/TagDelete", methods=["DELETE"])
 def delete_tags():
     '''Deletes a tag from the NGO's tags'''
@@ -261,7 +242,7 @@ def delete_tags():
 @ngo.route("/UserMatch", methods=["GET"])
 def get_usermatches():
     '''Gets all the users that match the NGO based on tags'''
-    # get a cursor object from the database
+
     cursor = db.get_db().cursor()
 
     cursor.execute(
@@ -278,23 +259,17 @@ def get_usermatches():
 """
     )
 
-    # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
 
-    # create an empty dictionary object to use in
-    # putting column headers together with data
     json_data = []
 
-    # fetch all the data from the cursor
     the_data = cursor.fetchall()
 
-    # for each of the rows, zip the data elements together with
-    # the column headers.
     for row in the_data:
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
-
+# recieves the bio from the NGO 
 @ngo.route("/Bio", methods=["GET"])
 def get_bio ():
     '''Get the bio for this NGO'''

@@ -1,8 +1,4 @@
-########################################################
-# Sample customers blueprint of endpoints
-# Remove this file if you are not using it in your project
-########################################################
-
+# this page defines routes needed for the enterprise entity 
 from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from backend.db_connection import db
@@ -10,10 +6,9 @@ from backend.db_connection import db
 
 enterprises = Blueprint('enterprises', __name__)
 
-# get all of the enterprise tags from database
+#Retrieves all enterprise tags from the database
 @enterprises.route('/tags', methods=['GET'])
 def get_tags():
-    # get a cursor object from the database
     cursor = db.get_db().cursor()
 
     cursor.execute('''
@@ -26,28 +21,24 @@ def get_tags():
     );
 ''')
     
-    # grab the column headers from the returned data
+   
     column_headers = [x[0] for x in cursor.description]
 
-    # create an empty dictionary object to use in 
-    # putting column headers together with data
+
     json_data = []
 
-    # fetch all the data from the cursor
     theData = cursor.fetchall()
 
-    # for each of the rows, zip the data elements together with
-    # the column headers. 
     for row in theData:
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
 
 
-# get all of the matching NGO's based on tags
+#Retrieves all enterprise tags from the database
 @enterprises.route('/NGOMatch', methods=['GET'])
 def get_matches():
-    # get a cursor object from the database
+   
     cursor = db.get_db().cursor()
 
     cursor.execute('''
@@ -62,18 +53,15 @@ def get_matches():
     );
 ''')
     
-    # grab the column headers from the returned data
+
     column_headers = [x[0] for x in cursor.description]
 
-    # create an empty dictionary object to use in 
-    # putting column headers together with data
     json_data = []
 
-    # fetch all the data from the cursor
+
     theData = cursor.fetchall()
 
-    # for each of the rows, zip the data elements together with
-    # the column headers. 
+   
     for row in theData:
         json_data.append(dict(zip(column_headers, row)))
 
@@ -83,7 +71,7 @@ def get_matches():
 # get my emissions, my country's, and avg other companies in same country emissions
 @enterprises.route('/EntCompare', methods=['GET'])
 def get_comparison():
-    # get a cursor object from the database
+
     cursor = db.get_db().cursor()
 
     cursor.execute('''
@@ -105,18 +93,12 @@ def get_comparison():
         GROUP BY Country.name;
     ''')
     
-    # grab the column headers from the returned data
+    
     column_headers = [x[0] for x in cursor.description]
 
-    # create an empty dictionary object to use in 
-    # putting column headers together with data
     json_data = []
 
-    # fetch all the data from the cursor
     theData = cursor.fetchall()
-
-    # for each of the rows, zip the data elements together with
-    # the column headers. 
     for row in theData:
         json_data.append(dict(zip(column_headers, row)))
 
@@ -139,7 +121,7 @@ def add_entry():
     db.get_db().commit()
     return "success"
 
-
+#allows enterprises to delete tags that they no longer want to be associated with 
 @enterprises.route("/TagDelete", methods=["DELETE"])
 def delete_tags():
 
@@ -172,7 +154,7 @@ def delete_tags():
     )
     return "Success"
 
-
+#allows enterprises to add tags that they no longer want to be associated with 
 @enterprises.route("/TagAdd", methods=["POST"])
 def add_tags():
 
@@ -203,10 +185,9 @@ def add_tags():
 
     return jsonify({"message": "Success"}), 200
 
-
+#retrieves enterprise history and displays it to the user on  data entry at a time 
 @enterprises.route('/EnterpriseHistory', methods=['GET'])
 def get_history():
-    # get a cursor object from the database
     cursor = db.get_db().cursor()
 
     cursor.execute('''
@@ -215,20 +196,15 @@ def get_history():
     WHERE Enterprises.id = 1
     ''')
 
-   # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
 
-    # create an empty dictionary object to use in 
-    # putting column headers together with data
+
     json_data = []
 
-    # fetch all the data from the cursor
     theData = cursor.fetchall()
     current_app.logger.info(theData)
 
 
-    # for each of the rows, zip the data elements together with
-    # the column headers. 
     for row in theData:
         json_data.append(dict(zip(column_headers, row)))
 
