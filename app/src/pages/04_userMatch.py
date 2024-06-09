@@ -12,4 +12,3 @@ st.header("My Matches")
 for match in matches:
     with st.container(border=True):
         st.write(match)
-
