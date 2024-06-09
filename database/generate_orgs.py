@@ -3,10 +3,12 @@ Generates NGO starting data by scraping Wikipedia for actual organzation info. A
 the inital idf and vocabulary encodings
 """
 
+import json
 import requests
 from bs4 import BeautifulSoup
 from sklearn.feature_extraction.text import TfidfVectorizer
 from scipy.sparse import csr_matrix
+import numpy as np
 from faker import Faker
 
 
@@ -157,14 +159,16 @@ def main():
         for i, org in enumerate(orgs)
     ]
 
-    idf = sparse_matrix_to_string(vectorizer.idf_)
-    vocabulary = sparse_matrix_to_string(vectorizer.vocabulary_)
+    idf = np.array2string(
+        vectorizer.idf_, threshold=np.inf, separator=",", max_line_width=np.inf
+    )
+    vocabulary = json.dumps(vectorizer.vocabulary_)
 
     try:
         with open("output.sql", "w", encoding="UTF-8") as file:
             # Save the first encondings
             file.write(
-                f"INSERT INTO TFIDF_Encoding (vector, vocabulary) VALUES (1, {idf}, {vocabulary})"
+                f"INSERT INTO TFIDF_Encoding (id, vector, vocabulary) VALUES (1, '{idf}', '{vocabulary}')"
             )
             file.write("\n")
 
