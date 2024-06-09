@@ -65,7 +65,7 @@ def get_country_carbon():
     """returns the carbon of the user's country"""
     cursor = db.get_db().cursor()
 
-    cursor.execute('SELECT emissions FROM User JOIN Country ON User.country_id = Country.id WHERE User.id = 1')
+    cursor.execute('SELECT Country.emissions, Country.name FROM User JOIN Country ON User.country_id = Country.id WHERE User.id = 1')
 
     column_headers = [x[0] for x in cursor.description]
 
@@ -77,6 +77,7 @@ def get_country_carbon():
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
 
 # Get all the residential history for this user
 @user.route('/UserCountry', methods=['PUT'])
