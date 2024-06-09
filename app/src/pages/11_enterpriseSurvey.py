@@ -127,7 +127,7 @@ st.write("#### That means your emissions are", round(multiplier, 2), "times the 
 
 
 
-st.write('### Display Enterprise Survey Result History')
+st.write('### Enterprise Emission Result History')
 
 data = []
 
