@@ -55,99 +55,99 @@ current_country_data = requests.get(
     "http://api:4000/u/UserCountryCarbon", timeout=200
 ).json()
 country_id = current_country_data[0]["id"]
-country = st.selectbox("Country :flag-eu:", COUNTRY_FLAGS, index=country_id)
-country_id = COUNTRY_FLAGS.index(country)
-try:
-    data = {"country_id": country_id}
-    response = requests.put("http://api:4000/u/UserCountry", json=data, timeout=300)
-except Exception as e:
-    st.error(f"An error occurred: {e}")
 
-current_bio = requests.get("http://api:4000/u/UserBio", timeout=200).json()["bio"]
+with st.container(border=True):
+    country = st.selectbox("Country :flag-eu:", COUNTRY_FLAGS, index=country_id)
+    country_id = COUNTRY_FLAGS.index(country)
+    try:
+        data = {"country_id": country_id}
+        response = requests.put("http://api:4000/u/UserCountry", json=data, timeout=300)
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
 
-bio = st.text_area(
-    "Bio",
-    help="Enter a quick bio here. Mention some environmental interests if any",
-    height=100,
-    max_chars=200,
-    value=current_bio,
-)
+    current_bio = requests.get("http://api:4000/u/UserBio", timeout=200).json()["bio"]
 
-consent = st.toggle(
-    "NGO Recommendations",
-    value=1,
-    help="By selecting this option, you consent to your name and description being shared with organizations that also use CarbonConnect",
-)
-
-user_data = {"consent": consent, "bio": bio}
-
-if st.button("Submit"):
-    response = requests.put(
-        "http://api:4000/u/UserUpdateInfo", json=user_data, timeout=300
+    bio = st.text_area(
+        "Bio",
+        help="Enter a quick bio here. Mention some environmental interests if any",
+        height=100,
+        max_chars=200,
+        value=current_bio,
     )
 
-st.divider()
+    consent = st.toggle(
+        "NGO Recommendations",
+        value=1,
+        help="By selecting this option, you consent to your name and description being shared with organizations that also use CarbonConnect",
+    )
 
+    user_data = {"consent": consent, "bio": bio}
 
-def fetch_tag_descriptions():
-    try:
-        response = requests.get("http://api:4000/u/tags")
-        response.raise_for_status()
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        st.error(f"Error fetching data: {e}")
-        return []
+    if st.button("Submit"):
+        response = requests.put(
+            "http://api:4000/u/UserUpdateInfo", json=user_data, timeout=300
+        )
 
-
-data = fetch_tag_descriptions()
-st.write("### Tag Settings")
-if data:
-    tags = [tag["description"] for tag in data]
-    selected = pills("Current tags", tags, [EMOJI_MAP[tag] for tag in tags], index=None)
-else:
-    tags = []
-    st.info("No tags available to display.")
-
-col1, col2 = st.columns(2)
-
-with col1:
-    st.write("#### Add Tags")
-
-    options = ["Transport", "Flights", "Energy", "Heat"]
-    options = [option for option in options if option not in tags]
-
-    selected_tags = st.selectbox("Select your associated tags", options)
-
-    if st.button("Add Tags"):
-        add_tags_api_url = "http://api:4000/u/TagAdd"
-        tag_data = {"tag": selected_tags}
+with st.container(border=True):
+    def fetch_tag_descriptions():
         try:
-            response = requests.post(add_tags_api_url, json=tag_data)
-            if response.status_code == 200:
-                st.success("Tags successfully added!")
-            else:
-                st.error(f"Failed to add tags. Status code: {response.status_code}")
-        except Exception as e:
-            st.error(f"An error occurred while adding tags: {e}")
+            response = requests.get("http://api:4000/u/tags")
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            st.error(f"Error fetching data: {e}")
+            return []
 
 
-with col2:
-    st.write("#### Delete Tags")
+    data = fetch_tag_descriptions()
+    st.write("### Tag Settings")
+    if data:
+        tags = [tag["description"] for tag in data]
+        selected = pills("Current tags", tags, [EMOJI_MAP[tag] for tag in tags], index=None)
+    else:
+        tags = []
+        st.info("No tags available to display.")
 
-    options = ["Transport", "Flights", "Energy", "Heat"]
-    options = [option for option in options if option in tags]
+    col1, col2 = st.columns(2)
 
-    selected_tag = st.selectbox("Select tags to delete", options)
+    with col1:
+        st.write("#### Add Tags")
 
-    if st.button("Delete Tags"):
-        delete_tags_api_url = "http://api:4000/u/TagDelete"
-        tag_data = {"tag": selected_tag}
+        options = ["Transport", "Flights", "Energy", "Heat"]
+        options = [option for option in options if option not in tags]
 
-        try:
-            response = requests.delete(delete_tags_api_url, json=tag_data)
-            if response.status_code == 200:
-                st.success("Tags successfully deleted!")
-            else:
-                st.error(f"Failed to delete tags. Status code: {response.status_code}")
-        except Exception as e:
-            st.error(f"An error occurred while deleting tags: {e}")
+        selected_tags = st.selectbox("Select your associated tags", options)
+
+        if st.button("Add Tags"):
+            add_tags_api_url = "http://api:4000/u/TagAdd"
+            tag_data = {"tag": selected_tags}
+            try:
+                response = requests.post(add_tags_api_url, json=tag_data)
+                if response.status_code == 200:
+                    st.success("Tags successfully added!")
+                else:
+                    st.error(f"Failed to add tags. Status code: {response.status_code}")
+            except Exception as e:
+                st.error(f"An error occurred while adding tags: {e}")
+
+
+    with col2:
+        st.write("#### Delete Tags")
+
+        options = ["Transport", "Flights", "Energy", "Heat"]
+        options = [option for option in options if option in tags]
+
+        selected_tag = st.selectbox("Select tags to delete", options)
+
+        if st.button("Delete Tags"):
+            delete_tags_api_url = "http://api:4000/u/TagDelete"
+            tag_data = {"tag": selected_tag}
+
+            try:
+                response = requests.delete(delete_tags_api_url, json=tag_data)
+                if response.status_code == 200:
+                    st.success("Tags successfully deleted!")
+                else:
+                    st.error(f"Failed to delete tags. Status code: {response.status_code}")
+            except Exception as e:
+                st.error(f"An error occurred while deleting tags: {e}")

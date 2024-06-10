@@ -8,6 +8,7 @@ side_bar_links()
 matches = requests.get("http://api:4000/n/NGOMatch/1?q=100", timeout=500).json()
 
 st.header("My Matches")
+st.write("These Organizations have been matched to you base on your bio! Please make sure to update your bio to ensure the best recommendations")
 st.write("")
 
 for match in matches:

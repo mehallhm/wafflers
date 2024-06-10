@@ -17,107 +17,106 @@ st.write(
 )
 
 # expandable section that is expanded by default
-st.divider()
-st.write("### Energy Questions")
-# user input section
-household_members = st.number_input(
-    "How many people live in your household?", 1, None, 2
-)
-
-electricity_usage = (
-    0.0000036
-    * 12
-    * st.number_input(
-        "How much electricity does your household use per month (kWh)?",
-        0.0,
-        None,
-        6320.0,
+with st.container(border=True):
+    st.write("### Energy Questions")
+    # user input section
+    household_members = st.number_input(
+        "How many people live in your household?", 1, None, 2
     )
-)
 
-heating = (
-    0.0000036
-    * 12
-    * st.number_input(
-        "How much heating does your household use per month (kWh)?",
-        0.0,
-        None,
-        3000.0,
+    electricity_usage = (
+        0.0000036
+        * 12
+        * st.number_input(
+            "How much electricity does your household use per month (kWh)?",
+            0.0,
+            None,
+            6320.0,
+        )
     )
-)
 
-water_heating = (
-    0.0000036
-    * 12
-    * st.number_input(
-        "How much water heating does your household use per month (kWh)?",
-        0.0,
-        None,
-        2000.0,
+    heating = (
+        0.0000036
+        * 12
+        * st.number_input(
+            "How much heating does your household use per month (kWh)?",
+            0.0,
+            None,
+            3000.0,
+        )
     )
-)
 
-cooking_gas = (
-    0.0000036
-    * 12
-    * st.number_input(
-        "Per month, how much energy is used cooking? (kWh)?", 0.0, None, 2000.0
+    water_heating = (
+        0.0000036
+        * 12
+        * st.number_input(
+            "How much water heating does your household use per month (kWh)?",
+            0.0,
+            None,
+            2000.0,
+        )
     )
-)
 
-kWh_total = (electricity_usage + heating + water_heating + cooking_gas) / (
-    household_members * 0.0000036 * 12
-)
-st.write("Your Total Residential Usage (kWh): ", round(kWh_total, 2))
-st.write(
-    "That's equivalent to running a 60w lightbulb for ",
-    round((kWh_total * 1000) / 60),
-    " hours!",
-)
-
-st.divider()
-st.write("### Transportation Questions")
-
-fuel_type = st.select_slider(
-    "Fuel Type", options=["Gasoline/Hybrid", "Diesel", "Electric"]
-)
-
-if fuel_type == "Gasoline/Hybrid":
-    fuel_capacity = st.number_input(
-        "How many liters of gasoline does your vehicle hold?", 0.0, None, 50.0
+    cooking_gas = (
+        0.0000036
+        * 12
+        * st.number_input(
+            "Per month, how much energy is used cooking? (kWh)?", 0.0, None, 2000.0
+        )
     )
-    fuel_used_monthly = st.slider(
-        "How many times a month do you fill up your tank?", 0, 10, 5
+
+    kWh_total = (electricity_usage + heating + water_heating + cooking_gas) / (
+        household_members * 0.0000036 * 12
     )
-    fuel_used = fuel_capacity * fuel_used_monthly * 12 * 1.11302e-6
-    st.write("Approx. fuel used per year (liters): ", round(fuel_used / 1.11302e-6))
+    st.write("Your Total Residential Usage (kWh): ", round(kWh_total, 2))
     st.write(
-        "That's equivalent to ",
-        round((fuel_used / 1.11302e-6) / 302, 2),
-        "bathtubs!",
+        "That's equivalent to running a 60w lightbulb for ",
+        round((kWh_total * 1000) / 60),
+        " hours!",
     )
 
-elif fuel_type == "Diesel":
-    fuel_capacity = st.number_input(
-        "How many liters of diesel does your vehicle hold?", 0.0, None, 50.0
-    )
-    fuel_used_monthly = st.slider(
-        "How many times a month do you fill up your tank?", 0, 10, 5
-    )
-    fuel_used = fuel_capacity * fuel_used_monthly * 12 * 1.1571e-6
-    st.write("Approx. fuel used per year (liters): ", fuel_used / 1.1571e-6)
-    st.write(
-        "That's equivalent to ",
-        round((fuel_used / 1.1571e-6) / 302, 2),
-        "bathtubs!",
+with st.container(border=True):
+    st.write("### Transportation Questions")
+
+    fuel_type = st.select_slider(
+        "Fuel Type", options=["Gasoline/Hybrid", "Diesel", "Electric"]
     )
 
-elif fuel_type == "Electric":
-    st.write("Please include charging data in residential data.")
+    if fuel_type == "Gasoline/Hybrid":
+        fuel_capacity = st.number_input(
+            "How many liters of gasoline does your vehicle hold?", 0.0, None, 50.0
+        )
+        fuel_used_monthly = st.slider(
+            "How many times a month do you fill up your tank?", 0, 10, 5
+        )
+        fuel_used = fuel_capacity * fuel_used_monthly * 12 * 1.11302e-6
+        st.write("Approx. fuel used per year (liters): ", round(fuel_used / 1.11302e-6))
+        st.write(
+            "That's equivalent to ",
+            round((fuel_used / 1.11302e-6) / 302, 2),
+            "bathtubs!",
+        )
 
-st.divider()
+    elif fuel_type == "Diesel":
+        fuel_capacity = st.number_input(
+            "How many liters of diesel does your vehicle hold?", 0.0, None, 50.0
+        )
+        fuel_used_monthly = st.slider(
+            "How many times a month do you fill up your tank?", 0, 10, 5
+        )
+        fuel_used = fuel_capacity * fuel_used_monthly * 12 * 1.1571e-6
+        st.write("Approx. fuel used per year (liters): ", fuel_used / 1.1571e-6)
+        st.write(
+            "That's equivalent to ",
+            round((fuel_used / 1.1571e-6) / 302, 2),
+            "bathtubs!",
+        )
 
-if st.button("View Prediction"):
+    elif fuel_type == "Electric":
+        st.write("Please include charging data in residential data.")
+
+
+if st.button("View Prediction", use_container_width=True):
     country_data = requests.get(
         "http://api:4000/u/UserCountryCarbon", timeout=10
     ).json()
