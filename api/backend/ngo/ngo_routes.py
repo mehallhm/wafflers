@@ -270,12 +270,15 @@ def get_usermatches():
 
     return jsonify(json_data)
 # recieves the bio from the NGO 
-@ngo.route("/Bio", methods=["GET"])
-def get_bio ():
-    '''Get the bio for this NGO'''
+@ngo.route("/info", methods=["GET"])
+def get_info ():
     cursor = db.get_db().cursor()
 
-    cursor.execute("SELECT bio FROM NGO WHERE id = 1")
-    bio = cursor.fetchone()[0]
+    cursor.execute("SELECT bio, website, name, contact FROM NGO WHERE id = 1")
+    result = cursor.fetchone()
 
-    return jsonify({"bio": bio})
+    if result:
+        bio, website, name, contact = result
+        return jsonify({"bio": bio, "website": website, "name": name, "contact": contact})
+    else:
+        return jsonify({"error": "No data found"}), 404

@@ -14,7 +14,12 @@ st.write("# Account Info")
 st.write("#### Edit Organization Information Below")
 
 with st.container(border=True):
-    ngo_name = st.text_input("Organization Name")
+    current_bio = requests.get("http://api:4000/n/info", timeout=200).json()["bio"]
+    current_website = requests.get("http://api:4000/n/info", timeout=200).json()["website"]
+    current_name = requests.get("http://api:4000/n/info", timeout=200).json()["name"]
+    current_contact = requests.get("http://api:4000/n/info", timeout=200).json()["contact"]
+
+    ngo_name = st.text_input("Organization Name", value=current_name)
     def url_check(url, tld_list):
         if not url.startswith(("http://", "https://")):
             url = "http://" + url
@@ -25,8 +30,8 @@ with st.container(border=True):
                     return True
         return False
 
-    website_link = st.text_input("Website Link:")
-    if website_link:
+    website_link = st.text_input("Website Link:", value=current_website)
+    if website_link and website_link != current_website:
         if url_check(
             website_link,
             [".com", ".gov", ".net", ".org", ".tv", ".cz", ".jp", ".de", ".br", ".edu"],
@@ -35,14 +40,12 @@ with st.container(border=True):
         else:
             st.error("Invalid URL or TLD")
 
-    contact_email = st.text_input("Head Contact Email:")
-    if contact_email:
+    contact_email = st.text_input("Head Contact Email:", value=current_contact)
+    if contact_email and contact_email != current_contact:
         if validators.email(contact_email):
             st.success("Valid Email Address!")
         else:
             st.error("Invalid Email Address. Please Enter A Valid Email.")
-
-    current_bio = requests.get("http://api:4000/n/Bio", timeout=200).json()["bio"]
 
     bio = st.text_area(
         "Bio",
