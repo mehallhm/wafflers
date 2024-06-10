@@ -134,23 +134,45 @@ with st.container(border=True):
         "times the average enterprise's emissions in " + country,
     )
 
-    st.write("### Enterprise Emission Result History")
+    # st.write("### Enterprise Emission Result History")
 
-    data = []
+    # data = []
 
-    try:
-        response = requests.get("http://api:4000/e/EnterpriseHistory", timeout=100)
-        response.raise_for_status()
-        data = response.json()
-    except requests.exceptions.RequestException as e:
-        st.error(f"An error occurred: {e}")
+    # try:
+    #     response = requests.get("http://api:4000/e/EnterpriseHistory", timeout=100)
+    #     response.raise_for_status()
+    #     data = response.json()
+    # except requests.exceptions.RequestException as e:
+    #     st.error(f"An error occurred: {e}")
 
-    if data:
-        df = pd.DataFrame(data)
+    # if data:
+    #     df = pd.DataFrame(data)
 
-        # Automatically display each history result in an expander
-        for index, row in df.iterrows():
-            with st.expander(f"Emission result {index + 1}"):
-                st.write(row["emission_history"])
-    else:
-        st.write("No data available to display.")
+    #     # Automatically display each history result in an expander
+    #     for index, row in df.iterrows():
+    #         with st.expander(f"Emission result {index + 1}"):
+    #             st.write(row["emission_history"])
+    # else:
+    #     st.write("No data available to display.")
+
+
+st.header("Enterprise Emission Result History")
+
+# try:
+
+# except requests.exceptions.RequestException as e:
+#     st.error(f"An error occurred: {e}")
+#     data = []
+# if data:
+data = requests.get("http://api:4000/e/EnterpriseHistory", timeout=100).json()
+with st.expander("Enterprise Emission Results"):
+    for item in data:
+        emission_history = item["emission_history"]
+        fCol1, fCol2 = st.columns(2)
+        with fCol1:
+            st.write("Submission #", data.index(item))
+        with fCol2:
+            st.write(emission_history)
+    st.bar_chart(data, y="emission_history")
+# else:
+#     st.write("No data available to display.")
