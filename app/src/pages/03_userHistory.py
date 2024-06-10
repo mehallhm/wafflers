@@ -9,6 +9,21 @@ side_bar_links()
 st.title("Survey History")
 st.write("##### Sorted by Completion Date")
 
+st.header("Carbon Data")
+carbon_data = requests.get("http://api:4000/u/UserCarbon", timeout=100).json()
+with st.expander("Emissions History", expanded=True):
+    for item in carbon_data:
+        carbon_emissions = item["emission_result"]
+        col1, col2, col3, col4 = st.columns(4)
+        with col2:
+            st.write("Submission #", carbon_data.index(item))
+        with col3:
+            inner_col1, inner_col2 = st.columns(2)
+            with inner_col2:
+                st.write(round(carbon_emissions * 1000000, 2), "kg")
+    st.bar_chart(carbon_data, y="emission_result")
+            
+
 outCol1, outCol2 = st.columns(2)
 with outCol1:
     st.header("Residential Data")

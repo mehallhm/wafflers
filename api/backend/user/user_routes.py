@@ -17,7 +17,7 @@ def predict_value():
     """
     cursor.execute(select_heating_query)
     heating = cursor.fetchone()[0]
-    current_app.logger.info(f"THIS IS HEATING {heating}")
+    current_app.logger.info("THIS IS HEATING", heating)
 
     select_car_query = """
         SELECT fuel_used FROM Cars WHERE user_id = 1 ORDER BY id DESC LIMIT 1;
@@ -25,7 +25,6 @@ def predict_value():
     cursor.execute(select_car_query)
     fuel_used = cursor.fetchone()[0]
     current_app.logger.info(select_car_query)
-    current_app.logger.info(f"THIS IS FUEL {fuel_used}")
 
     select_beta_query = """
         SELECT user_values FROM Beta_User ORDER BY id DESC LIMIT 1;
@@ -33,8 +32,7 @@ def predict_value():
 
     cursor.execute(select_beta_query)
     beta_val = cursor.fetchone()[0].split(", ")
-    current_app.logger.info(f'select_beta_query = {select_beta_query}')
-    current_app.logger.info(f'beta val = {beta_val}')
+    current_app.logger.info(select_beta_query)
 
     if beta_val is None:
         current_app.logger.info(f"Beta Value not Found: {beta_val}")
@@ -51,7 +49,7 @@ def predict_value():
 
 
 # Get all the cars history for this user
-@user.route("/UserCountryCarbon", methods=["GET"])
+@user.route("/CountryCarbon", methods=["GET"])
 def get_country_carbon():
     """returns the carbon of the user's country"""
     cursor = db.get_db().cursor()
@@ -128,6 +126,24 @@ def add_car():
     db.get_db().commit()
     return "success"
 
+# Adds car survey data
+@user.route("/UserAddCarbon", methods=["PUT"])
+def add_carbon():
+    '''Adds predicted carbon data to the database'''
+    current_app.logger.info("user_routes.py: PUT /UserAddCarbon") 
+
+    received_data = request.json
+    current_app.logger.info(received_data)
+    
+    emission_result = received_data["emission_result"]
+
+    query = "UPDATE User SET emission_result = %s WHERE id = 1"
+
+    data = (emission_result)
+    cursor = db.get_db().cursor()
+    cursor.execute(query, data)
+    db.get_db().commit()
+    return "success"
 
 # Get all the residential history for this user
 @user.route("/UserResidential", methods=["GET"])
@@ -173,11 +189,11 @@ def add_residential():
     return "success"
 
 
-@user.route("/UserFlights", methods=["GET"])
-def get_flights():
-    """Get all the flight history for this user"""
+@user.route("/UserCarbon", methods=["GET"])
+def get_carbon():
+    """Get all the carbon history for this user"""
     cursor = db.get_db().cursor()
-    cursor.execute("SELECT * FROM Flight WHERE Flight.user_id = 1")
+    cursor.execute("SELECT emission_result FROM User WHERE id = 1")
 
     column_headers = [x[0] for x in cursor.description]
     json_data = []
@@ -185,6 +201,7 @@ def get_flights():
 
     for row in returned_data:
         json_data.append(dict(zip(column_headers, row)))
+    current_app.logger.info("CARBONHISTORY: ", json_data)
     return jsonify(json_data)
 
 
@@ -213,6 +230,16 @@ def get_bio ():
     bio = cursor.fetchone()[0]
 
     return jsonify({"bio": bio})
+
+@user.route("/UserAll", methods=["GET"])
+def get_all_user_data():
+    '''Get all for this user'''
+    cursor = db.get_db().cursor()
+
+    cursor.execute("SELECT * FROM User WHERE id = 1 ORDER BY survey_id DESC LIMIT 1")
+    user = cursor.fetchone()
+
+    return jsonify({"user": user})
 
 # Updates match consent and bio for user
 @user.route("/UserUpdateInfo", methods=["PUT"])
@@ -249,6 +276,8 @@ def get_usertags():
            SELECT tag_id
            FROM UserTags
            WHERE UserTags.user_id = 1
+           ORDER BY survey_id
+           LIMIT 1;
        );
    """
     )
