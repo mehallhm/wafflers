@@ -7,7 +7,16 @@ import requests
 side_bar_links()
 
 st.title("Survey History")
-st.write("##### Sorted by Completion Date")
+st.write("## Recent Carbon Data")
+
+carbon_data = requests.get("http://api:4000/u/UserCarbon", timeout=100).json()
+for item in carbon_data:
+    carbon_emissions = item["emission_result"]
+    col1, col2, col3 = st.columns(3)
+    with col2:
+        st.write('## ', round(carbon_emissions * 1000000, 2), "kg")
+        st.write("Estimated Carbon Footprint")
+            
 
 outCol1, outCol2 = st.columns(2)
 with outCol1:

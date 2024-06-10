@@ -151,6 +151,10 @@ if st.button("View Prediction", use_container_width=True):
     responseJSON = pred_response.json()
     finalCarbon = responseJSON["result"]
 
+    CARBON_URL = "http://api:4000/u/UserAddCarbon"
+    data = {"emission_result": finalCarbon}
+    carbon_response = requests.put(CARBON_URL, json=data, timeout=300)
+
     with st.container(border=True):
         st.write(
             "### Estimated Carbon Footprint \n #####",
@@ -168,5 +172,6 @@ if st.button("View Prediction", use_container_width=True):
             (car_response.status_code == 201 or car_response.status_code == 200)
             and (res_response.status_code == 201 or res_response.status_code == 200)
             and (pred_response.status_code == 201 or pred_response.status_code == 200)
+            and (carbon_response.status_code == 201 or carbon_response.status_code == 200)
         ):
             st.success("Successfully Predicted!")

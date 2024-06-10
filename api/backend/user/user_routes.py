@@ -17,7 +17,6 @@ def predict_value():
     """
     cursor.execute(select_heating_query)
     heating = cursor.fetchone()[0]
-    current_app.logger.info(f"THIS IS HEATING {heating}")
 
     select_car_query = """
         SELECT fuel_used FROM Cars WHERE user_id = 1 ORDER BY id DESC LIMIT 1;
@@ -329,3 +328,37 @@ def add_tags():
     db.get_db().commit()
 
     return jsonify({"message": "Success"}), 200
+
+
+# Updates user emission result
+@user.route("/UserAddCarbon", methods=["PUT"])
+def update_emission():
+    '''Adds predicted carbon data to the database'''
+    current_app.logger.info("user_routes.py: PUT /UserAddCarbon") 
+
+    received_data = request.json
+    current_app.logger.info(received_data)
+    
+    emission_result = received_data["emission_result"]
+
+    query = "UPDATE User SET emission_result = %s WHERE id = 1"
+
+    data = (emission_result)
+    cursor = db.get_db().cursor()
+    cursor.execute(query, data)
+    db.get_db().commit()
+    return "success"
+
+# Get all the carbon history for this user
+@user.route("/UserCarbon", methods=["GET"])
+def get_carbonhistory():
+    cursor = db.get_db().cursor()
+    cursor.execute("SELECT emission_result FROM User WHERE id = 1")
+
+    column_headers = [x[0] for x in cursor.description]
+    json_data = []
+    returned_data = cursor.fetchall()
+
+    for row in returned_data:
+        json_data.append(dict(zip(column_headers, row)))
+    return jsonify(json_data)
