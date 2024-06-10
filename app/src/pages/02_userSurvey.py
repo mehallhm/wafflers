@@ -146,7 +146,7 @@ if st.button("View Prediction", use_container_width=True):
     data = {"fuel_type": fuel_type, "fuel_used": fuel_used}
     car_response = requests.post(API_URL, json=data, timeout=300)
 
-    PRED_URL = "http://api:4000/u/UserPrediction/"
+    PRED_URL = "http://api:4000/u/UserPrediction"
     pred_response = requests.get(PRED_URL, timeout=10)
     responseJSON = pred_response.json()
     finalCarbon = responseJSON["result"]

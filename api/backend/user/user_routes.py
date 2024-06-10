@@ -13,18 +13,19 @@ def predict_value():
     cursor = db.get_db().cursor()
 
     select_heating_query = """
-        SELECT heating FROM ResData;
+        SELECT heating FROM ResData WHERE user_id = 1 ORDER BY id DESC LIMIT 1;
     """
     cursor.execute(select_heating_query)
     heating = cursor.fetchone()[0]
-    current_app.logger.info("THIS IS HEATING", heating)
+    current_app.logger.info(f"THIS IS HEATING {heating}")
 
     select_car_query = """
-        SELECT fuel_used FROM Cars WHERE user_id = 1;
+        SELECT fuel_used FROM Cars WHERE user_id = 1 ORDER BY id DESC LIMIT 1;
     """
     cursor.execute(select_car_query)
     fuel_used = cursor.fetchone()[0]
     current_app.logger.info(select_car_query)
+    current_app.logger.info(f"THIS IS FUEL {fuel_used}")
 
     select_beta_query = """
         SELECT user_values FROM Beta_User ORDER BY id DESC LIMIT 1;
@@ -32,7 +33,8 @@ def predict_value():
 
     cursor.execute(select_beta_query)
     beta_val = cursor.fetchone()[0].split(", ")
-    current_app.logger.info(select_beta_query)
+    current_app.logger.info(f'select_beta_query = {select_beta_query}')
+    current_app.logger.info(f'beta val = {beta_val}')
 
     if beta_val is None:
         current_app.logger.info(f"Beta Value not Found: {beta_val}")
