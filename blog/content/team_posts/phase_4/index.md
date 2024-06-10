@@ -1,8 +1,8 @@
 ---
-title: "Project - Phase VI"
+title: "Project - Phase IV"
 date: 2024-06-10
 draft: false
-description: "Final project writeup"
+description: "Final Project Writeup"
 tags: ["authors", "config", "docs"]
 slug: "phase_four"
 authors:
@@ -90,3 +90,38 @@ This experiment was performed with varying degrees of abiquity, but consistently
 #### Future Improvements
 
 Much of the future improvements to this model would be in the data cleaning phase, to ensure the term frequencies are not based on structural text and instead the actual content of the article. As mentioned above, this improvement would allow the Cosine Similarity to be more accurate to the content of the article, more accuratly matching users and NGOs. Decreasing the vector space would allow the cosine similarity matches to unique words to show more than matches to structural text that might not be break words, but are commonplace in the article format from which the data was collected. In addition, more NGO documents would be beneficial since it would provide more orgs that users could match to, improving user experiance.
+## Overview:
+
+Carbon Connect is organized by three user personas: a general user, an NGO, and an enterprise. Each enterprise has a home page for page navigation and a routes file for each in the back end. Users can take a survey and update their fuel used to display a carbon footprint prediction and comparison. They can also view their survey history and gain insight on past surveys they’ve taken. With a text-based cosine similarity model, Carbon Connect suggests NGOs to users based on user and NGO bios. Finally, users can edit their info in settings and add/delete tags. 
+NGOs can update their bio, name, website, and email on the info page as well as add/delete tags. On the match page, enterprises with the same tags are displayed, and consenting users are displayed. Their name and emails are in a table so that NGOs know who to focus efforts on. 
+As an enterprise, you can input your emissions and add/delete tags you have. Based on your emissions Carbon Connect shows further insight by displaying how your result matches up to the average enterprise in your country. In addition, there is an enterprise survey history that shows previous emission results. 
+
+## Architecture:
+
+Carbon Connect is built using Streamlit, Flask, and MySQL. All of the front-end architecture is built with Streamlit elements using Python. For user/enterprise survey tools, the inputs are communicated to the database using POST and PUT requests to update survey results. The survey history for both users and enterprises is displayed using GET requests. The tag system throughout the app uses POST and DELETE requests to add/delete tags and the matching system uses GET requests for entities with the same tags. The comparison insights for users and enterprises uses simple math and GET requests. 
+
+
+
+## Challenges encountered/stuff changed:
+
+### - Enterprise persona/user survey reduction:
+ Our first plan was to have a government entity persona that would use the app to gain insight into
+emission policy. After some discussion, this persona was scrapped just before phase II due to it being unrealistic to work with policy. We instead replaced it with an enterprise persona. Going into phase 3 we planned for the enterprise persona to have an emissions survey similar to users with some minor tweaks. However, as Michael tried to find correlations between different factors and CO2 emissions despite many comparisons, the linear regression model was only highly correlated with two. These are heat energy used, and fuel used for households. Our user survey had to be heavily reduced and we decided it didn’t make sense to have a corresponding enterprise survey. Thus, we assumed that enterprises would have already calculated their total emissions and added the rest of the functionality based on that. This resulted in many of our initial tables being deleted that were meant to store flight data, supply chain, and public transport. 
+### - ML models
+Originally we were planning on making two ML models for user and enterprise where they would have a CO2 prediction from linear regression. In addition, we wanted to make a model somehow for matching NGOs and users. After the enterprise persona was scrapped, we had to shift gears from that model and after Michael discussed it with Dr. Fontenot, we had a new idea. The new ML model would use cosine similarity to match users and NGOs based on similarities in their bios (scrapping real data for this). This proved to be a new challenge since we needed to implement a new plan near the ending of our project, but despite the challenges of making a major shift near the end; this new feature proved to be both accurate and interesting. 
+### - Ideation: 
+As with many other teams it took us a while to come up with what we wanted to focus on for our project, we had multiple problems that we wanted to deal with inspired by the presentations that we had attended for example: migration, economic warfare, misinformation,climate change, etc. After a long time we were able to finalize on working with climate change but even after we had that idea, we shifted our idea multiple times while working on the project. From focusing on economic warfare in combination with climate change, to focusing on climate change and policy, to our final idea of finding the relations between enterprises, general citizens, and NGOs when it comes to combating climate change. Shifting our idea multiple times caused us to have to scrap our work and restart numerous times, but eventually we were able to come up with an end result that we were proud of despite the challenges.
+
+
+
+![Final Diagram](./finaldiagram.jpeg)
+
+This is our final model outlining the tables and attributes we are storing. It is extremely different from our initial ER diagram and phase two and three diagrams. First of all, our government entity was scrapped and replaced by the enterprise entity. We replaced the emission tag multi valued attributes with a tag entity with three many to many relationships because we wanted to connect personas based on tags. The supply chain, flights, and public transport tables were deleted due to survey correlation complications. In addition, we had to add some tables to store ML beta values and vectors. 
+
+## End result:
+Despite the numerous challenges we faced from minor tweaks to basically changing a whole user persona, we ended up with an application we were extremely happy with. Our ML models are accurate and robust. In addition, we successfully implemented all of the features we wanted for each persona. Overall, this dialogue was extremely educational in teaching our group how to work on a project that intertwined Flask, Streamlit, and SQL. We learned how to navigate tying in machine learning and tackling problems. We are very proud of Carbon Connect and grateful for the journey we took to make the app. 
+
+Link to presentation: https://www.canva.com/design/DAGHoX8jz_4/X0yKwG6jN6_L_2BK4WZrTw/view?utm_content=DAGHoX8jz_4&utm_campaign=designshare&utm_medium=link&utm_source=editor
+
+
+It was extremely interesting to learn how to connect what we learned in SQL to an actual application. I gained a lot of experience working in the front end with Streamlit and also the back end with API routes. However, my biggest takeaway from this app was that it is imperative you are adaptable. It seemed that one day we were taking Carbon Connect in one direction and the next it completely changed. Despite being frustrated, I learned how to better adapt and use these redirects as learning experiences instead. 
